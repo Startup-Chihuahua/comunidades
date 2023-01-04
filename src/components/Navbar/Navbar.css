@@ -1,0 +1,16 @@
+#container {
+    background-color: rgb(15, 111, 228);
+}
+
+#container-navbar img {
+    width: 60px;
+    height: 60px;
+}
+
+#text-dropdown {
+    color: rgb(0, 0, 0);
+}
+
+#text {
+    color: rgb(255, 255, 255);
+} 
