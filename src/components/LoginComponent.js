@@ -1,6 +1,42 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+const dominio = 'http://localhost:3000';
 
 export const LoginComponent = () => {
+
+  const navigate = useNavigate();
+
+  const capturarDatos = (e) => {
+    e.preventDefault();
+    let target = e.target;
+    let mail = target.mail.value;
+    let password = target.password.value;
+    validarUsuario(mail, password);
+  }
+
+  const validarUsuario = async (mail, password) => {
+    const url = `${dominio}/login`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+        },
+        body: `{
+            "mail": "${mail}",
+            "password": "${password}"
+        }`,
+    });
+    const data = await response.json();
+    console.log(data);
+    if(data.status === 'FAILED'){
+      alert("datos erroneos");
+    }else{
+      localStorage.setItem("accessToken", data.data.accessToken);
+      navigate('/home');
+    }
+};
+
   return (
     <div className="wrapper">
       <div className="title">
@@ -11,13 +47,13 @@ export const LoginComponent = () => {
           height="100"
         />
       </div>
-      <form action="/">
+      <form onSubmit={capturarDatos}>
         <div className="field">
-          <input type="text" required />
+          <input type="text" name='mail' required />
           <label>Correo electrónico</label>
         </div>
         <div className="field">
-          <input type="password" required />
+          <input type="password" name='password' required />
           <label>Contraseña</label>
         </div>
         <div className="content">
