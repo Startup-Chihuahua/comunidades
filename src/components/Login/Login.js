@@ -15,13 +15,13 @@ export const Login = () => {
   };
 
   const validarUsuario = async (mail, password) => {
-    const data = await validateLogin(mail, password);
-    if (data.status === "FAILED") {
-      alert("datos erroneos");
-    } else {
-      setLocalStorageItem("accessToken", data.accessToken);
+    try {
+      const { data: { accessToken } = {} } = await validateLogin(mail, password);
+      setLocalStorageItem("accessToken", accessToken);
       navigate("/home");
-    }
+    } catch(e) {
+      alert("datos erroneos");
+    };
   };
 
   return (
