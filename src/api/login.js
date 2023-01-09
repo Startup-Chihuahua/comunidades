@@ -1,9 +1,8 @@
-import axios from "axios";
-
-export const validateLogin = (mail, password) => {
-  const HOST = process.env.REACT_APP_BASE_URL;
-  return axios
-    .post(`${HOST}/login`, {
+import { axiosInstance } from './axios.config';
+export const validateLogin = async (mail, password) => {
+  
+  return axiosInstance
+    .post(`/login`, {
       mail,
       password,
     })
@@ -11,7 +10,6 @@ export const validateLogin = (mail, password) => {
       return response.data;
     })
     .catch(function (error) {
-      console.log(error.message);
       return error.response.data;
     });
 };

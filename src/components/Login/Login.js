@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../api/login";
+import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export const Login = () => {
     if (data.status === "FAILED") {
       alert("datos erroneos");
     } else {
-      localStorage.setItem("accessToken", data.accessToken);
+      setLocalStorageItem("accessToken", data.accessToken);
       navigate("/home");
     }
   };
