@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 import { useNavigate } from "react-router-dom";
-const dominio = 'http://localhost:3000';
+import { validateLogin } from "../../api/login";
 
-export const LoginComponent = () => {
-
+export const Login = () => {
   const navigate = useNavigate();
 
   const capturarDatos = (e) => {
@@ -12,36 +11,23 @@ export const LoginComponent = () => {
     let mail = target.mail.value;
     let password = target.password.value;
     validarUsuario(mail, password);
-  }
+  };
 
   const validarUsuario = async (mail, password) => {
-    const url = `${dominio}/login`;
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-        },
-        body: `{
-            "mail": "${mail}",
-            "password": "${password}"
-        }`,
-    });
-    const data = await response.json();
-    console.log(data);
-    if(data.status === 'FAILED'){
+    const data = await validateLogin(mail, password);
+    if (data.status === "FAILED") {
       alert("datos erroneos");
-    }else{
-      localStorage.setItem("accessToken", data.data.accessToken);
-      navigate('/home');
+    } else {
+      localStorage.setItem("accessToken", data.accessToken);
+      navigate("/home");
     }
-};
+  };
 
   return (
     <div className="wrapper">
       <div className="title">
         <img
-          src={require("../images/logo.png")}
+          src={require("../../images/logo.png")}
           alt="Logotipo"
           width="100"
           height="100"
@@ -49,11 +35,11 @@ export const LoginComponent = () => {
       </div>
       <form onSubmit={capturarDatos}>
         <div className="field">
-          <input type="text" name='mail' required />
+          <input type="text" name="mail" required />
           <label>Correo electrónico</label>
         </div>
         <div className="field">
-          <input type="password" name='password' required />
+          <input type="password" name="password" required />
           <label>Contraseña</label>
         </div>
         <div className="content">
@@ -74,4 +60,4 @@ export const LoginComponent = () => {
       </form>
     </div>
   );
-}
+};
