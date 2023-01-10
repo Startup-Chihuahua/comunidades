@@ -1,13 +1,19 @@
 import React from 'react';
 import './Navbar.css'; 
 import { Link, Outlet } from 'react-router-dom';  
+import { useNavigate } from 'react-router-dom'; 
+
+function Login() {
+    const navigate = useNavigate();
+    navigate('/login'); 
+}
 
 function Navbar() {
     return( 
         <>
         <nav className='navbar navbar-expand-lg shadow p-3' id='container'>
             <div className='container-fluid' id='container-navbar'>
-                <Link className='navbar-brand' to='/'> 
+                <Link className='navbar-brand' to='/'>  
                     <img src={require('../assets/image-logo.png')} alt='Logotipo Empresa'/> 
                 </Link>
                 <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
@@ -42,7 +48,7 @@ function Navbar() {
                             <Link className='nav-link' to='/Contactanos' id='text'>Contáctanos</Link>   
                         </li> 
                         <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-                            <button className='btn btn-outline-light' type='button'>
+                            <button className='btn btn-outline-light' type='button' onClick={Login}> 
                                 Login 
                             </button>
                             <button className='btn btn-outline-light' type='button'> 
@@ -52,8 +58,8 @@ function Navbar() {
                     </ul>
                 </div>
             </div>
-        </nav> 
-        <Outlet/>
+        </nav>
+        <Outlet/> 
         </> 
     );
 }

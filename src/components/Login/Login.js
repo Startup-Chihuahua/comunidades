@@ -43,6 +43,7 @@ export const Login = () => {
   };
 
   return (
+    <div className="elpadrote">
     <div className="wrapper">
       <ToastContainer
         closeButton={true}
@@ -52,7 +53,7 @@ export const Login = () => {
       />
       <div className="title">
         <img
-          src={require("../../images/logo.png")}
+          src={require("../../assets/image-logo.png")} 
           alt="Logotipo"
           width="100"
           height="100"
@@ -75,5 +76,6 @@ export const Login = () => {
         </div>
       </form>
     </div>
+    </div> 
   );
 };
