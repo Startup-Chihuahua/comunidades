@@ -2,16 +2,33 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { validateLogin } from "../../api/login";
 import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
+import * as yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Login = () => {
   const navigate = useNavigate();
+  //Data Validation
+  let schema = yup.object().shape({
+    mail: yup.string().email().required(),
+    password: yup.string().min(5).max(20).required()
+  });
 
-  const capturarDatos = (e) => {
+  const capturarDatos = async (e) => {
     e.preventDefault();
     let target = e.target;
-    let mail = target.mail.value;
-    let password = target.password.value;
-    validarUsuario(mail, password);
+    let datos = {
+      mail: target.mail.value,
+      password: target.password.value,
+    };
+    const validarCampos = await schema.isValid(datos);
+    if (validarCampos === true) {
+      validarUsuario(datos.mail, datos.password);
+    } else {
+      toast.error("Datos inválidos", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   const validarUsuario = async (mail, password) => {
@@ -26,6 +43,12 @@ export const Login = () => {
 
   return (
     <div className="wrapper">
+      <ToastContainer
+        closeButton={true}
+        position="bottom-right"
+        autoClose="3000"
+        hideProgressBar="true"
+      />
       <div className="title">
         <img
           src={require("../../images/logo.png")}
@@ -42,15 +65,6 @@ export const Login = () => {
         <div className="field">
           <input type="password" name="password" required />
           <label>Contraseña</label>
-        </div>
-        <div className="content">
-          <div className="checkbox">
-            <input type="checkbox" id="remember-me" />
-            <label for="remember-me">Remember me</label>
-          </div>
-          <div className="pass-link">
-            <a href="/">¿Olvidaste tu contraseña?</a>
-          </div>
         </div>
         <div className="field">
           <input type="submit" value="Iniciar sesión" />
