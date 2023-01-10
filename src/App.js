@@ -1,12 +1,12 @@
 import './App.css';
-import FirstSection from './components/FirstSection/FirstSection';
+import ParentContainer from './components/Layout/FirstSection/FirstSection'; 
 
 function App() {
   return (
     <div className="App">
-      <FirstSection/>
+      <ParentContainer/>
     </div>
   );
 }
 
-export default App; 
+export default App;    
