@@ -27,21 +27,39 @@ export const Login = () => {
       validarUsuario(datos.mail, datos.password);
     } else {
       toast.error("Datos inválidos", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
     }
   };
 
   const validarUsuario = async (mail, password) => {
     try {
-      const { data: { accessToken } = {} } = await validateLogin(
-        mail,
-        password
-      );
+      const {
+        data: { data: { accessToken } = {} },
+      } = await validateLogin(mail, password);
       setLocalStorageItem("accessToken", accessToken);
+      // toast.success("Usuario validado", {
+      //   position: toast.POSITION.TOP_RIGHT,
+      // });
       navigate("/home");
     } catch (e) {
-      alert("datos erroneos");
+      toast.error("Contraseña o correo incorrectos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -55,8 +73,13 @@ export const Login = () => {
           hideProgressBar="true"
         />
         <div className="title">
-          <Link className='navbar-brand' to='/'>  
-              <img src={require('../../assets/image-logo.png')} width="100" height="100" alt='Logotipo Empresa'/> 
+          <Link className="navbar-brand" to="/">
+            <img
+              src={require("../../assets/image-logo.png")}
+              width="100"
+              height="100"
+              alt="Logotipo Empresa"
+            />
           </Link>
         </div>
         <form onSubmit={capturarDatos}>

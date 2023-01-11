@@ -1,0 +1,32 @@
+#footer{
+    background-color: #EAE6DD;
+    
+}
+
+#footer h5 {
+    padding: 30px;
+    font-weight: 1000;
+    font-size: x-large;
+    color:#0F6CDE;
+    text-align: center;
+}
+
+#footer p {
+    color: #0F6CDE;
+    text-align: center;
+}
+
+#footer img{
+    width: 200px;
+    height: 200px;
+    float: right;   
+}
+
+#footer button {
+    display:block;
+    margin:auto;
+    border-radius: 25px;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
