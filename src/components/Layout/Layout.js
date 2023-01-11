@@ -1,33 +1,33 @@
 import React from "react";
-import { Home } from "../Home/Home";
+// import { Home } from "../Home/Home"; 
 import { Login } from "../Login/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
-import Ecosistema from '../../components/Pages/Ecosistema';
-import Startups from '../../components/Pages/Startups';
-import Meetup from '../../components/Pages/Meetup';
-import Comunidades from '../../components/Pages/Comunidades';
-import TheTeam from '../../components/Pages/TheTeam';
-import Eventos from '../../components/Pages/Eventos';
-import Contactanos from '../../components/Pages/Contactanos'; 
-import Navbar from '../Layout/Navbar';  
+import Ecosistema from "../Pages/Ecosistema";
+import Startups from "../Pages/Startups";
+import Meetup from "../Pages/Meetup";
+import Comunidades from "../Pages/Comunidades";
+import TheTeam from "../Pages/TheTeam";
+import Eventos from "../Pages/Eventos";
+import Contactanos from "../Pages/Contactanos";
+import Navbar from "../Navbar/Navbar";
 
 const Layout = ({ children }) => {
   return (
-      <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Navbar />}>
-            <Route path={ROUTES.ECOSISTEMA} element={<Ecosistema />} />
-            <Route path='Startups' element={<Startups />} />
-            <Route path='Meetup' element={<Meetup />} />
-            <Route path='Comunidades' element={<Comunidades />} />
-            <Route path='TheTeam' element={<TheTeam />} />
-            <Route path='Eventos' element={<Eventos />} />
-            <Route path='Contactanos' element={<Contactanos />} />
-            <Route path={ROUTES.LOGIN} element={<Login />} /> 
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route path={ROUTES.ECOSISTEMA} element={<Ecosistema />} />
+          <Route path={ROUTES.STARTUPS} element={<Startups />} />
+          <Route path={ROUTES.MEETUP} element={<Meetup />} />
+          <Route path={ROUTES.COMUNIDADES} element={<Comunidades />} />
+          <Route path={ROUTES.THETEAM} element={<TheTeam />} />
+          <Route path={ROUTES.EVENTOS} element={<Eventos />} />
+          <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
+        </Route>
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
