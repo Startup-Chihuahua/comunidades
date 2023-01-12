@@ -1,13 +1,12 @@
 import React from 'react';
-import './First.css';
+import { MainContainer, Title } from './First.css.js';     
 
 function First() {
     return(
-        <div className='container-fluid main-container'>
-            <h1>El futuro<br/>empieza hoy<br/>¿Ya lo estás<br/>creando?</h1>
-            <h2>test</h2>
-        </div>
+        <MainContainer className='container-fluid'>
+            <Title>El futuro<br/>empieza hoy<br/>¿Ya lo estás<br/>creando?</Title>
+        </MainContainer>
     );
 }
 
-export default First; 
+export default First;  

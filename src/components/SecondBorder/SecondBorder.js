@@ -1,12 +1,12 @@
 import React from 'react';
-import './SecondBorder.css'; 
+import { SecondBorderContainer, BorderContent } from './SecondBorder.css.js';  
 
 function SecondBorder() {
     return(
-        <div className='container-fluid SecondBorder-container'>
-            <h2>Innovamos 24 horas al dia • Innovamos 24 horas al dia • Innovamos 24 horas al dia • Innovamos 24 horas al dia</h2>
-        </div>
+        <SecondBorderContainer className='container-fluid'>
+            <BorderContent>Innovamos 24 horas al día • Innovamos 24 horas al día • Innovamos 24 horas al día • Innovamos 24 horas al día</BorderContent>
+        </SecondBorderContainer>
     );
 }
 
-export default SecondBorder;   
+export default SecondBorder;  

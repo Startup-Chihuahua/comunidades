@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 
 function Navbar() {
   const navigate = useNavigate();
@@ -30,8 +30,8 @@ function Navbar() {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
-          ``
+          </button> 
+
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto gap-4">
               <li className="nav-item">
