@@ -1,8 +1,10 @@
-.main-container {
-    background-color: #0F6CDE;
-} 
+import styled from 'styled-components';
 
-.main-container h1 {
+export const MainContainer = styled.div`
+    background-color: #0F6CDE;
+`; 
+
+export const Title = styled.h1`
     margin: 0;
     padding: 40px;
     font-size: 90px;
@@ -10,5 +12,5 @@
     letter-spacing: -.01em;
     font-weight: 900;
     color: #DCDBDB; 
-    text-transform: uppercase; 
-}
+    text-transform: uppercase;
+`;         
