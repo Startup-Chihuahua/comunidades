@@ -25,8 +25,8 @@ export const ButtonContent = styled.button`
     padding: 15px 0;
     margin: 20px 10px; 
     font-weight: 600; 
-    border: 2px solid rgb(2, 241, 129);
-    background-color: rgb(2, 241, 129); 
+    border: 2px solid #02F181;
+    background-color: #02F181;  
     border-radius: 30px;  
     color: black;  
     border-width: 3px;
@@ -34,8 +34,8 @@ export const ButtonContent = styled.button`
     &:hover {
         color: white; 
         font-weight: 600; 
-        border: 3px solid rgb(0, 0, 0);
-        background-color: rgb(0, 0, 0); 
-        border-color: rgb(2, 241, 129);
+        border: 3px solid #000000; 
+        background-color: #000000; 
+        border-color: #02F181;
     }
-`;  
+`;   
