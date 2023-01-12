@@ -7,6 +7,6 @@ export const ROUTES = {
     MEETUP: '/meetup',
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',
-    EVENTOS: '/eventos',
+    EVENTOS: '/eventos', 
     CONTACTANOS: '/contactanos' 
 };

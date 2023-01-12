@@ -2,7 +2,7 @@ import React from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import Footer from '../Footer/Footer'; 
 function Navbar() {
   const navigate = useNavigate();
 
@@ -138,6 +138,7 @@ function Navbar() {
         </div>
       </nav>
       <Outlet />
+      <Footer/> 
     </>
   );
 }

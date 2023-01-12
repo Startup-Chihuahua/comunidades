@@ -8,7 +8,7 @@ import Startups from "../Pages/Startups";
 import Meetup from "../Pages/Meetup";
 import Comunidades from "../Pages/Comunidades";
 import TheTeam from "../Pages/TheTeam";
-import Eventos from "../Pages/Eventos";
+import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
 
