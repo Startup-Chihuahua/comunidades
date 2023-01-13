@@ -1,11 +1,11 @@
 import React from 'react';
-import { SecondBorderContainer, BorderContent } from './SecondBorder.css.js';  
+import { Container, BorderContent } from './SecondBorder.css.js';  
 
 function SecondBorder() {
     return(
-        <SecondBorderContainer className='container-fluid'>
+        <Container className='container-fluid'>
             <BorderContent>Innovamos 24 horas al día • Innovamos 24 horas al día • Innovamos 24 horas al día • Innovamos 24 horas al día</BorderContent>
-        </SecondBorderContainer>
+        </Container>
     );
 }
 

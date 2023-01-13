@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SecondBorderContainer = styled.div`
+export const Container = styled.div`
     background-color: #E8E8E8; 
 `; 
 
