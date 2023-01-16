@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const MainContainerfooter = styled.div`
+export const Container = styled.div`
 padding: 30px;
 background-color: #EAE6DD;`;
 
-export const TitleFooter = styled.h5`
+export const Title = styled.h5`
 padding: 30px;
 font-weight: 1000;
 font-size: x-large;
@@ -12,18 +12,18 @@ color:#0F6CDE;
 text-align: center;
 `;
 
-export const TextFooter = styled.p`
+export const Text = styled.p`
     color: #0F6CDE;
     text-align: center;`;
 
-export const ImgFooter = styled.img`
+export const Img = styled.img`
     width: 130px;
     height: 130px;
     float: right;
     margin-right 50px;
 `;
 
-export const ButtonFooter = styled.button`
+export const Button = styled.button`
 width: 130px;
 padding: 15px 0px;
 margin: 20px 10px;
@@ -44,7 +44,5 @@ font-family: Arial, Helvetica, sans-serif;
  
 `;
 
-export const ColumnFooter = styled.div`
 
-`;
 

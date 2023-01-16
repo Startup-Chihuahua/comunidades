@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const MainContainerContact=styled.div `
+export const ContactContainer=styled.div `
   position: relative;
   /* max-width: 1200px; */
   /* width: 100%; */
@@ -12,27 +12,24 @@ export const MainContainerContact=styled.div `
   color: #d4d6d4;
   ;`
 
-  export const ContainerInformationContact=styled.div `
+  export const ContactInformationContainer=styled.div `
   display: flex;
     flex-wrap: wrap;
     padding: 50px; `;
 
-  export const ContainerContact=styled.div `
-  `;
-
-  export const TitleContact=styled.h1 `
+  export const Title=styled.h1 `
   font-size: 60px;
     text-transform: uppercase;
     color: #d4d6d4;
     font-weight: bold;
   `;
 
-  export const TextContact=styled.p `
+  export const Text=styled.p `
   font-size: 20px;
   width: 900px;`;
   
 
-  export const ButtonContact=styled.button`
+  export const Button=styled.button`
   position: relative;
   width: 200px; 
   padding: 15px 0;

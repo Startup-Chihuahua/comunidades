@@ -1,35 +1,35 @@
 import React from "react";
 import "./Footer.css";
-import {MainContainerfooter, TitleFooter, TextFooter, ImgFooter, ButtonFooter, ColumnFooter} from "./Footer.css.js";
+import {Container, Title, Text, Img, Button} from "./Footer.css.js";
 
 export default function Footer() {
   return (
-    <MainContainerfooter className="container-fluid">
+    <Container className="container-fluid">
       <div className="row align-items-start">
-        <ColumnFooter className="col">
-          <TitleFooter>SE PARTE DE NUESTRO FUTURO</TitleFooter>
-          <ButtonFooter type="button" className="btn btn-dark">
+        <div className="col">
+          <Title>SE PARTE DE NUESTRO FUTURO</Title>
+          <Button type="button" className="btn btn-dark">
             Unete
-          </ButtonFooter>
-        </ColumnFooter>
-        <ColumnFooter className="col">
-          <TitleFooter>STARUP CHIHUAHUA</TitleFooter>
-          <TextFooter>
+          </Button>
+        </div>
+        <div className="col">
+          <Title>STARUP CHIHUAHUA</Title>
+          <Text>
             Av. Colegio Militar 4709, Nombre de Dios, 31150 Chihuahua, Chih.
-          </TextFooter>
-          <TextFooter>hola@startupchihuahua.com</TextFooter>
-          <TextFooter>(614) 182-2983 WPP*</TextFooter>
-        </ColumnFooter>
+          </Text>
+          <Text>hola@startupchihuahua.com</Text>
+          <Text>(614) 182-2983 WPP*</Text>
+        </div>
         <br />
         <div className="col">
           <br />
-          <ImgFooter
+          <Img
             src={require("../../assets/StartupLogo.png")}
             alt="logo StartupChihuahua"
           />
         </div>
       </div>
-    </MainContainerfooter>
+    </Container>
   );
 }
 
