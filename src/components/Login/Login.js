@@ -12,7 +12,7 @@ export const Login = () => {
   //Data Validation
   let schema = yup.object().shape({
     mail: yup.string().email().required(),
-    password: yup.string().min(5).max(20).required(),
+    password: yup.string().min(5).max(50).required(),
   });
 
   const capturarDatos = async (e) => {
@@ -64,7 +64,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="elpadrote">
+    <div className="principal">
       <div className="wrapper">
         <ToastContainer
           closeButton={true}

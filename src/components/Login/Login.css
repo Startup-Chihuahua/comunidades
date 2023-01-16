@@ -1,5 +1,5 @@
 
-.elpadrote {
+.principal {
   /* padding: 320px; */
   background-color: #0E68D6; 
   display: flex;
@@ -7,6 +7,7 @@
   width: 100vw;
   align-items: center;
   justify-content: center;
+ 
 }
 
 .wrapper {
@@ -78,6 +79,7 @@ form .content {
   font-size: 16px;
   align-items: center;
   justify-content: space-around;
+  
 } 
 
 form .content .checkbox {
