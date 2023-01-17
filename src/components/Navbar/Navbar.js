@@ -1,10 +1,10 @@
 import React from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 
 function Navbar() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   function toLogin() {
     navigate("/login");
@@ -19,7 +19,7 @@ function Navbar() {
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
-          </Link>
+          </Link> 
           <button
             className="navbar-toggler"
             type="button"
@@ -137,7 +137,7 @@ function Navbar() {
           </div>
         </div>
       </nav>
-      <Outlet />
+      <Outlet /> 
     </>
   );
 }
