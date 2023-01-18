@@ -6,49 +6,52 @@ export const ContainerEvent = styled.div`
     margin: 0;
     font-family: Arial;
     color: #d4d6d4;
-    `;
-
-export const ColsEvent = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    padding: 50px;   
-    div{
-    flex: 2;
-    }
 `;
 
-export const H1Event = styled.h1`
+export const ColsEvent = styled.div`
+    background: #0f6cde;
+    position: relative;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    color: #000000;
+`;
+
+export const TitleEvent = styled.h1`
     font-size: 60px;
     text-transform: uppercase;
     color: #d4d6d4;
     font-weight: bold;
     text-align: left;
-    margin: 0 480px 0 0;
+    padding: 20px;
 `;
 
-export const EventsP = styled.p`
+export const Content = styled.div`
+    background: #0F6CDE;
 `;
 
-export const Pevent = styled.p`
-    .event  .p-event{
-    font-size: 15px;
-    margin: 5px;
-    }
+export const Content2 = styled.div`
+    background: #0F6CDE;
+`;
+
+export const Paragraph = styled.p`
+    font-size: 20px;
     color: #d4d6d4;
     text-align: left;
-    padding: 0 450px 0 0;
     font-family: Arial;
+    padding: 20px;
 `;
 
-export const Pevent2 = styled.p`
+export const Paragraph2 = styled.p`
     font-size: 15px;
-    width: left;
-    background-color: #34659b;
     max-width: 700px;
-    max-height: 150px;
     color: #d4d6d4;
-    margin: 1em;
-    padding: 0;
+    margin: 30px;
+    background-color: #34659b;
+    padding: 10px 10px 40px 0;
 `;
 
 export const ButtonEvent = styled.button`
@@ -62,10 +65,8 @@ export const ButtonEvent = styled.button`
     border-radius: 35px;  
     color: black;  
     border-width: 3px;
-    font-size: 15px; 
-    .event .button-event{
+    font-size: 15px;
     margin: 0 300px 10px 20px;
-    }
     &:hover{
     color: #FFFFFF; 
     border: 3px solid #000000;
