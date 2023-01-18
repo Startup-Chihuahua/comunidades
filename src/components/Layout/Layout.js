@@ -1,6 +1,7 @@
 import React from "react";
 import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
+import { SendMail } from "../Send-mail/SendMail";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Ecosistema from "../Pages/Ecosistema";
@@ -11,6 +12,7 @@ import TheTeam from "../Pages/TheTeam";
 import Eventos from "../Pages/Eventos";
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
+import { ChangePassword } from "../ChangePassword/ChangePassword";
 
 const Layout = ({ children }) => {
   return (
@@ -26,6 +28,8 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
+          <Route path={ROUTES.ENVIAR} element={<SendMail />} />
+          <Route path={ROUTES.CHANGE} element={<ChangePassword />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
       </Routes>
