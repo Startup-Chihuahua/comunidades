@@ -1,4 +1,5 @@
 import React from "react";
+import "./SendMail.css";
 import { Link, useNavigate } from "react-router-dom";
 import { sendMail } from "../../api/send-mail";
 
@@ -22,7 +23,7 @@ export const SendMail = () => {
   };
 
   return (
-    <div className="">
+    <div className="elpadrote">
       <div className="wrapper">
         <div className="title">
           <Link className="navbar-brand" to="/">
@@ -33,8 +34,13 @@ export const SendMail = () => {
               alt="Logotipo Empresa"
             />
           </Link>
+          <p>Recuperar contraseña</p>
         </div>
         <form onSubmit={capturarDatos}>
+          <p>
+            Ingresa tu correo electronico y te enviaremos un link para que
+            ingreses una nueva contraseña
+          </p>
           <div className="field">
             <input type="text" name="mail" required />
             <label>Correo electrónico</label>

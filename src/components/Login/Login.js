@@ -91,6 +91,11 @@ export const Login = () => {
             <input type="password" name="password" required />
             <label>Contraseña</label>
           </div>
+          <div className="content">
+            <div className="pass-link">
+              <a href="/enviar">¿Olvidaste tu contraseña?</a>
+            </div>
+          </div>
           <div className="field">
             <input type="submit" value="Iniciar sesión" />
           </div>

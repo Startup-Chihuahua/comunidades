@@ -28,10 +28,10 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
-          <Route path={ROUTES.ENVIAR} element={<SendMail />} />
-          <Route path={ROUTES.CHANGE} element={<ChangePassword />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.ENVIAR} element={<SendMail />} />
+        <Route path={ROUTES.CHANGE} element={<ChangePassword />} />
       </Routes>
     </BrowserRouter>
   );
