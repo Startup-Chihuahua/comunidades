@@ -15,27 +15,36 @@ export const Container = styled.section`
   background: #fff;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 15px 20px#000000;
 `;
 export const ContainerHeader = styled.header`
-font-size: 1.3rem;
-  color: #FFFF;
-  font-weight: 350;
+  
   border-radius: 8px;
   text-align: center;
   align-items: center;
   background: #0E68D6;
+ 
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1)
-  text-shadow: 0px 15px 20px #000000;
+  
   display: flex;
   justify-content: center;
   width: 100%;
 `;
-export const ContainerImage = styled.img
-`
-max-width: 9%;
+export const LabelHeader = styled.label`
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-shadow: 0px 2px 5px #000000;
+  color: #ffff;
+  &: hover {
+    text-decoration: underline;
+  } ;
+`;
+
+export const ContainerImage = styled.img`
+  max-width: 9%;
   width: 120px;
-margin-right: 10px;
+  margin-right: 10px;
 `;
 
 export const Form = styled.form`
@@ -108,7 +117,6 @@ export const SelectBox = styled.select`
   border: none;
   color: #707070;
   font-size: 1rem;
-  
 `;
 export const SelectContainer = styled.div`
   position: relative;
@@ -126,12 +134,13 @@ export const SelectContainer = styled.div`
 export const Button = styled.button`
   height: 50px;
   width: 30%;
-  border-radius: 15px;
   color: #fff;
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 500;
   margin-top: 30px;
-  border: none;
+  border: 1px solid #b5b5b5;
+  border-radius: 12px;
+  transition: all 0.3s ease;
   cursor: pointer;
   transition: all 0.2s ease;
   background: #0e68d6;
@@ -145,8 +154,3 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-
-
-
-

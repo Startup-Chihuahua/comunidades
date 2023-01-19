@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -22,8 +22,10 @@ import {
   Button,
   SelectContainer,
   ButtonContainer,
-  ContainerImage
+  ContainerImage,
+  LabelHeader
 } from "../SignUp/SignUp.css.js";
+import { validateSignUp } from '../../api/signup.js';
 
 export const SignUp = () => {
 
@@ -32,8 +34,8 @@ export const SignUp = () => {
   const [showAli,setAli] = useState(false);
   const [gender,setGender] = useState("Hombre");
   const [tipoEmp,setTipoEmp] = useState("");
-  const [tipoAli,setTipoAli] = useState("");
-  
+  const [tipoAli,setTipoAli] = useState("No aplica");
+  const navigate = useNavigate();
 
   const asignaGenero = (e)=>{
     setGender(e.target.value);
@@ -78,13 +80,42 @@ export const SignUp = () => {
       setTipoAli("");
       setTipoEmp("No aplica");
     }
-
   };
-  const EnviarDatos = async(e) => {
+
+  const validarUsuario = async (mail,password,name,lastname,curp,birth_date,gender,state,town,neighborhood,program,tags,emprendedor,aliado) => {
+    try {
+      const {
+        data: { data: {  } = {} },
+      } = await validateSignUp(mail,password,name,lastname,curp,birth_date,gender,state,town,neighborhood,program,tags,emprendedor,aliado);
+      toast.success("Usuario creado exitosamente", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      
+      navigate("/login");
+    } catch (e) {
+      toast.error("Error, verifiques sus datos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
+  const handleOnSumit = async(e) => {
     e.preventDefault();
     let target = e.target;
-    
-      
       let datos = {
         mail: target.mail.value,
         password: target.password.value,
@@ -114,9 +145,37 @@ export const SignUp = () => {
           progress: undefined,
           theme: "light"
         });
-      }else if (validarCampos === true) {
-        alert("Datos correctos");
-        console.log(JSON.stringify(datos));
+      }
+      else if(target.password.value.length < 8){
+        toast.error("Ingrese una contraseña mayor a 8 caracteres", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
+      else if (validarCampos === true) {
+        validarUsuario(
+          datos.mail,
+          datos.password,
+          datos.name,
+          datos.lastname,
+          datos.curp,
+          datos.birth_date,
+          datos.gender,
+          datos.state,
+          datos.town,
+          datos.neighborhood,
+          datos.program,
+          datos.tags,
+          datos.emprendedor,
+          datos.aliado
+        );
+
       } else {
         toast.error("Datos inválidos", {
           position: "top-center",
@@ -140,22 +199,19 @@ export const SignUp = () => {
           autoClose="3000"
           hideProgressBar="true"
         />
-         <Link  to="/">
-        <ContainerHeader>
-        
-          <ContainerImage
-            src={require("../../assets/image-logo.png")}
-            width="70"
-            height="70"
-            alt="Logotipo Empresa"
-          />
-         
-          REGISTRO
-         
-        </ContainerHeader>
+        <Link to="/">
+          <ContainerHeader>
+            <ContainerImage
+              src={require("../../assets/image-logo.png")}
+              width="70"
+              height="70"
+              alt="Logotipo Empresa"
+            />
+            <LabelHeader >REGISTRO</LabelHeader>
+          </ContainerHeader>
         </Link>
-        
-        <Form onSubmit={EnviarDatos}>
+
+        <Form onSubmit={handleOnSumit}>
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Nombre</InputBoxLabel>
@@ -173,53 +229,52 @@ export const SignUp = () => {
             </InputBox>
             <InputBox>
               <InputBoxLabel>Curp</InputBoxLabel>
-              <InputBoxInput  type="text" name="curp" required />
+              <InputBoxInput type="text" name="curp" required />
             </InputBox>
           </FormColumn>
           <FormColumn>
-          <InputBox>
+            <InputBox>
               <InputBoxLabel>Fecha de nacimiento</InputBoxLabel>
               <InputBoxInput type="date" name="birth_date" required />
             </InputBox>
             <InputBox>
-            <FormGenderBox>
-            <GenderBoxH3>Género</GenderBoxH3>
-            <GenderOption>
-              <Gender>
-                <GenderInput
-                  type="radio"
-                  id="male"
-                  name="gender"
-                  value="Hombre"
-                  onChange={asignaGenero}
-                  defaultChecked
-                />
-                <GenderLabel for="male">Hombre</GenderLabel>
-              </Gender>
-              <Gender>
-                <GenderInput
-                  type="radio"
-                  id="female"
-                  name="gender"
-                  value="Mujer"
-                  onChange={asignaGenero}
-                />
-                <GenderLabel for="female">Mujer</GenderLabel>
-              </Gender>
-              <Gender>
-                <GenderInput
-                  type="radio"
-                  id="other"
-                  name="gender"
-                  value="Otro"
-                  onChange={asignaGenero}
-                />
-                <GenderLabel for="other">Prefiero no decir</GenderLabel>
-              </Gender>
-            </GenderOption>
-          </FormGenderBox>
+              <FormGenderBox>
+                <GenderBoxH3>Género</GenderBoxH3>
+                <GenderOption>
+                  <Gender>
+                    <GenderInput
+                      type="radio"
+                      id="male"
+                      name="gender"
+                      value="Hombre"
+                      onChange={asignaGenero}
+                      defaultChecked
+                    />
+                    <GenderLabel for="male">Hombre</GenderLabel>
+                  </Gender>
+                  <Gender>
+                    <GenderInput
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="Mujer"
+                      onChange={asignaGenero}
+                    />
+                    <GenderLabel for="female">Mujer</GenderLabel>
+                  </Gender>
+                  <Gender>
+                    <GenderInput
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="Otro"
+                      onChange={asignaGenero}
+                    />
+                    <GenderLabel for="other">Prefiero no decir</GenderLabel>
+                  </Gender>
+                </GenderOption>
+              </FormGenderBox>
             </InputBox>
-            
           </FormColumn>
           <FormColumn>
             <InputBox>
@@ -227,12 +282,11 @@ export const SignUp = () => {
               <InputBoxInput type="password" name="password" required />
             </InputBox>
             <InputBox>
-            <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
+              <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
               <InputBoxInput type="password" name="password2" required />
             </InputBox>
           </FormColumn>
 
-          
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Estado</InputBoxLabel>
