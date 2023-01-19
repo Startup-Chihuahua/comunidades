@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toFormData } from "axios";
 
+import Footer from '../Footer/Footer'; 
 function Navbar() {
   const navigate = useNavigate();
 
@@ -142,6 +143,7 @@ function Navbar() {
         </div>
       </nav>
       <Outlet />
+      <Footer/> 
     </>
   );
 }
