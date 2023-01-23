@@ -1,16 +1,23 @@
 import React from "react";
 import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Router,
+} from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Ecosistema from "../Pages/Ecosistema";
 import Startups from "../Pages/Startups";
 import Meetup from "../Pages/Meetup";
 import Comunidades from "../Pages/Comunidades";
 import TheTeam from "../Pages/TheTeam";
-import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
+import Eventos from "../Pages/CalendarioDeCiudad/Eventos";
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
+import { LogEvent } from "../LogEvent/LogEvent";
 
 const Layout = ({ children }) => {
   return (
@@ -28,6 +35,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.LOGEVENT} element={<LogEvent />} />
       </Routes>
     </BrowserRouter>
   );
