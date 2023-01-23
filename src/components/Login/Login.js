@@ -93,7 +93,7 @@ export const Login = () => {
           </div>
           <div className="content">
             <div className="pass-link">
-              <a href="/enviar">¿Olvidaste tu contraseña?</a>
+              <a href="/recuperar-contraseña">¿Olvidaste tu contraseña?</a>
             </div>
           </div>
           <div className="field">

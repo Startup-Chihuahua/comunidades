@@ -9,6 +9,6 @@ export const ROUTES = {
     THETEAM: '/theteam',
     EVENTOS: '/eventos',
     CONTACTANOS: '/contactanos' ,
-    ENVIAR: '/enviar',
-    CHANGE: '/recuperar-contraseña'
+    RECUPERAR: '/recuperar-contraseña',
+    ACTUALIZAR: '/actualizar-contraseña'
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
-import { SendMail } from "../Send-mail/SendMail";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Ecosistema from "../Pages/Ecosistema";
@@ -12,7 +11,9 @@ import TheTeam from "../Pages/TheTeam";
 import Eventos from "../Pages/Eventos";
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
-import { ChangePassword } from "../ChangePassword/ChangePassword";
+import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
+import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
+
 
 const Layout = ({ children }) => {
   return (
@@ -30,8 +31,8 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.ENVIAR} element={<SendMail />} />
-        <Route path={ROUTES.CHANGE} element={<ChangePassword />} />
+        <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
+        <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
       </Routes>
     </BrowserRouter>
   );
