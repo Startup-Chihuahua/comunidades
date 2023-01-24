@@ -8,7 +8,6 @@ import Text from "../Text/Text";
 import Events from "../Events/Events";
 import Sponsors from "../Sponsors/Sponsors";
 import Contact from "../Contact/Contact";
-import Footer from "../Footer/Footer";
 
 export const Home = () => {
   return (
@@ -22,7 +21,6 @@ export const Home = () => {
       <Events />
       <Sponsors />
       <Contact />
-      <Footer/>
     </>
   );
 };

@@ -3,14 +3,15 @@ import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
-import Ecosistema from "../Pages/Ecosistema";
+import Ecosystem from "../Pages/Ecosystem/Ecosystem";
 import Startups from "../Pages/Startups";
 import Meetup from "../Pages/Meetup";
 import Comunidades from "../Pages/Comunidades";
 import TheTeam from "../Pages/TheTeam";
-import Eventos from "../Pages/Eventos";
+import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
+import { SignUp } from "../SignUp/SignUp";
 
 const Layout = ({ children }) => {
   return (
@@ -19,7 +20,7 @@ const Layout = ({ children }) => {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/" element={<Navbar />}>
           <Route path={ROUTES.HOME} element={<Home />}></Route>
-          <Route path={ROUTES.ECOSISTEMA} element={<Ecosistema />} />
+          <Route path={ROUTES.ECOSISTEMA} element={<Ecosystem />} />
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
           <Route path={ROUTES.MEETUP} element={<Meetup />} />
           <Route path={ROUTES.COMUNIDADES} element={<Comunidades />} />
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
       </Routes>
     </BrowserRouter>
   );

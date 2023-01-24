@@ -1,18 +1,18 @@
 import React from "react";
-import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { validateLogin } from "../../api/login";
 import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
 import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {Container,Wrapper,Title,Form,Field,Input,FormFieldLabel,Button,Link1,Ref} from "../Login/Login.css.js"
 
 export const Login = () => {
   const navigate = useNavigate();
   //Data Validation
   let schema = yup.object().shape({
     mail: yup.string().email().required(),
-    password: yup.string().min(5).max(20).required(),
+    password: yup.string().min(5).max(50).required(),
   });
 
   const capturarDatos = async (e) => {
@@ -64,15 +64,15 @@ export const Login = () => {
   };
 
   return (
-    <div className="elpadrote">
-      <div className="wrapper">
+    <Container>
+      <Wrapper>
         <ToastContainer
           closeButton={true}
           position="bottom-right"
           autoClose="3000"
           hideProgressBar="true"
         />
-        <div className="title">
+        <Title>
           <Link className="navbar-brand" to="/">
             <img
               src={require("../../assets/image-logo.png")}
@@ -81,24 +81,31 @@ export const Login = () => {
               alt="Logotipo Empresa"
             />
           </Link>
-        </div>
-        <form onSubmit={capturarDatos}>
-          <div className="field">
-            <input type="text" name="mail" required />
-            <label>Correo electrónico</label>
-          </div>
-          <div className="field">
-            <input type="password" name="password" required />
-            <label>Contraseña</label>
-          </div>
-          <div className="field">
-            <input type="submit" value="Iniciar sesión" />
-          </div>
-          <div className="signup-link">
-            ¿No tienes una cuenta? <a href="/">Regístrate</a>
-          </div>
-        </form>
-      </div>
-    </div>
+        </Title>
+        <Form onSubmit={capturarDatos}>
+          
+          <Field>
+          <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
+            <Input type="text" name="mail" required />
+            
+          </Field>
+          <Field>
+            
+          <FormFieldLabel>Contraseña</FormFieldLabel>
+            <Input type="password" name="password" required />
+            
+          </Field>
+          <Field>
+           
+            <Button type="submit" value="Iniciar sesión" />
+            
+          </Field>
+          <Link1 >
+            ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
+          </Link1>
+         
+        </Form>
+      </Wrapper>
+    </Container>
   );
 };
