@@ -1,4 +1,4 @@
 import { axiosInstance } from "./axios.config";
 export const sendMail = async (mail) => {
-  return axiosInstance.get(`/user/recover-password/${mail}`);
+  return axiosInstance.post(`/user/recover-password`, { mail });
 };
