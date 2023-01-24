@@ -4,7 +4,8 @@ import { Login } from "../Login/Login";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Ecosistema from "../Pages/Ecosistema";
-import Startups from "../Pages/Startups";
+import Startups from "../Pages/Startups/Startups";
+import AddStartup from "../Pages/Startups/AddStartups";
 import Meetup from "../Pages/Meetup";
 import Comunidades from "../Pages/Comunidades";
 import TheTeam from "../Pages/TheTeam";
@@ -21,6 +22,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.HOME} element={<Home />}></Route>
           <Route path={ROUTES.ECOSISTEMA} element={<Ecosistema />} />
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
+          <Route path={ROUTES.ADDSTARTUP} element={<AddStartup />} />
           <Route path={ROUTES.MEETUP} element={<Meetup />} />
           <Route path={ROUTES.COMUNIDADES} element={<Comunidades />} />
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
