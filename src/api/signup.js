@@ -1,6 +1,21 @@
 import { axiosInstance } from './axios.config';
 
-export const CreateUser = async (mail,password,name,lastname,curp,birth_date,gender,state,town,neighborhood,program,tags,emprendedor,aliado) => {
+export const CreateUser = async ({
+  mail,
+  password,
+  name,
+  lastname,
+  curp,
+  birth_date,
+  gender,
+  state,
+  town,
+  neighborhood,
+  program,
+  tags,
+  emprendedor,
+  aliado,
+}) => {
   return axiosInstance.post(`/users`, {
     mail,
     password,
@@ -15,7 +30,7 @@ export const CreateUser = async (mail,password,name,lastname,curp,birth_date,gen
     program,
     tags,
     emprendedor,
-    aliado
+    aliado,
   });
 };
 
