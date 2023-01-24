@@ -15,7 +15,7 @@ export const Container = styled.section`
   background: #fff;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0px 15px 20px#000000;
+  box-shadow: 0px 15px 20px #000000;
 `;
 export const ContainerHeader = styled.header`
   
@@ -23,9 +23,7 @@ export const ContainerHeader = styled.header`
   text-align: center;
   align-items: center;
   background: #0E68D6;
- 
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1)
-  
+  box-shadow: 0 0 15px ##0000001a
   display: flex;
   justify-content: center;
   width: 100%;

@@ -25,7 +25,7 @@ import {
   ContainerImage,
   LabelHeader
 } from "../SignUp/SignUp.css.js";
-import { validateSignUp } from '../../api/signup.js';
+import { CreateUser } from '../../api/signup.js';
 
 export const SignUp = () => {
 
@@ -82,37 +82,6 @@ export const SignUp = () => {
     }
   };
 
-  const validarUsuario = async (mail,password,name,lastname,curp,birth_date,gender,state,town,neighborhood,program,tags,emprendedor,aliado) => {
-    try {
-      const {
-        data: { data: {  } = {} },
-      } = await validateSignUp(mail,password,name,lastname,curp,birth_date,gender,state,town,neighborhood,program,tags,emprendedor,aliado);
-      toast.success("Usuario creado exitosamente", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      
-      navigate("/login");
-    } catch (e) {
-      toast.error("Error, verifiques sus datos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  };
-
   const handleOnSumit = async(e) => {
     e.preventDefault();
     let target = e.target;
@@ -159,22 +128,50 @@ export const SignUp = () => {
         });
       }
       else if (validarCampos === true) {
-        validarUsuario(
-          datos.mail,
-          datos.password,
-          datos.name,
-          datos.lastname,
-          datos.curp,
-          datos.birth_date,
-          datos.gender,
-          datos.state,
-          datos.town,
-          datos.neighborhood,
-          datos.program,
-          datos.tags,
-          datos.emprendedor,
-          datos.aliado
-        );
+        
+        try {
+          const {
+            data: { data: {} = {} },
+          } = await CreateUser(
+            datos.mail,
+            datos.password,
+            datos.name,
+            datos.lastname,
+            datos.curp,
+            datos.birth_date,
+            datos.gender,
+            datos.state,
+            datos.town,
+            datos.neighborhood,
+            datos.program,
+            datos.tags,
+            datos.emprendedor,
+            datos.aliado
+          );
+          toast.success("Usuario creado exitosamente", {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          
+          navigate("/login");
+        } catch (e) {
+          toast.error("Error, verifique sus datos", {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
 
       } else {
         toast.error("Datos inválidos", {
