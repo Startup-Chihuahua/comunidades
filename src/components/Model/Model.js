@@ -1,108 +1,64 @@
 import React from "react";
-import "./Model.css";
+import './Model.css.js';
+import { ContainerModel, ColsTitle, ColsModel, ColsSubtitle, ColsP, Space, ButtonModel } from "./Model.css.js";
 
 const Model = () => {
+  
   return (
-    <div className="container-model">
-      <h1 className="cols-title">Modelo del Ecosistema</h1>
-      <hr />
-      <div className="cols-model container-fluid">
-        <div className="">
-          <h3 className="cols-subtitle">Sensibilizacion y cultura</h3>
+    <ContainerModel>
+      <ColsTitle>Modelo del Ecosistema</ColsTitle>
+      <hr/>
+      <ColsModel>
+        <div>
+          <ColsSubtitle>Sensibilizacion y cultura</ColsSubtitle>
         </div>
-        <div className="">
-          <p className="cols-p">
+        <div>
+          <ColsP>
             Primero necesitamos inspirar a la sociedad de la región para lograr
             que tengan una vision innovadora con nuevos retos para un mundo
             tecnologico dentro de un ecosistema innovador.
-          </p>
+          </ColsP>
         </div>
-        <hr className="espacio" />
-      </div>
+        <Space/>
+      </ColsModel>
 
-      <hr className="espacio" />
-      <div className="cols-model container-fluid">
-        <div className="">
-          <h3 className="cols-subtitle">Inmersión y conocimiento</h3>
+      <Space/>
+      <ColsModel>
+        <div>
+          <ColsSubtitle>Inmersión y conocimiento</ColsSubtitle>
         </div>
-        <div className="">
-          <p className="cols-p">
+        <div>
+          <ColsP>
             Un ves que hemos hecho el paso de cultivar a las personas toca
             encontrar a aquellos que tengan y puedan desarrollar ideas
             innovadoras que puedan cambiar la vida de la region ya sea B2C o B2B
             con proyectos de base científica y/o tecnológica.
-          </p>
+          </ColsP>
         </div>
-        <hr className="espacio" />
-      </div>
+        <Space/>
+      </ColsModel>
 
-      <hr className="espacio" />
-      <div className="cols-model container-fluid">
-        <div className="">
-          <h3 className="cols-subtitle">Desarrollo de ideas y Proyectos</h3>
+      <Space/>
+      <ColsModel>
+        <div>
+          <ColsSubtitle>Desarrollo de ideas y Proyectos</ColsSubtitle>
         </div>
-        <div className="">
-          <p className="cols-p">
+        <div>
+          <ColsP>
             Lograr desarrollar proyectos que sean viables dentro de un modelo de
             negocio utilizando las ideas desarrolladas un paso atrás para lograr
             que tenga un crecimiento exponencial.
-          </p>
+          </ColsP>
         </div>
-      </div>
-      <hr className="espacio" />
+      </ColsModel>
+      <Space/>
+      <br/>
       <div>
-        <button className="button-model">Conocer Nuestro Manifiesto</button>
+        <ButtonModel>Conocer Nuestro Manifiesto</ButtonModel>
       </div>
-    </div>
+      <br/>
+    </ContainerModel>
   );
 };
 
 export default Model;
-
-/*
-<div className="model">
-        <h1>Modelo del Ecosistema</h1>
-        
-        <hr/>
-        
-        <div className="cols">
-            <div>
-            <h3>Sensibilizacion y Cultura</h3>
-            </div>
-            <div>
-            <p>Primero necesitamos inspirar a la sociedad de la región para lograr que tengan una vision innovadora con nuevos retos para un mundo tecnologico dentro de un ecosistema innovador.</p>
-            </div>
-        </div>
-        
-        <hr/>
-        
-        <div className="cols">
-            <div>
-            <h3>Inmersión y conocimiento</h3>
-            </div>
-            <div>
-            <p>Un ves que hemos hecho el paso de cultivar a las personas toca encontrar a aquellos que tengan y puedan desarrollar ideas innovadoras que puedan cambiar la vida de la region ya sea B2C o B2B con proyectos de base científica y/o tecnológica.</p>
-            </div>
-        </div>
-        <br/>
-        <hr/>
-        <br/>
-        <div className="cols">
-            <div>
-            <h3>Desarrollo de ideas y Proyectos</h3>
-            </div>
-            <div>
-            <p>Lograr desarrollar proyectos que sean viables dentro de un modelo de negocio utilizando las ideas desarrolladas un paso atrás para lograr que tenga un crecimiento exponencial.</p>
-            </div>
-        </div>
-        <br/>
-        <hr/>
-        <br/>
-        <div className="container">
-            <button>Conocer Nuestro Manifiesto</button>
-        </div>
-    </div>
-
-
-
-*/
