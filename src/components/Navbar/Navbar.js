@@ -1,13 +1,18 @@
 import React from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { toFormData } from "axios";
 
+import Footer from '../Footer/Footer'; 
 function Navbar() {
   const navigate = useNavigate(); 
 
   function toLogin() {
     navigate("/login");
+  }
+  function toSignUp() {
+    navigate("/signup");
   }
 
   return (
@@ -129,7 +134,7 @@ function Navbar() {
                 >
                   Login
                 </button>
-                <button className="btn btn-outline-light" type="button">
+                <button className="btn btn-outline-light" type="button" onClick={toSignUp}>
                   Sign-up
                 </button>
               </div>
@@ -137,7 +142,8 @@ function Navbar() {
           </div>
         </div>
       </nav>
-      <Outlet /> 
+      <Outlet />
+      <Footer/> 
     </>
   );
 }

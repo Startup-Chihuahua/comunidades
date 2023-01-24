@@ -1,35 +1,36 @@
 import React from "react";
 import "./Footer.css";
+import {Container, Title, Text, Img, Button} from "./Footer.css.js";
 
-function Footer() {
+export default function Footer() {
   return (
-    <div className="container-fluid" id="footer">
+    <Container className="container-fluid">
       <div className="row align-items-start">
         <div className="col">
-          <h5>SE PARTE DE NUESTRO FUTURO</h5>
-          <button type="button" className="btn btn-dark">
+          <Title>SE PARTE DE NUESTRO FUTURO</Title>
+          <Button type="button" className="btn btn-dark">
             Unete
-          </button>
+          </Button>
         </div>
         <div className="col">
-          <h5>STARUP CHIHUAHUA</h5>
-          <p>
+          <Title>STARUP CHIHUAHUA</Title>
+          <Text>
             Av. Colegio Militar 4709, Nombre de Dios, 31150 Chihuahua, Chih.
-          </p>
-          <p>hola@startupchihuahua.com</p>
-          <p>(614) 182-2983 WPP*</p>
+          </Text>
+          <Text>hola@startupchihuahua.com</Text>
+          <Text>(614) 182-2983 WPP*</Text>
         </div>
         <br />
         <div className="col">
           <br />
-          <img
+          <Img
             src={require("../../assets/StartupLogo.png")}
             alt="logo StartupChihuahua"
           />
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 
-export default Footer;
+
