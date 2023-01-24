@@ -6,3 +6,4 @@ export const validateLogin = async (mail, password) => {
       password,
     });
 };
+
