@@ -11,6 +11,7 @@ import TheTeam from "../Pages/TheTeam";
 import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
+import { SignUp } from "../SignUp/SignUp";
 
 const Layout = ({ children }) => {
   return (
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
       </Routes>
     </BrowserRouter>
   );
