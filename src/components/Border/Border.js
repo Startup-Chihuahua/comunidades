@@ -1,12 +1,12 @@
 import React from 'react';
-import './Border.css';
+import { Container, Content } from './Border.css.js';
 
 function Border() {
     return(
-        <div className='container-fluid border-container'>
-            <h2>El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy</h2>
-        </div>
+        <Container className='container-fluid'>
+            <Content>El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy • El futuro es hoy</Content>
+        </Container>
     );
 }
 
-export default Border;  
+export default Border;     
