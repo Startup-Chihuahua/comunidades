@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Footer from '../Footer/Footer'; 
 function Navbar() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   function toLogin() {
     navigate("/login");
@@ -23,7 +23,7 @@ function Navbar() {
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
-          </Link>
+          </Link> 
           <button
             className="navbar-toggler"
             type="button"
