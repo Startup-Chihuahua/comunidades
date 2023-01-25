@@ -8,5 +8,8 @@ export const ROUTES = {
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',
     EVENTOS: '/eventos',
-    CONTACTANOS: '/contactanos' 
+    RECUPERAR: '/recuperar-contraseña',
+    ACTUALIZAR: '/actualizar-contraseña',
+    CONTACTANOS: '/contactanos',
+    SIGNUP: '/signUp'
 };
