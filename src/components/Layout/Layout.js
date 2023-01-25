@@ -6,7 +6,7 @@ import { ROUTES } from "../../routes/routes";
 import Ecosystem from "../Pages/Ecosystem/Ecosystem";
 import Startups from "../Pages/Startups";
 import Meetup from "../Pages/Meetup";
-import Comunidades from "../Pages/Comunidades";
+import ConoceLasComunidades from "../Pages/ConoceLasComunidades/ConoceLasComunidades";
 import TheTeam from "../Pages/TheTeam";
 import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
 import Contactanos from "../Pages/Contactanos";
@@ -14,6 +14,7 @@ import Navbar from "../Navbar/Navbar";
 import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
 import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
 import { SignUp } from "../SignUp/SignUp";
+
 
 const Layout = ({ children }) => {
   return (
@@ -25,7 +26,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.ECOSISTEMA} element={<Ecosystem />} />
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
           <Route path={ROUTES.MEETUP} element={<Meetup />} />
-          <Route path={ROUTES.COMUNIDADES} element={<Comunidades />} />
+          <Route path={ROUTES.COMUNIDADES} element={<ConoceLasComunidades />} />
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
