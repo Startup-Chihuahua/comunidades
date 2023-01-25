@@ -8,6 +8,7 @@ export const ROUTES = {
     MEETUP: '/meetup',
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',
-    EVENTOS: '/eventos', 
-    CONTACTANOS: '/contactanos' 
+    EVENTOS: '/eventos',
+    CONTACTANOS: '/contactanos',
+    SIGNUP: '/signUp'
 };
