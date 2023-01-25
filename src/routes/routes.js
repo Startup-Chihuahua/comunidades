@@ -12,6 +12,5 @@ export const ROUTES = {
     EVENTOS: '/eventos',
     RECUPERAR: '/recuperar-contraseña',
     ACTUALIZAR: '/actualizar-contraseña',
-    CONTACTANOS: '/contactanos',
     SIGNUP: '/signUp'
 };

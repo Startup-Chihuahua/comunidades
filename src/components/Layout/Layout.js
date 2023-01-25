@@ -5,8 +5,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
-  Router,
+  Navigate
 } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Ecosystem from "../Pages/Ecosystem/Ecosystem";
