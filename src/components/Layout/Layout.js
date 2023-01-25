@@ -11,6 +11,8 @@ import TheTeam from "../Pages/TheTeam";
 import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
 import Contactanos from "../Pages/Contactanos";
 import Navbar from "../Navbar/Navbar";
+import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
+import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
 import { SignUp } from "../SignUp/SignUp";
 
 const Layout = ({ children }) => {
@@ -29,6 +31,8 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
+        <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
       </Routes>
     </BrowserRouter>
