@@ -7,7 +7,11 @@ export const ROUTES = {
     MEETUP: '/meetup',
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',
-    EVENTOS: '/eventos', 
     CONTACTANOS: '/contactanos',
     LOGEVENT: '/logevent',
+    EVENTOS: '/eventos',
+    RECUPERAR: '/recuperar-contraseña',
+    ACTUALIZAR: '/actualizar-contraseña',
+    CONTACTANOS: '/contactanos',
+    SIGNUP: '/signUp'
 };
