@@ -6,7 +6,7 @@ import { ROUTES } from "../../routes/routes";
 import Ecosystem from "../Pages/Ecosystem/Ecosystem";
 import Startups from "../Pages/Startups/Startups";
 import AddStartup from "../Pages/Startups/AddStartups";
-import Meetup from "../Pages/Meetup";
+import Meetup from "../../components/Pages/MeetUp/MeetUp";
 import Comunidades from "../Pages/Comunidades";
 import TheTeam from "../../components/Pages/Theteam/Theteam";
 import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
