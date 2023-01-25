@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateLogin } from "../../api/login";
 import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
 import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {Container,Wrapper,Title,Form,Field,Input,FormFieldLabel,Button,Link1,Ref} from "../Login/Login.css.js"
+import {
+  Container,
+  Wrapper,
+  Title,
+  Form,
+  Field,
+  Input,
+  FormFieldLabel,
+  Button,
+  Link1,
+  Ref,
+} from "../Login/Login.css.js";
+import { Loader } from "../Loader/Loader";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
   //Data Validation
   let schema = yup.object().shape({
     mail: yup.string().email().required(),
@@ -39,73 +52,72 @@ export const Login = () => {
     }
   };
 
-  const validarUsuario = async (mail, password) => {
-    try {
-      const {
-        data: { data: { accessToken } = {} },
-      } = await validateLogin(mail, password);
-      setLocalStorageItem("accessToken", accessToken);
-      // toast.success("Usuario validado", {
-      //   position: toast.POSITION.TOP_RIGHT,
-      // });
-      navigate("/home");
-    } catch (e) {
-      toast.error("Contraseña o correo incorrectos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+  const validarUsuario = (mail, password) => {
+    setLoad(true);
+    setTimeout(async () => {
+      try {
+        const {
+          data: { data: { accessToken } = {} },
+        } = await validateLogin(mail, password);
+        setLocalStorageItem("accessToken", accessToken);
+        setLoad(false);
+        navigate("/home");
+      } catch (e) {
+        toast.error("Contraseña o correo incorrectos", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setLoad(false);
+      }
+    }, 3000);
   };
 
-  return (
-    <Container>
-      <Wrapper>
-        <ToastContainer
-          closeButton={true}
-          position="bottom-right"
-          autoClose="3000"
-          hideProgressBar="true"
-        />
-        <Title>
-          <Link className="navbar-brand" to="/">
-            <img
-              src={require("../../assets/image-logo.png")}
-              width="100"
-              height="100"
-              alt="Logotipo Empresa"
-            />
-          </Link>
-        </Title>
-        <Form onSubmit={capturarDatos}>
-          
-          <Field>
-          <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
-            <Input type="text" name="mail" required />
-            
-          </Field>
-          <Field>
-            
-          <FormFieldLabel>Contraseña</FormFieldLabel>
-            <Input type="password" name="password" required />
-            
-          </Field>
-          <Field>
-           
-            <Button type="submit" value="Iniciar sesión" />
-            
-          </Field>
-          <Link1 >
-            ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
-          </Link1>
-         
-        </Form>
-      </Wrapper>
-    </Container>
-  );
+  if (load === false) {
+    return (
+      <Container>
+        <Wrapper>
+          <ToastContainer
+            closeButton={true}
+            position="bottom-right"
+            autoClose="3000"
+            hideProgressBar="true"
+          />
+          <Title>
+            <Link className="navbar-brand" to="/">
+              <img
+                src={require("../../assets/image-logo.png")}
+                width="100"
+                height="100"
+                alt="Logotipo Empresa"
+              />
+            </Link>
+          </Title>
+          <Form onSubmit={capturarDatos}>
+            <Field>
+              <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
+              <Input type="text" name="mail" required />
+            </Field>
+            <Field>
+              <FormFieldLabel>Contraseña</FormFieldLabel>
+              <Input type="password" name="password" required />
+            </Field>
+            <Field>
+              <Button type="submit" value="Iniciar sesión" />
+            </Field>
+            <Link1>
+              ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
+            </Link1>
+          </Form>
+        </Wrapper>
+      </Container>
+    );
+  } else {
+    return <Loader />;
+  }
 };
