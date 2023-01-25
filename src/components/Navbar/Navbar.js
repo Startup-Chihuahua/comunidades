@@ -3,11 +3,15 @@ import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import Footer from '../Footer/Footer'; 
 function Navbar() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   function toLogin() {
     navigate("/login");
+  }
+  function toSignUp() {
+    navigate("/signup");
   }
 
   return (
@@ -19,7 +23,7 @@ function Navbar() {
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
-          </Link>
+          </Link> 
           <button
             className="navbar-toggler"
             type="button"
@@ -31,7 +35,6 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          ``
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto gap-4">
               <li className="nav-item">
@@ -129,7 +132,7 @@ function Navbar() {
                 >
                   Login
                 </button>
-                <button className="btn btn-outline-light" type="button">
+                <button className="btn btn-outline-light" type="button" onClick={toSignUp}>
                   Sign-up
                 </button>
               </div>
@@ -138,6 +141,7 @@ function Navbar() {
         </div>
       </nav>
       <Outlet />
+      <Footer/> 
     </>
   );
 }

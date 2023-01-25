@@ -1,11 +1,12 @@
 import React from 'react';
-import './Text.css';
+import './Text.css.js';
+import { Title, Container } from './Text.css.js';
 
 function Text() {
     return(
-        <div className='container-fluid main-container2'>
-            <h1>"BUSCAMOS LOS UNICORNIOS DE TU CABEZA Y LOS GUIAMOS DENTRO DE UN ECOSISTEMA"</h1>
-        </div>
+        <Container>
+            <Title>"BUSCAMOS LOS UNICORNIOS DE TU CABEZA Y LOS GUIAMOS DENTRO DE UN ECOSISTEMA"</Title>
+        </Container>
     );
 }
 
