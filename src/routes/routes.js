@@ -4,9 +4,13 @@ export const ROUTES = {
     LOGIN: '/login',
     ECOSISTEMA: '/ecosistema',
     STARTUPS: '/startups',
+    ADDSTARTUP: '/startups/addstartup',
     MEETUP: '/meetup',
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',
-    EVENTOS: '/eventos', 
-    CONTACTANOS: '/contactanos' 
+    EVENTOS: '/eventos',
+    RECUPERAR: '/recuperar-contraseña',
+    ACTUALIZAR: '/actualizar-contraseña',
+    CONTACTANOS: '/contactanos',
+    SIGNUP: '/signUp'
 };

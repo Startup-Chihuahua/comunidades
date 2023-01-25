@@ -1,8 +1,10 @@
-.main-container2 {
-    background-color: #DCDBDB;
-} 
+import styled from 'styled-components';
 
-.main-container2 h1 {
+export const Container = styled.div`
+    background-color: #DCDBDB;
+`;
+
+export const Title = styled.h1`
     margin: 0;
     padding: 40px;
     font-size: 60px;
@@ -12,4 +14,5 @@
     color: #0F6CDE;
     text-align: right; 
     text-transform: uppercase; 
-}
+`;
+   
