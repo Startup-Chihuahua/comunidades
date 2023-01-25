@@ -8,7 +8,7 @@ function MeetUp() {
         <div>
         <Container>
             <Img
-                src={require('../../../../assets/MeetUpImage.png')}
+                src={require("../../../assets/meetupimage.png")}
                 alt="logo StartupChihuahua" />
             <InfoContainer>
                 <Title>COMMUNITY MEET UP</Title><br />
@@ -17,9 +17,7 @@ function MeetUp() {
                 <Text><strong>#ELFUTUROESHOY  #IMPACTOCOLECTIVO #COMMUNITYBUILDERS #SOCIALTEC</strong></Text>
                 <Button type="button" className="btn btn-dark">Conoce las comunidades</Button>
             </InfoContainer>
-         </Container>
-      
-        
+         </Container>       
         </div>
     );
 }
