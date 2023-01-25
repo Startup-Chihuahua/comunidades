@@ -2,23 +2,22 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     background-color: #E8E8E8; 
+    overflow: hidden;
 `; 
 
 export const BorderContent = styled.h2` 
     margin: 0;
-    padding: 20px;
-    font-size: 20px; 
-    font-family: 'Arial';
+    padding: 18px;
+    font-size: 20px;
     font-weight: bold;
-    color: #0F6CDE;
+    color: #0053B9;
     text-transform: uppercase;
-    text-align: center; 
-    transform: translate(100%);
-    animation: move-rtl 30s linear infinite;
+    white-space: nowrap;
+    animation: move-rtl 20s linear infinite;
 
-    @keyframes move-rtl {
+    @keyframes move-rtl { 
         0% {
-            transform: translate(100%);
+            transform: translate(0%);
         }
         100% {
             transform: translate(-100%);
