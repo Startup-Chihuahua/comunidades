@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Title, ContainerGrid, ContainerLeft, Text, SocialMediaContainer, ButtonInstagram, ButtonLinkedin, ContainerRight, SubTitle, ButtonSend, ButtonRestore, SliderContainer, Content } from './Contactanos.css.js';
-import Footer from '../../Footer/Footer';
 
 function Contactanos() { 
     return (
@@ -43,11 +42,10 @@ function Contactanos() {
                 </ContainerRight>
             </ContainerGrid>
             <SliderContainer>
-                <Content>El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy</Content>
+                <Content>| El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy | El futuro es hoy</Content>
             </SliderContainer>
-            <Footer />
         </>
     );
 }
 
-export default Contactanos;     
+export default Contactanos;          

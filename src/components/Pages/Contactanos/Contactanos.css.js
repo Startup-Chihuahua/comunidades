@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     background-color: #0F6CDE; 
     padding: 60px;  
-`;  
+`;
 
 export const Title = styled.h1` 
     font-size: 80px;
@@ -123,25 +123,25 @@ export const ButtonRestore = styled.button`
 
 export const SliderContainer = styled.div`
     background-color: #E9E6DE;
+    overflow: hidden;
 `;
 
 export const Content = styled.h3`
     margin: 0;
-    padding: 20px;
-    font-size: 18px;  
-    font-family: 'Arial';
+    padding: 18px;
+    font-size: 20px;
     font-weight: bold;
-    color: #0F6CDE;
-    text-transform: uppercase; 
-    text-align: center; 
-    transform: translate(100%);
-    animation: move-rtl 30s linear infinite;
+    color: #0053B9;
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: move-rtl 20s linear infinite;
+
     @keyframes move-rtl { 
         0% {
-           transform: translate(100%);
+           transform: translate(0%);
         }
         100% {
            transform: translate(-100%);
         }
     }
-`;    
+`;       
