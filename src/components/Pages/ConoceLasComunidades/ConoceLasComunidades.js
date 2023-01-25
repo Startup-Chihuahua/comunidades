@@ -11,13 +11,13 @@ function ConoceLasComunidades() {
             <div className="button-container">
                 <ImagesContainer>
                     <ContainerLeft>
-                        <Image src={require("../../../assets/culture&education1.png")} alt="logo StartupChihuahua" />
+                        <Image src={require("../../../assets/culture-education1.png")} alt="logo StartupChihuahua" />
                         <Overlay>
                             <Content><strong>COMUNIDADES QUE <br />PRUMEUEVEN LA<br />CULTURA DEL FUTURO</strong></Content>
                         </Overlay>
                     </ContainerLeft>
                     <ContainerRight>
-                        <Image src={require("../../../assets/bussines&networking2.png")} alt="logo StartupChihuahua" />
+                        <Image src={require("../../../assets/bussines-networking2.png")} alt="logo StartupChihuahua" />
                         <Overlay>
                             <Content><strong>COMUNIDADESD DE<br />NEGOCIOS</strong></Content>
                         </Overlay>
@@ -31,7 +31,7 @@ function ConoceLasComunidades() {
                         </Overlay>
                     </ContainerLeft>
                     <ContainerRight>
-                        <Image src={require("../../../assets/code&developers4.png")} alt="logo StartupChihuahua" />
+                        <Image src={require("../../../assets/code-developers4.png")} alt="logo StartupChihuahua" />
                         <Overlay>
                             <Content><strong>COMUNIDADES DE<br />PROGRAMADORES</strong></Content>
                         </Overlay>
@@ -39,7 +39,7 @@ function ConoceLasComunidades() {
                 </ImagesContainer>
                 <ImagesContainerb>
                     <ContainerLeft1>
-                        <Image src={require("../../../assets/industry&profesionist5.png")} alt="logo StartupChihuahua" />
+                        <Image src={require("../../../assets/industry-profesionist5.png")} alt="logo StartupChihuahua" />
                         <Overlay>
                             <Content><strong>COMUNIDADES DE<br />PROGRAMADORES</strong></Content>
                         </Overlay>
