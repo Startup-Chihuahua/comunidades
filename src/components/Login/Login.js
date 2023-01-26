@@ -107,6 +107,9 @@ export const Login = () => {
               <FormFieldLabel>Contraseña</FormFieldLabel>
               <Input type="password" name="password" required />
             </Field>
+            <Link1>
+            <Ref href="/recuperar-contraseña">¿Olvidaste tu contraseña?</Ref>
+          </Link1>
             <Field>
               <Button type="submit" value="Iniciar sesión" />
             </Field>
