@@ -15,6 +15,8 @@ import Navbar from "../Navbar/Navbar";
 import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
 import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
 import { SignUp } from "../SignUp/SignUp";
+import ConoceLasComunidades from "../Pages/ConoceLasComunidades/ConoceLasComunidades";
+
 
 
 const Layout = ({ children }) => {
@@ -28,7 +30,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
           <Route path={ROUTES.ADDSTARTUP} element={<AddStartup />} />
           <Route path={ROUTES.MEETUP} element={<Meetup />} />
-          <Route path={ROUTES.COMUNIDADES} element={<ConoceLasComunidades />} />
+          <Route path={ROUTES.COMUNIDADES} element={<ConoceLasComunidades/>} />
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
