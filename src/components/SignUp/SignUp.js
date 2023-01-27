@@ -131,37 +131,36 @@ export const SignUp = () => {
       });
     } else if (validarCampos === true) {
       setLoad(true);
-      setTimeout(async () => {
-        try {
-          const {
-            data: { data: {} = {} },
-          } = await CreateUser(datos);
-          toast.success("Usuario creado exitosamente", {
-            position: "top-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setLoad(false);
-          navigate("/login");
-        } catch (e) {
-          toast.error("Error, verifique sus datos", {
-            position: "top-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setLoad(false);
-        }
-      }, 3000);
+
+      try {
+        const {
+          data: { data: {} = {} },
+        } = await CreateUser(datos);
+        toast.success("Usuario creado exitosamente", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setLoad(false);
+        navigate("/login");
+      } catch (e) {
+        toast.error("Error, verifique sus datos", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setLoad(false);
+      }
     } else {
       toast.error("Datos inválidos", {
         position: "top-center",
@@ -175,186 +174,184 @@ export const SignUp = () => {
       });
     }
   };
-  if (load === false) {
-    return (
-      <Body>
-        <Container>
-          <ToastContainer
-            closeButton={true}
-            position="bottom-right"
-            autoClose="3000"
-            hideProgressBar="true"
-          />
-          <Link to="/">
-            <ContainerHeader>
-              <ContainerImage
-                src={require("../../assets/image-logo.png")}
-                width="70"
-                height="70"
-                alt="Logotipo Empresa"
-              />
-              <LabelHeader>REGISTRO</LabelHeader>
-            </ContainerHeader>
-          </Link>
+  const form = (
+    <Body>
+      <Container>
+        <ToastContainer
+          closeButton={true}
+          position="bottom-right"
+          autoClose="3000"
+          hideProgressBar="true"
+        />
+        <Link to="/">
+          <ContainerHeader>
+            <ContainerImage
+              src={require("../../assets/image-logo.png")}
+              width="70"
+              height="70"
+              alt="Logotipo Empresa"
+            />
+            <LabelHeader>REGISTRO</LabelHeader>
+          </ContainerHeader>
+        </Link>
 
-          <Form onSubmit={handleOnSumit}>
-            <FormColumn>
-              <InputBox>
-                <InputBoxLabel>Nombre</InputBoxLabel>
-                <InputBoxInput type="text" name="name" required />
-              </InputBox>
-              <InputBox>
-                <InputBoxLabel>Apellido</InputBoxLabel>
-                <InputBoxInput type="text" name="lastname" required />
-              </InputBox>
-            </FormColumn>
-            <FormColumn>
-              <InputBox>
-                <InputBoxLabel>Correo electrónico</InputBoxLabel>
-                <InputBoxInput type="text" name="mail" required />
-              </InputBox>
-              <InputBox>
-                <InputBoxLabel>Curp</InputBoxLabel>
-                <InputBoxInput type="text" name="curp" required />
-              </InputBox>
-            </FormColumn>
-            <FormColumn>
-              <InputBox>
-                <InputBoxLabel>Fecha de nacimiento</InputBoxLabel>
-                <InputBoxInput type="date" name="birth_date" required />
-              </InputBox>
-              <InputBox>
-                <FormGenderBox>
-                  <GenderBoxH3>Género</GenderBoxH3>
-                  <GenderOption>
-                    <Gender>
-                      <GenderInput
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="Hombre"
-                        onChange={asignaGenero}
-                        defaultChecked
-                      />
-                      <GenderLabel for="male">Hombre</GenderLabel>
-                    </Gender>
-                    <Gender>
-                      <GenderInput
-                        type="radio"
-                        id="female"
-                        name="gender"
-                        value="Mujer"
-                        onChange={asignaGenero}
-                      />
-                      <GenderLabel for="female">Mujer</GenderLabel>
-                    </Gender>
-                    <Gender>
-                      <GenderInput
-                        type="radio"
-                        id="other"
-                        name="gender"
-                        value="Otro"
-                        onChange={asignaGenero}
-                      />
-                      <GenderLabel for="other">Prefiero no decir</GenderLabel>
-                    </Gender>
-                  </GenderOption>
-                </FormGenderBox>
-              </InputBox>
-            </FormColumn>
-            <FormColumn>
-              <InputBox>
-                <InputBoxLabel>Contraseña</InputBoxLabel>
-                <InputBoxInput type="password" name="password" required />
-              </InputBox>
-              <InputBox>
-                <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
-                <InputBoxInput type="password" name="password2" required />
-              </InputBox>
-            </FormColumn>
+        <Form onSubmit={handleOnSumit}>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Nombre</InputBoxLabel>
+              <InputBoxInput type="text" name="name" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Apellido</InputBoxLabel>
+              <InputBoxInput type="text" name="lastname" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Correo electrónico</InputBoxLabel>
+              <InputBoxInput type="text" name="mail" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Curp</InputBoxLabel>
+              <InputBoxInput type="text" name="curp" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Fecha de nacimiento</InputBoxLabel>
+              <InputBoxInput type="date" name="birth_date" required />
+            </InputBox>
+            <InputBox>
+              <FormGenderBox>
+                <GenderBoxH3>Género</GenderBoxH3>
+                <GenderOption>
+                  <Gender>
+                    <GenderInput
+                      type="radio"
+                      id="male"
+                      name="gender"
+                      value="Hombre"
+                      onChange={asignaGenero}
+                      defaultChecked
+                    />
+                    <GenderLabel for="male">Hombre</GenderLabel>
+                  </Gender>
+                  <Gender>
+                    <GenderInput
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="Mujer"
+                      onChange={asignaGenero}
+                    />
+                    <GenderLabel for="female">Mujer</GenderLabel>
+                  </Gender>
+                  <Gender>
+                    <GenderInput
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="Otro"
+                      onChange={asignaGenero}
+                    />
+                    <GenderLabel for="other">Prefiero no decir</GenderLabel>
+                  </Gender>
+                </GenderOption>
+              </FormGenderBox>
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Contraseña</InputBoxLabel>
+              <InputBoxInput type="password" name="password" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
+              <InputBoxInput type="password" name="password2" required />
+            </InputBox>
+          </FormColumn>
 
-            <FormColumn>
-              <InputBox>
-                <InputBoxLabel>Estado</InputBoxLabel>
-                <InputBoxInput type="text" name="state" required />
-              </InputBox>
-              <InputBox>
-                <InputBoxLabel>Municipio</InputBoxLabel>
-                <InputBoxInput type="text" name="town" required />
-              </InputBox>
-            </FormColumn>
-            <FormColumn>
-              <InputBox>
-                <InputBoxLabel>Localidad</InputBoxLabel>
-                <InputBoxInput type="text" name="neighborhood" required />
-              </InputBox>
-              <InputBox>
-                <InputBoxLabel>Programa</InputBoxLabel>
-                <InputBoxInput type="text" name="program" required />
-              </InputBox>
-            </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Estado</InputBoxLabel>
+              <InputBoxInput type="text" name="state" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Municipio</InputBoxLabel>
+              <InputBoxInput type="text" name="town" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Localidad</InputBoxLabel>
+              <InputBoxInput type="text" name="neighborhood" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Programa</InputBoxLabel>
+              <InputBoxInput type="text" name="program" required />
+            </InputBox>
+          </FormColumn>
 
-            <FormGenderBox>
-              <GenderBoxH3>Tag</GenderBoxH3>
-              <GenderOption>
-                <Gender>
-                  <GenderInput
-                    type="radio"
-                    id="emp"
-                    name="tag"
-                    value="Emprendedor"
-                    checked={tag === "Emprendedor" ? true : false}
-                    onChange={ShowInputEmpAliado}
-                  />
-                  <GenderLabel for="emp">Emprendedor</GenderLabel>
-                </Gender>
-                <Gender>
-                  <GenderInput
-                    type="radio"
-                    id="ali"
-                    name="tag"
-                    value="Aliado"
-                    checked={tag === "Aliado" ? true : false}
-                    onChange={ShowInputEmpAliado}
-                  />
-                  <GenderLabel for="ali">Aliado</GenderLabel>
-                </Gender>
-              </GenderOption>
-            </FormGenderBox>
-            <FormColumn>
-              {showEmp && (
-                <SelectContainer id="selectEmprendedor">
-                  <SelectBox name="emprendedor" onChange={asignaTipoEmp}>
-                    <option hidden>Seleccione el tipo</option>
-                    <option value="Tipo 1">Tipo 1</option>
-                    <option value="Tipo 2">Tipo 2</option>
-                    <option value="Tipo 3">Tipo 3</option>
-                    <option value="Tipo 4">Tipo 4</option>
-                    <option value="Tipo 5">Tipo 5</option>
-                  </SelectBox>
-                </SelectContainer>
-              )}
-              {showAli && (
-                <SelectContainer id="selectAliado">
-                  <SelectBox name="aliado" onChange={asignaTipoAli}>
-                    <option hidden>Seleccione el tipo</option>
-                    <option value="Inversionista">Inversionista</option>
-                    <option value="Comunidad">Comunidad</option>
-                    <option value="Empresa & Industria">
-                      Empresa & Industria
-                    </option>
-                  </SelectBox>
-                </SelectContainer>
-              )}
-            </FormColumn>
-            <ButtonContainer>
-              <Button>Enviar</Button>
-            </ButtonContainer>
-          </Form>
-        </Container>
-      </Body>
-    );
-  } else {
-    return <Loader />;
-  }
+          <FormGenderBox>
+            <GenderBoxH3>Tag</GenderBoxH3>
+            <GenderOption>
+              <Gender>
+                <GenderInput
+                  type="radio"
+                  id="emp"
+                  name="tag"
+                  value="Emprendedor"
+                  checked={tag === "Emprendedor" ? true : false}
+                  onChange={ShowInputEmpAliado}
+                />
+                <GenderLabel for="emp">Emprendedor</GenderLabel>
+              </Gender>
+              <Gender>
+                <GenderInput
+                  type="radio"
+                  id="ali"
+                  name="tag"
+                  value="Aliado"
+                  checked={tag === "Aliado" ? true : false}
+                  onChange={ShowInputEmpAliado}
+                />
+                <GenderLabel for="ali">Aliado</GenderLabel>
+              </Gender>
+            </GenderOption>
+          </FormGenderBox>
+          <FormColumn>
+            {showEmp && (
+              <SelectContainer id="selectEmprendedor">
+                <SelectBox name="emprendedor" onChange={asignaTipoEmp}>
+                  <option hidden>Seleccione el tipo</option>
+                  <option value="Tipo 1">Tipo 1</option>
+                  <option value="Tipo 2">Tipo 2</option>
+                  <option value="Tipo 3">Tipo 3</option>
+                  <option value="Tipo 4">Tipo 4</option>
+                  <option value="Tipo 5">Tipo 5</option>
+                </SelectBox>
+              </SelectContainer>
+            )}
+            {showAli && (
+              <SelectContainer id="selectAliado">
+                <SelectBox name="aliado" onChange={asignaTipoAli}>
+                  <option hidden>Seleccione el tipo</option>
+                  <option value="Inversionista">Inversionista</option>
+                  <option value="Comunidad">Comunidad</option>
+                  <option value="Empresa & Industria">
+                    Empresa & Industria
+                  </option>
+                </SelectBox>
+              </SelectContainer>
+            )}
+          </FormColumn>
+          <ButtonContainer>
+            <Button>Enviar</Button>
+          </ButtonContainer>
+        </Form>
+      </Container>
+    </Body>
+  );
+
+  return load  ?  <Loader /> : form;
 };

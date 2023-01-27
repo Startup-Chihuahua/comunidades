@@ -52,75 +52,71 @@ export const Login = () => {
     }
   };
 
-  const validarUsuario = (mail, password) => {
+  const validarUsuario = async (mail, password) => {
     setLoad(true);
-    setTimeout(async () => {
-      try {
-        const {
-          data: { data: { accessToken } = {} },
-        } = await validateLogin(mail, password);
-        setLocalStorageItem("accessToken", accessToken);
-        setLoad(false);
-        navigate("/home");
-      } catch (e) {
-        toast.error("Contraseña o correo incorrectos", {
-          position: "top-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        setLoad(false);
-      }
-    }, 3000);
-  };
 
-  if (load === false) {
-    return (
-      <Container>
-        <Wrapper>
-          <ToastContainer
-            closeButton={true}
-            position="bottom-right"
-            autoClose="3000"
-            hideProgressBar="true"
-          />
-          <Title>
-            <Link className="navbar-brand" to="/">
-              <img
-                src={require("../../assets/image-logo.png")}
-                width="100"
-                height="100"
-                alt="Logotipo Empresa"
-              />
-            </Link>
-          </Title>
-          <Form onSubmit={capturarDatos}>
-            <Field>
-              <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
-              <Input type="text" name="mail" required />
-            </Field>
-            <Field>
-              <FormFieldLabel>Contraseña</FormFieldLabel>
-              <Input type="password" name="password" required />
-            </Field>
-            <Link1>
+    try {
+      const {
+        data: { data: { accessToken } = {} },
+      } = await validateLogin(mail, password);
+      setLocalStorageItem("accessToken", accessToken);
+      setLoad(false);
+      navigate("/home");
+    } catch (e) {
+      toast.error("Contraseña o correo incorrectos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setLoad(false);
+    }
+  };
+  const form = (
+    <Container>
+      <Wrapper>
+        <ToastContainer
+          closeButton={true}
+          position="bottom-right"
+          autoClose="3000"
+          hideProgressBar="true"
+        />
+        <Title>
+          <Link className="navbar-brand" to="/">
+            <img
+              src={require("../../assets/image-logo.png")}
+              width="100"
+              height="100"
+              alt="Logotipo Empresa"
+            />
+          </Link>
+        </Title>
+        <Form onSubmit={capturarDatos}>
+          <Field>
+            <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
+            <Input type="text" name="mail" required />
+          </Field>
+          <Field>
+            <FormFieldLabel>Contraseña</FormFieldLabel>
+            <Input type="password" name="password" required />
+          </Field>
+          <Link1>
             <Ref href="/recuperar-contraseña">¿Olvidaste tu contraseña?</Ref>
           </Link1>
-            <Field>
-              <Button type="submit" value="Iniciar sesión" />
-            </Field>
-            <Link1>
-              ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
-            </Link1>
-          </Form>
-        </Wrapper>
-      </Container>
-    );
-  } else {
-    return <Loader />;
-  }
+          <Field>
+            <Button type="submit" value="Iniciar sesión" />
+          </Field>
+          <Link1>
+            ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
+          </Link1>
+        </Form>
+      </Wrapper>
+    </Container>
+  );
+
+  return load  ?  <Loader /> : form;
 };
