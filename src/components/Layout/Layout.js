@@ -7,7 +7,6 @@ import Ecosystem from "../Pages/Ecosystem/Ecosystem";
 import Startups from "../Pages/Startups/Startups";
 import AddStartup from "../Pages/Startups/AddStartups";
 import Meetup from "../../components/Pages/MeetUp/MeetUp";
-import Comunidades from "../Pages/Comunidades";
 import TheTeam from "../../components/Pages/Theteam/Theteam";
 import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
 import Contactanos from "../../components/Pages/Contactanos/Contactanos";

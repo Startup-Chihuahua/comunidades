@@ -2,25 +2,19 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #0f6cde;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  margin-bottom: 20px;
 `;
 export const InfoContainer = styled.div`
   background: #eae7dd;
+  position: absolute;
   width: 600px;
   height: 700px;
-  position: absolute;
-  left: 73px;
-  top: 45px;
+  left: 96px;
+  top: 160px;
   padding: 40px;
 `;
 export const Img = styled.img`
   width: 970px;
   height: 720px;
-  position: absolute;
-  left: 500px;
 `;
 export const Title = styled.h1`
   font-size: 60px;
@@ -46,4 +40,10 @@ export const Button = styled.button`
     background-color: #ffffff;
     border-color: #000000;
   }
+`;
+export const Image = styled.div`
+  position: relative;
+  padding: 90px;
+  padding-left: 480px;
+  padding-bottom: 150px;
 `;
