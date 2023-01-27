@@ -2,11 +2,10 @@ import React from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toFormData } from "axios";
 
 import Footer from '../Footer/Footer'; 
 function Navbar() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   function toLogin() {
     navigate("/login");
@@ -24,7 +23,7 @@ function Navbar() {
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
-          </Link>
+          </Link> 
           <button
             className="navbar-toggler"
             type="button"
@@ -35,8 +34,8 @@ function Navbar() {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
-          ``
+          </button> 
+
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto gap-4">
               <li className="nav-item">

@@ -4,6 +4,7 @@ export const ROUTES = {
     LOGIN: '/login',
     ECOSISTEMA: '/ecosistema',
     STARTUPS: '/startups',
+    ADDSTARTUP: '/startups/addstartup',
     MEETUP: '/meetup',
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',

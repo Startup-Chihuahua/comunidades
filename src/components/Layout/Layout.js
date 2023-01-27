@@ -9,17 +9,20 @@ import {
 } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import Ecosystem from "../Pages/Ecosystem/Ecosystem";
-import Startups from "../Pages/Startups";
-import Meetup from "../Pages/Meetup";
-import Comunidades from "../Pages/Comunidades";
-import TheTeam from "../Pages/TheTeam";
-import Eventos from "../Pages/CalendarioDeCiudad/Eventos";
-import Contactanos from "../Pages/Contactanos";
+import Startups from "../Pages/Startups/Startups";
+import AddStartup from "../Pages/Startups/AddStartups";
+import Meetup from "../../components/Pages/MeetUp/MeetUp";
+import TheTeam from "../../components/Pages/Theteam/Theteam";
+import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
+import Contactanos from "../../components/Pages/Contactanos/Contactanos";
 import Navbar from "../Navbar/Navbar";
 import { LogEvent } from "../LogEvent/LogEvent";
 import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
 import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
 import { SignUp } from "../SignUp/SignUp";
+import ConoceLasComunidades from "../Pages/ConoceLasComunidades/ConoceLasComunidades";
+
+
 
 const Layout = ({ children }) => {
   return (
@@ -30,8 +33,9 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.HOME} element={<Home />}></Route>
           <Route path={ROUTES.ECOSISTEMA} element={<Ecosystem />} />
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
+          <Route path={ROUTES.ADDSTARTUP} element={<AddStartup />} />
           <Route path={ROUTES.MEETUP} element={<Meetup />} />
-          <Route path={ROUTES.COMUNIDADES} element={<Comunidades />} />
+          <Route path={ROUTES.COMUNIDADES} element={<ConoceLasComunidades/>} />
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
