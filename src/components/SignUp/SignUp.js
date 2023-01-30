@@ -132,22 +132,7 @@ export const SignUp = () => {
         try {
           const {
             data: { data: {} = {} },
-          } = await CreateUser(
-            datos.mail,
-            datos.password,
-            datos.name,
-            datos.lastname,
-            datos.curp,
-            datos.birth_date,
-            datos.gender,
-            datos.state,
-            datos.town,
-            datos.neighborhood,
-            datos.program,
-            datos.tags,
-            datos.emprendedor,
-            datos.aliado
-          );
+          } = await CreateUser (datos);
           toast.success("Usuario creado exitosamente", {
             position: "top-center",
             autoClose: 4000,

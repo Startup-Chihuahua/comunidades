@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { toFormData } from "axios";
 import { getLocalStorageItem } from "../../helpers/localStorage.helpers";
 import jwt_decode from "jwt-decode";
-
-
 import Footer from '../Footer/Footer'; 
 
 function Navbar() {
@@ -53,7 +51,7 @@ function Navbar() {
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
-          </Link>
+          </Link> 
           <button
             className="navbar-toggler"
             type="button"

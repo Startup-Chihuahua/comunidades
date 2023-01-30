@@ -5,7 +5,18 @@ import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
 import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {Container,Wrapper,Title,Form,Field,Input,FormFieldLabel,Button,Link1,Ref} from "../Login/Login.css.js"
+import {
+  Container,
+  Wrapper,
+  Title,
+  Form,
+  Field,
+  Input,
+  FormFieldLabel,
+  Button,
+  Link1,
+  Ref,
+} from "../Login/Login.css.js";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -83,27 +94,23 @@ export const Login = () => {
           </Link>
         </Title>
         <Form onSubmit={capturarDatos}>
-          
           <Field>
-          <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
+            <FormFieldLabel for="mail">Correo electrónico</FormFieldLabel>
             <Input type="text" name="mail" required />
-            
           </Field>
           <Field>
-            
-          <FormFieldLabel>Contraseña</FormFieldLabel>
+            <FormFieldLabel>Contraseña</FormFieldLabel>
             <Input type="password" name="password" required />
-            
           </Field>
+          <Link1>
+            <Ref href="/recuperar-contraseña">¿Olvidaste tu contraseña?</Ref>
+          </Link1>
           <Field>
-           
             <Button type="submit" value="Iniciar sesión" />
-            
           </Field>
-          <Link1 >
+          <Link1>
             ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
           </Link1>
-         
         </Form>
       </Wrapper>
     </Container>
