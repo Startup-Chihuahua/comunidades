@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toFormData } from "axios";
+import { getLocalStorageItem } from "../../helpers/localStorage.helpers";
+import jwt_decode from "jwt-decode";
+
 
 import Footer from '../Footer/Footer'; 
+
 function Navbar() {
+
+  useEffect(()=>{
+    validateLogin();
+    if(token){
+      decodeToken();
+      if (id > 0){
+        
+      }
+    }
+  })
+
   const navigate = useNavigate();
+  const [token,setToken] = useState ("");
+  const [login,setLogin] = useState(false);
+  const [id,setId]= useState(0);
 
   function toLogin() {
     navigate("/login");
@@ -14,13 +32,24 @@ function Navbar() {
   function toSignUp() {
     navigate("/signup");
   }
+  const decodeToken = () => {
+    var decoded = jwt_decode(token);
+    //console.log(decoded);
+    setId(decoded.id);
+  }
+  const validateLogin = ()=>{
+    if(getLocalStorageItem("accessToken")){
+      setLogin(true);
+      setToken(getLocalStorageItem("accessToken"));
+    }
+  }
 
   return (
     <>
       <nav className="navbar navbar-expand-lg shadow p-3" id="container">
         <div className="container-fluid" id="container-navbar">
           <Link className="navbar-brand" to="/home">
-            <img
+            <img id="img-logo"
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
@@ -36,7 +65,7 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          ``
+          
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto gap-4">
               <li className="nav-item">
@@ -124,9 +153,11 @@ function Navbar() {
                       Instagram
                     </Link>
                   </li>
+                
                 </ul>
               </li>
-              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              {!login && (
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button
                   className="btn btn-outline-light"
                   type="button"
@@ -138,6 +169,54 @@ function Navbar() {
                   Sign-up
                 </button>
               </div>
+              )}
+              
+
+            
+            {login  && (
+
+              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+             
+            <img id="img-user"
+              src={require("../../assets/user-logo.png")}
+              alt="Logotipo Empresa"
+            />
+         
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="/"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  id="text"
+                >
+                  Usuario
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      // to="https://www.linkedin.com/"
+                      id="text-dropdown"
+                    >
+                      Tu perfil
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      // to="https://www.instagram.com/startupchihuahua/"
+                      id="text-dropdown"
+                    >
+                      Cerrar sesión
+                    </Link>
+                  </li>
+                
+                </ul>
+              </li>
+                
+              </div>
+              )}
             </ul>
           </div>
         </div>

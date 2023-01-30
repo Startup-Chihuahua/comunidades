@@ -42,7 +42,7 @@ export const Login = () => {
   const validarUsuario = async (mail, password) => {
     try {
       const {
-        data: { data: { accessToken } = {} },
+        data: { data: { accessToken} = {} },
       } = await validateLogin(mail, password);
       setLocalStorageItem("accessToken", accessToken);
       // toast.success("Usuario validado", {
@@ -58,7 +58,7 @@ export const Login = () => {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "light"
       });
     }
   };
