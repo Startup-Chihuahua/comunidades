@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import * as yup from "yup";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -23,38 +23,40 @@ import {
   SelectContainer,
   ButtonContainer,
   ContainerImage,
-  LabelHeader
+  LabelHeader,
 } from "../SignUp/SignUp.css.js";
-import { CreateUser } from '../../api/signup.js';
+import { CreateUser } from "../../api/signup.js";
+import { Loader } from "../Loader/Loader";
+import { async } from "q";
 
 export const SignUp = () => {
-
   const [tag, setTag] = useState("Emprendedor");
-  const [showEmp,setEmp] = useState(true);
-  const [showAli,setAli] = useState(false);
-  const [gender,setGender] = useState("Hombre");
-  const [tipoEmp,setTipoEmp] = useState("");
-  const [tipoAli,setTipoAli] = useState("No aplica");
+  const [showEmp, setEmp] = useState(true);
+  const [showAli, setAli] = useState(false);
+  const [gender, setGender] = useState("Hombre");
+  const [tipoEmp, setTipoEmp] = useState("");
+  const [tipoAli, setTipoAli] = useState("No aplica");
+  const [load, setLoad] = useState(false);
+
   const navigate = useNavigate();
 
-  const asignaGenero = (e)=>{
+  const asignaGenero = (e) => {
     setGender(e.target.value);
-  }
-  const asignaTipoEmp = (e)=>{
+  };
+  const asignaTipoEmp = (e) => {
     setTipoEmp(e.target.value);
-  }
-  const asignaTipoAli = (e)=>{
+  };
+  const asignaTipoAli = (e) => {
     setTipoAli(e.target.value);
-  }
+  };
 
-  
   //Data Validation
   let schema = yup.object().shape({
     mail: yup.string().email().required(),
     password: yup.string().min(5).max(50).required(),
     name: yup.string().min(3).max(30).required(),
     lastname: yup.string().min(3).max(30).required(),
-    curp: yup.string().min(5).max(30).required(),  
+    curp: yup.string().min(5).max(30).required(),
     birth_date: yup.string().required(),
     gender: yup.string().required(),
     state: yup.string().min(5).max(30).required(),
@@ -63,18 +65,17 @@ export const SignUp = () => {
     program: yup.string().min(5).max(30).required(),
     tags: yup.string().required(),
     emprendedor: yup.string().required(),
-    aliado: yup.string().required()
+    aliado: yup.string().required(),
   });
 
-
-  const ShowInputEmpAliado = e => {
+  const ShowInputEmpAliado = (e) => {
     setTag(e.target.value);
-    if(e.target.value === "Emprendedor"){
+    if (e.target.value === "Emprendedor") {
       setEmp(true);
       setAli(false);
       setTipoEmp("");
       setTipoAli("No aplica");
-    }else if(e.target.value === "Aliado"){
+    } else if (e.target.value === "Aliado") {
       setEmp(false);
       setAli(true);
       setTipoAli("");
@@ -82,84 +83,60 @@ export const SignUp = () => {
     }
   };
 
-  const handleOnSumit = async(e) => {
+  const handleOnSumit = async (e) => {
     e.preventDefault();
     let target = e.target;
-      let datos = {
-        mail: target.mail.value,
-        password: target.password.value,
-        name: target.name.value,
-        lastname: target.lastname.value,
-        curp: target.curp.value,
-        birth_date: target.birth_date.value,
-        gender: gender,
-        state: target.state.value,
-        town: target.town.value,
-        neighborhood: target.neighborhood.value,
-        program: target.program.value,
-        tags: tag,
-        emprendedor: tipoEmp,
-        aliado: tipoAli
-      }
-      const validarCampos = await schema.isValid(datos);
+    let datos = {
+      mail: target.mail.value,
+      password: target.password.value,
+      name: target.name.value,
+      lastname: target.lastname.value,
+      curp: target.curp.value,
+      birth_date: target.birth_date.value,
+      gender: gender,
+      state: target.state.value,
+      town: target.town.value,
+      neighborhood: target.neighborhood.value,
+      program: target.program.value,
+      tags: tag,
+      emprendedor: tipoEmp,
+      aliado: tipoAli,
+    };
+    const validarCampos = await schema.isValid(datos);
 
-      if(target.password.value.length > 0 && target.password.value !== target.password2.value){
-        toast.error("Las contraseñas no coinciden", {
-          position: "top-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
-      }
-      else if(target.password.value.length < 8){
-        toast.error("Ingrese una contraseña mayor a 8 caracteres", {
-          position: "top-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light"
-        });
-      }
-      else if (validarCampos === true) {
-        
-        try {
-          const {
-            data: { data: {} = {} },
-          } = await CreateUser (datos);
-          toast.success("Usuario creado exitosamente", {
-            position: "top-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          
-          navigate("/login");
-        } catch (e) {
-          toast.error("Error, verifique sus datos", {
-            position: "top-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
+    if (
+      target.password.value.length > 0 &&
+      target.password.value !== target.password2.value
+    ) {
+      toast.error("Las contraseñas no coinciden", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else if (target.password.value.length < 8) {
+      toast.error("Ingrese una contraseña mayor a 8 caracteres", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else if (validarCampos === true) {
+      setLoad(true);
 
-      } else {
-        toast.error("Datos inválidos", {
+      try {
+        const {
+          data: { data: {} = {} },
+        } = await CreateUser(datos);
+        toast.success("Usuario creado exitosamente", {
           position: "top-center",
           autoClose: 4000,
           hideProgressBar: false,
@@ -167,12 +144,37 @@ export const SignUp = () => {
           pauseOnHover: false,
           draggable: true,
           progress: undefined,
-          theme: "light"
+          theme: "light",
         });
+        setLoad(false);
+        navigate("/login");
+      } catch (e) {
+        toast.error("Error, verifique sus datos", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setLoad(false);
+      }
+    } else {
+      toast.error("Datos inválidos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
-}
-
-  return (
+  };
+  const form = (
     <Body>
       <Container>
         <ToastContainer
@@ -189,7 +191,7 @@ export const SignUp = () => {
               height="70"
               alt="Logotipo Empresa"
             />
-            <LabelHeader >REGISTRO</LabelHeader>
+            <LabelHeader>REGISTRO</LabelHeader>
           </ContainerHeader>
         </Link>
 
@@ -350,4 +352,6 @@ export const SignUp = () => {
       </Container>
     </Body>
   );
-}
+
+  return load  ?  <Loader /> : form;
+};

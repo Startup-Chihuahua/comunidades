@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateLogin } from "../../api/login";
 import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
@@ -17,9 +17,11 @@ import {
   Link1,
   Ref,
 } from "../Login/Login.css.js";
+import { Loader } from "../Loader/Loader";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
   //Data Validation
   let schema = yup.object().shape({
     mail: yup.string().email().required(),
@@ -51,14 +53,14 @@ export const Login = () => {
   };
 
   const validarUsuario = async (mail, password) => {
+    setLoad(true);
+
     try {
       const {
         data: { data: { accessToken } = {} },
       } = await validateLogin(mail, password);
       setLocalStorageItem("accessToken", accessToken);
-      // toast.success("Usuario validado", {
-      //   position: toast.POSITION.TOP_RIGHT,
-      // });
+      setLoad(false);
       navigate("/home");
     } catch (e) {
       toast.error("Contraseña o correo incorrectos", {
@@ -71,10 +73,10 @@ export const Login = () => {
         progress: undefined,
         theme: "light",
       });
+      setLoad(false);
     }
   };
-
-  return (
+  const form = (
     <Container>
       <Wrapper>
         <ToastContainer
@@ -115,4 +117,6 @@ export const Login = () => {
       </Wrapper>
     </Container>
   );
+
+  return load  ?  <Loader /> : form;
 };
