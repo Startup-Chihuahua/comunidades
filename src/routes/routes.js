@@ -13,9 +13,9 @@ export const ROUTES = {
     ACTUALIZAR: '/actualizar-contraseña',
     CONTACTANOS: '/contactanos',
     SIGNUP: '/signUp',
-    BUSSINESNETWORKING: '/busines-networking/BussinesNetworking',
-    CODEDEVELOPERS: '/code-developers/CodeDevelopers',
-    CULTUREEDUCATION: '/culture-education/CultureEducation',
-    INDUSTRYPROFESIONIST: '/industry-profesionist/IndustryProfesionist',
-    SPAN: '/span/Span'
+    BUSSINES_NETWORKING: '/busines-networking/BussinesNetworking',
+    CODE_DEVELOPERS: '/code-developers/CodeDevelopers',
+    CULTURE_EDUCATION: '/culture-education/CultureEducation',
+    INDUSTRY_PROFESIONIST: '/industry-profesionist/IndustryProfesionist',
+    STEAM: '/steam/Steam'
 };

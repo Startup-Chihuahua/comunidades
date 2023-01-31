@@ -19,7 +19,7 @@ import BussinesNetworking from "../Pages/ConoceLasComunidades/cd/bussines-networ
 import CodeDevelopers from "../Pages/ConoceLasComunidades/cd/code-developers/CodeDevelopers";
 import CultureEducation from "../Pages/ConoceLasComunidades/cd/culture-education/CultureEducation";
 import IndustryProfesionist from "../Pages/ConoceLasComunidades/cd/industry-profesionist/IndustryProfesionist";
-import Span from "../Pages/ConoceLasComunidades/cd/span/Span";
+import Steam from "../Pages/ConoceLasComunidades/cd/steam/Steam";
 
 
 
@@ -43,11 +43,11 @@ const Layout = ({ children }) => {
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
-        <Route path={ROUTES.BUSSINESNETWORKING} element={<BussinesNetworking/>}/>
-        <Route path={ROUTES.CODEDEVELOPERS} element={<CodeDevelopers/>}/>
-        <Route path={ROUTES.CULTUREEDUCATION} element={<CultureEducation/>}/>
-        <Route path={ROUTES.INDUSTRYPROFESIONIST} element={<IndustryProfesionist/>}/>
-        <Route path={ROUTES.SPAN} element={<Span/>}/>
+        <Route path={ROUTES.BUSSINES_NETWORKING} element={<BussinesNetworking/>}/>
+        <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
+        <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
+        <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>
+        <Route path={ROUTES.STEAM} element={<Steam/>}/>
       </Routes>
     </BrowserRouter>
   );

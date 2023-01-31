@@ -17,8 +17,8 @@ function ConoceLasComunidades() {
         
     }
 
-    function toSpan() {
-        navigate ("/span/Span");
+    function toSteam() {
+        navigate ("/steam/Steam");
         
     }
 
@@ -56,7 +56,7 @@ function ConoceLasComunidades() {
                 <ImagesContainer>
                     <ContainerLeft>
                         <Image src={require("../../../assets/steam3.png")} alt="logo StartupChihuahua" />
-                        <Overlay onClick={toSpan}>
+                        <Overlay onClick={toSteam}>
                             <Content><strong>COMUNIDADES DE STEAM</strong></Content>
                         </Overlay>
                     </ContainerLeft>
