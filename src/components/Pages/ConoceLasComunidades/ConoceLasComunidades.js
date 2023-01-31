@@ -1,36 +1,16 @@
 import React from "react";
 import { Container, TitleContainer, Image, Content, ContainerRight, ContainerLeft, ImagesContainer, ImagesContainerb, Overlay, ContainerLeft1, Title, Description} from "./ConoceLasComunidades.css.js";
 import { useNavigate} from "react-router-dom"
+import { ROUTES } from "../../../routes/routes"
 
 
 function ConoceLasComunidades() {
 
     const navigate = useNavigate ();
 
-    function toCultureEducation() {
-        navigate ("/culture-education/CultureEducation");
-
-    }
-
-    function toBussinesNetworking() {
-        navigate ("/busines-networking/BussinesNetworking");
-        
-    }
-
-    function toSteam() {
-        navigate ("/steam/Steam");
-        
-    }
-
-    function toCodeDevelopers() {
-        navigate ("/code-developers/CodeDevelopers");
-        
-    }
-
-    function toIndustryProfesionist() {
-        navigate ("/industry-profesionist/IndustryProfesionist");
-        
-    }
+        const navigateTo = (routes) => {
+            navigate(routes);
+        }
 
     return (    
         <Container>
@@ -42,13 +22,13 @@ function ConoceLasComunidades() {
                 <ImagesContainer>
                     <ContainerLeft>
                         <Image  src={require("../../../assets/culture-education1.png")} alt="logo StartupChihuahua" />
-                        <Overlay onClick= {toCultureEducation}>
+                        <Overlay onClick= {navigateTo(ROUTES.CULTURE_EDUCATION)}>
                             <Content><strong>COMUNIDADES QUE <br />PRUMEUEVEN LA<br />CULTURA DEL FUTURO</strong></Content>
                         </Overlay>
                     </ContainerLeft>
                     <ContainerRight>
                         <Image src={require("../../../assets/bussines-networking2.png")} alt="logo StartupChihuahua" />
-                        <Overlay onClick={toBussinesNetworking}>
+                        <Overlay onClick={navigateTo(ROUTES.BUSSINES_NETWORKING)}>
                             <Content><strong>COMUNIDADESD DE<br />NEGOCIOS</strong></Content>
                         </Overlay>
                     </ContainerRight>
@@ -56,13 +36,13 @@ function ConoceLasComunidades() {
                 <ImagesContainer>
                     <ContainerLeft>
                         <Image src={require("../../../assets/steam3.png")} alt="logo StartupChihuahua" />
-                        <Overlay onClick={toSteam}>
+                        <Overlay onClick={navigateTo(ROUTES.STEAM)}>
                             <Content><strong>COMUNIDADES DE STEAM</strong></Content>
                         </Overlay>
                     </ContainerLeft>
                     <ContainerRight>
                         <Image src={require("../../../assets/code-developers4.png")} alt="logo StartupChihuahua" />
-                        <Overlay onClick={toCodeDevelopers}>
+                        <Overlay onClick={navigateTo(ROUTES.CODE_DEVELOPERS)}>
                             <Content><strong>COMUNIDADES DE<br />PROGRAMADORES</strong></Content>
                         </Overlay>
                     </ContainerRight>
@@ -70,8 +50,8 @@ function ConoceLasComunidades() {
                 <ImagesContainerb>
                     <ContainerLeft1>
                         <Image src={require("../../../assets/industry-profesionist5.png")} alt="logo StartupChihuahua" />
-                        <Overlay onClick={toIndustryProfesionist}>
-                            <Content><strong>COMUNIDADES DE<br />PROGRAMADORES</strong></Content>
+                        <Overlay onClick={navigateTo(ROUTES.INDUSTRY_PROFESIONIST)}>
+                            <Content><strong>COMUNIDADES DE INDUSTRIA Y PROFESIONISTAS</strong></Content>
                         </Overlay >
                     </ContainerLeft1>
                 </ImagesContainerb>
