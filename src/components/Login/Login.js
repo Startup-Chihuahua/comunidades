@@ -76,6 +76,15 @@ export const Login = () => {
       setLoad(false);
     }
   };
+
+  function toRecover() {
+    navigate("/recuperar-contraseña");
+  }
+
+  function toSingup() {
+    navigate("/signup");
+  }
+
   const form = (
     <Container>
       <Wrapper>
@@ -105,18 +114,18 @@ export const Login = () => {
             <Input type="password" name="password" required />
           </Field>
           <Link1>
-            <Ref href="/recuperar-contraseña">¿Olvidaste tu contraseña?</Ref>
+            <Ref onClick={toRecover}>¿Olvidaste tu contraseña?</Ref>
           </Link1>
           <Field>
             <Button type="submit" value="Iniciar sesión" />
           </Field>
           <Link1>
-            ¿No tienes una cuenta? <Ref href="/signup">Regístrate</Ref>
+            ¿No tienes una cuenta? <Ref onClick={toSingup}>Regístrate</Ref>
           </Link1>
         </Form>
       </Wrapper>
     </Container>
   );
 
-  return load  ?  <Loader /> : form;
+  return load ? <Loader /> : form;
 };
