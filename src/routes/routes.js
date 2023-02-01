@@ -12,5 +12,10 @@ export const ROUTES = {
     RECUPERAR: '/recuperar-contraseña',
     ACTUALIZAR: '/actualizar-contraseña',
     CONTACTANOS: '/contactanos',
-    SIGNUP: '/signUp'
+    SIGNUP: '/signUp',
+    BUSSINES_NETWORKING: '/busines-networking/BussinesNetworking',
+    CODE_DEVELOPERS: '/code-developers/CodeDevelopers',
+    CULTURE_EDUCATION: '/culture-education/CultureEducation',
+    INDUSTRY_PROFESIONIST: '/industry-profesionist/IndustryProfesionist',
+    STEAM: '/steam/Steam'
 };
