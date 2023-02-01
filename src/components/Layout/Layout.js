@@ -17,7 +17,6 @@ import { SignUp } from "../SignUp/SignUp";
 import ConoceLasComunidades from "../Pages/ConoceLasComunidades/ConoceLasComunidades";
 
 
-
 const Layout = ({ children }) => {
   return (
     <BrowserRouter>
@@ -39,6 +38,7 @@ const Layout = ({ children }) => {
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
       </Routes>
+
     </BrowserRouter>
   );
 };
