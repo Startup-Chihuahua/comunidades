@@ -12,20 +12,20 @@ import {
   InputBoxLabel,
   InputBoxInput,
   FormColumn,
-  FormGenderBox,
-  GenderBoxH3,
-  GenderOption,
-  Gender,
-  GenderInput,
-  GenderLabel,
   SelectBox,
   Button,
   SelectContainer,
   ButtonContainer,
   ContainerImage,
   LabelHeader,
+  TextSelect,
+  DivSelect,
 } from "./LogEvent.css";
 import { validateLogin } from "../../api/login.js";
+
+import { FileUploader } from "react-drag-drop-files";
+
+const fileTypes = ["JPG", "PNG", "GIF"];
 
 export const LogEvent = () => {
   const [tag, setTag] = useState("Emprendedor");
@@ -217,6 +217,12 @@ export const LogEvent = () => {
     }
   };
 
+  const [file, setFile] = useState(null);
+  const handleChange = (image) => {
+    console.log(file);
+    setFile(image);
+  };
+
   return (
     <Body>
       <Container>
@@ -250,143 +256,80 @@ export const LogEvent = () => {
             </InputBox>
           </FormColumn>
           <FormColumn>
-            <InputBox>
-              <InputBoxLabel>Correo electrónico</InputBoxLabel>
-              <InputBoxInput type="text" name="mail" required />
-            </InputBox>
-            <InputBox>
-              <InputBoxLabel>Curp</InputBoxLabel>
-              <InputBoxInput type="text" name="curp" required />
-            </InputBox>
-          </FormColumn>
-          <FormColumn>
-            <InputBox>
-              <InputBoxLabel>Fecha de nacimiento</InputBoxLabel>
-              <InputBoxInput type="date" name="birth_date" required />
-            </InputBox>
-            <InputBox>
-              <FormGenderBox>
-                <GenderBoxH3>Género</GenderBoxH3>
-                <GenderOption>
-                  <Gender>
-                    <GenderInput
-                      type="radio"
-                      id="male"
-                      name="gender"
-                      value="Hombre"
-                      onChange={asignaGenero}
-                      defaultChecked
-                    />
-                    <GenderLabel for="male">Hombre</GenderLabel>
-                  </Gender>
-                  <Gender>
-                    <GenderInput
-                      type="radio"
-                      id="female"
-                      name="gender"
-                      value="Mujer"
-                      onChange={asignaGenero}
-                    />
-                    <GenderLabel for="female">Mujer</GenderLabel>
-                  </Gender>
-                  <Gender>
-                    <GenderInput
-                      type="radio"
-                      id="other"
-                      name="gender"
-                      value="Otro"
-                      onChange={asignaGenero}
-                    />
-                    <GenderLabel for="other">Prefiero no decir</GenderLabel>
-                  </Gender>
-                </GenderOption>
-              </FormGenderBox>
-            </InputBox>
-          </FormColumn>
-          <FormColumn>
-            <InputBox>
-              <InputBoxLabel>Contraseña</InputBoxLabel>
-              <InputBoxInput type="password" name="password" required />
-            </InputBox>
-            <InputBox>
-              <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
-              <InputBoxInput type="password" name="password2" required />
-            </InputBox>
-          </FormColumn>
-
-          <FormColumn>
-            <InputBox>
-              <InputBoxLabel>Estado</InputBoxLabel>
-              <InputBoxInput type="text" name="state" required />
-            </InputBox>
-            <InputBox>
-              <InputBoxLabel>Municipio</InputBoxLabel>
-              <InputBoxInput type="text" name="town" required />
-            </InputBox>
-          </FormColumn>
-          <FormColumn>
-            <InputBox>
-              <InputBoxLabel>Localidad</InputBoxLabel>
-              <InputBoxInput type="text" name="neighborhood" required />
-            </InputBox>
-            <InputBox>
-              <InputBoxLabel>Programa</InputBoxLabel>
-              <InputBoxInput type="text" name="program" required />
-            </InputBox>
-          </FormColumn>
-
-          <FormGenderBox>
-            <GenderBoxH3>Tag</GenderBoxH3>
-            <GenderOption>
-              <Gender>
-                <GenderInput
-                  type="radio"
-                  id="emp"
-                  name="tag"
-                  value="Emprendedor"
-                  checked={tag === "Emprendedor" ? true : false}
-                  onChange={ShowInputEmpAliado}
-                />
-                <GenderLabel for="emp">Emprendedor</GenderLabel>
-              </Gender>
-              <Gender>
-                <GenderInput
-                  type="radio"
-                  id="ali"
-                  name="tag"
-                  value="Aliado"
-                  checked={tag === "Aliado" ? true : false}
-                  onChange={ShowInputEmpAliado}
-                />
-                <GenderLabel for="ali">Aliado</GenderLabel>
-              </Gender>
-            </GenderOption>
-          </FormGenderBox>
-          <FormColumn>
-            {showEmp && (
-              <SelectContainer id="selectEmprendedor">
-                <SelectBox name="emprendedor" onChange={asignaTipoEmp}>
+            <DivSelect>
+              <TextSelect>Tipo de Perfil</TextSelect>
+              <SelectContainer id="selectModalidad">
+                <SelectBox name="profile_type" onChange={asignaTipoEmp}>
                   <option hidden>Seleccione el tipo</option>
                   <option value="Tipo 1">Tipo 1</option>
-                  <option value="Tipo 2">Tipo 2</option>
-                  <option value="Tipo 3">Tipo 3</option>
-                  <option value="Tipo 4">Tipo 4</option>
-                  <option value="Tipo 5">Tipo 5</option>
+                  <option value="Tipo 2">Tipo 3</option>
+                  <option value="Tipo 3">Tipo 2</option>
                 </SelectBox>
               </SelectContainer>
-            )}
-            {showAli && (
-              <SelectContainer id="selectAliado">
-                <SelectBox name="aliado" onChange={asignaTipoAli}>
+            </DivSelect>
+            <InputBox>
+              <InputBoxLabel>Fecha de inicio</InputBoxLabel>
+              <InputBoxInput type="datetime-local" name="start_date" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Fecha de termino</InputBoxLabel>
+              <InputBoxInput type="datetime-local" name="end_date" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>URL Imagen</InputBoxLabel>
+              <FileUploader
+                handleChange={handleChange}
+                name="file"
+                types={fileTypes}
+                multiple="true"
+                maxSize="30"
+              />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <DivSelect>
+              <TextSelect>Modalidad</TextSelect>
+              <SelectContainer id="selectModalidad">
+                <SelectBox name="modality" onChange={asignaTipoEmp}>
                   <option hidden>Seleccione el tipo</option>
-                  <option value="Inversionista">Inversionista</option>
-                  <option value="Comunidad">Comunidad</option>
-                  <option value="Empresa & Industria">
-                    Empresa & Industria
-                  </option>
+                  <option value="Presencial">Presencial</option>
+                  <option value="Virtual">Virtual</option>
+                  <option value="Hibrido">Hibrido</option>
                 </SelectBox>
               </SelectContainer>
-            )}
+            </DivSelect>
+            <InputBox>
+              <InputBoxLabel>Ubicacion</InputBoxLabel>
+              <InputBoxInput type="text" name="location" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Nombre encargado</InputBoxLabel>
+              <InputBoxInput type="text" name="name" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Apellido</InputBoxLabel>
+              <InputBoxInput type="text" name="lastname" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Telefono</InputBoxLabel>
+              <InputBoxInput type="text" name="phone" required />
+            </InputBox>
+            <InputBox>
+              <InputBoxLabel>Correo</InputBoxLabel>
+              <InputBoxInput type="mail" name="mail" required />
+            </InputBox>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Nombre de la comunidad</InputBoxLabel>
+              <InputBoxInput type="text" name="community_name" required />
+            </InputBox>
           </FormColumn>
           <ButtonContainer>
             <Button>Enviar</Button>

@@ -120,8 +120,8 @@ export const SelectBox = styled.select`
 `;
 export const SelectContainer = styled.div`
   position: relative;
-  height: 50px;
-  width: 50%;
+  height: 40px;
+  width: 100%;
   outline: none;
   font-size: 1rem;
   color: #707070;
@@ -153,4 +153,14 @@ export const ButtonContainer = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: center;
+`;
+export const TextSelect = styled.p`
+  padding-top: 7px;
+  height: 15%;
+`;
+export const DivSelect = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  width: 100%;
 `;
