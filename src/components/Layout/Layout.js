@@ -37,6 +37,7 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
+          <Route path={ROUTES.STEAM} element={<Steam/>}/>
         </Route>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
@@ -46,7 +47,7 @@ const Layout = ({ children }) => {
         <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
         <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
         <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>
-        <Route path={ROUTES.STEAM} element={<Steam/>}/>
+        
       </Routes>
 
     </BrowserRouter>

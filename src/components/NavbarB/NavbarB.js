@@ -16,10 +16,10 @@ function NavbarB() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg shadow p-3" id="container">
-        <div className="container-fluid" id="container-navbar">
+      <nav className="navbar navbar-expand-lg shadow p-3 container" >
+        <div className="container-fluid" >
           <Link className="navbar-brand" to="/home">
-            <img
+            <img className="logo-startup"
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
@@ -39,40 +39,40 @@ function NavbarB() {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto gap-4">
               <li className="nav-item">
-                <Link className="nav-link" to="/ecosistema" id="text">
+                <Link className="nav-link text" to="/ecosistema" >
                   Ecosistema
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/startups" id="text">
+                <Link className="nav-link text" to="/startups" >
                   Startups
                 </Link>
               </li>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle text"
                   href="/"
                   role="button"
                   data-bs-toggle="dropdown"
-                  id="text"
+                  
                 >
                   Comunidades
                 </a>
                 <ul className="dropdown-menu">
                   <li>
                     <Link
-                      className="dropdown-item"
+                      className="dropdown-item text-dropdown"
                       to="/meetup"
-                      id="text-dropdown"
+                    
                     >
                       Meet up
                     </Link>
                   </li>
                   <li>
                     <Link
-                      className="dropdown-item"
+                      className="dropdown-item text-dropdown"
                       to="/comunidades"
-                      id="text-dropdown"
+                      
                     >
                       Conoce las comunidades
                     </Link>
@@ -80,45 +80,45 @@ function NavbarB() {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/theteam" id="text">
+                <Link className="nav-link text" to="/theteam" >
                   The team
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/eventos" id="text">
+                <Link className="nav-link text" to="/eventos">
                   Eventos
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contactanos" id="text">
+                <Link className="nav-link text" to="/contactanos" >
                   Contáctanos
                 </Link>
               </li>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle text"
                   href="/"
                   role="button"
                   data-bs-toggle="dropdown"
-                  id="text"
+                 
                 >
                   Redes Sociales
                 </a>
                 <ul className="dropdown-menu">
                   <li>
                     <Link
-                      className="dropdown-item"
+                      className="dropdown-item text-dropdown"
                       // to="https://www.linkedin.com/"
-                      id="text-dropdown"
+                     
                     >
                       Linkedin
                     </Link>
                   </li>
                   <li>
                     <Link
-                      className="dropdown-item"
+                      className="dropdown-item text-dropdown"
                       // to="https://www.instagram.com/startupchihuahua/"
-                      id="text-dropdown"
+                  
                     >
                       Instagram
                     </Link>

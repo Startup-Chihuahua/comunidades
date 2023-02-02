@@ -8,8 +8,8 @@ function ConoceLasComunidades() {
 
     const navigate = useNavigate ();
 
-        const navigateTo = (routes) => {
-            navigate(routes);
+        const navigateTo = (route) => {
+            navigate(route);
         }
 
     return (    
