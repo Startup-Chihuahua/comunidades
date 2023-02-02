@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Body,
@@ -21,206 +21,79 @@ import {
   TextSelect,
   DivSelect,
 } from "./LogEvent.css";
-import { validateLogin } from "../../api/login.js";
-
-import { FileUploader } from "react-drag-drop-files";
-
-const fileTypes = ["JPG", "PNG", "GIF"];
+import { invalidData, validData } from "../../helpers/alerts.helpers";
+import { createEvent } from "../../api/log_event";
 
 export const LogEvent = () => {
-  const [tag, setTag] = useState("Emprendedor");
-  const [showEmp, setEmp] = useState(true);
-  const [showAli, setAli] = useState(false);
-  const [gender, setGender] = useState("Hombre");
-  const [tipoEmp, setTipoEmp] = useState("");
-  const [tipoAli, setTipoAli] = useState("No aplica");
+
   const navigate = useNavigate();
+  
+  const [modality, setModality] = useState("");
+  const [profile_type, setProfileType] = useState("");
 
-  const asignaGenero = (e) => {
-    setGender(e.target.value);
-  };
-  const asignaTipoEmp = (e) => {
-    setTipoEmp(e.target.value);
-  };
-  const asignaTipoAli = (e) => {
-    setTipoAli(e.target.value);
+  const asingModality = (e) => {
+    setModality(e.target.value);
   };
 
-  //Data Validation
-  let schema = yup.object().shape({
+  const asingProfile = (e) => {
+    setProfileType(e.target.value);
+  };
+
+  const eventSchema = yup.object().shape({
+    event_name: yup.string().max(100).required(),
+    description: yup.string().max(200).required(),
+    profile_type: yup.string().max(50).required(),
+    start_date: yup
+      .string()
+      .matches(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/)
+      .required(),
+    end_date: yup
+      .string()
+      .matches(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/)
+      .required(),
+    url_flyer: yup.string().max(1000).required(),
+    modality: yup.string().max(20).required(),
+    location: yup.string().max(200).required(),
+    name: yup.string().max(50).required(),
+    lastname: yup.string().max(100).required(),
+    phone: yup.string().max(50).required(),
     mail: yup.string().email().required(),
-    password: yup.string().min(5).max(50).required(),
-    name: yup.string().min(3).max(30).required(),
-    lastname: yup.string().min(3).max(30).required(),
-    curp: yup.string().min(5).max(30).required(),
-    birth_date: yup.string().required(),
-    gender: yup.string().required(),
-    state: yup.string().min(5).max(30).required(),
-    town: yup.string().min(5).max(30).required(),
-    neighborhood: yup.string().min(5).max(30).required(),
-    program: yup.string().min(5).max(30).required(),
-    tags: yup.string().required(),
-    emprendedor: yup.string().required(),
-    aliado: yup.string().required(),
+    community_name: yup.string().max(100).required(),
   });
-
-  const ShowInputEmpAliado = (e) => {
-    setTag(e.target.value);
-    if (e.target.value === "Emprendedor") {
-      setEmp(true);
-      setAli(false);
-      setTipoEmp("");
-      setTipoAli("No aplica");
-    } else if (e.target.value === "Aliado") {
-      setEmp(false);
-      setAli(true);
-      setTipoAli("");
-      setTipoEmp("No aplica");
-    }
-  };
-
-  const validarUsuario = async (
-    mail,
-    password,
-    name,
-    lastname,
-    curp,
-    birth_date,
-    gender,
-    state,
-    town,
-    neighborhood,
-    program,
-    tags,
-    emprendedor,
-    aliado
-  ) => {
-    try {
-      const {
-        data: { data: {} = {} },
-      } = await validateLogin(
-        mail,
-        password,
-        name,
-        lastname,
-        curp,
-        birth_date,
-        gender,
-        state,
-        town,
-        neighborhood,
-        program,
-        tags,
-        emprendedor,
-        aliado
-      );
-      toast.success("Usuario creado exitosamente", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      navigate("/login");
-    } catch (e) {
-      toast.error("Error, verifiques sus datos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  };
 
   const handleOnSumit = async (e) => {
     e.preventDefault();
-    let target = e.target;
-    let datos = {
-      mail: target.mail.value,
-      password: target.password.value,
+    const target = e.target;
+    const newStartDate = target.start_date.value.replace(/(T)/, " ");
+    const newEndDate = target.end_date.value.replace(/(T)/, " ");
+    const datos = {
+      event_name: target.event_name.value,
+      description: target.description.value,
+      profile_type,
+      start_date: newStartDate,
+      end_date: newEndDate,
+      url_flyer: target.url_flyer.value,
+      modality,
+      location: target.location.value,
       name: target.name.value,
       lastname: target.lastname.value,
-      curp: target.curp.value,
-      birth_date: target.birth_date.value,
-      gender: gender,
-      state: target.state.value,
-      town: target.town.value,
-      neighborhood: target.neighborhood.value,
-      program: target.program.value,
-      tags: tag,
-      emprendedor: tipoEmp,
-      aliado: tipoAli,
+      phone: target.phone.value,
+      mail: target.mail.value,
+      community_name: target.community_name.value,
     };
-    const validarCampos = await schema.isValid(datos);
 
-    if (
-      target.password.value.length > 0 &&
-      target.password.value !== target.password2.value
-    ) {
-      toast.error("Las contraseñas no coinciden", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else if (target.password.value.length < 8) {
-      toast.error("Ingrese una contraseña mayor a 8 caracteres", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else if (validarCampos === true) {
-      validarUsuario(
-        datos.mail,
-        datos.password,
-        datos.name,
-        datos.lastname,
-        datos.curp,
-        datos.birth_date,
-        datos.gender,
-        datos.state,
-        datos.town,
-        datos.neighborhood,
-        datos.program,
-        datos.tags,
-        datos.emprendedor,
-        datos.aliado
-      );
+    const validarCampos = await eventSchema.isValid(datos);
+    if (validarCampos === true) {
+      try {
+        await createEvent(datos);
+        validData("Evento registrado exitosamente");
+        navigate("/home");
+      } catch (error) {
+        invalidData("Error en el servidor");
+      }
     } else {
-      toast.error("Datos inválidos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      invalidData("Datos invalidos");
     }
-  };
-
-  const [file, setFile] = useState(null);
-  const handleChange = (image) => {
-    console.log(file);
-    setFile(image);
   };
 
   return (
@@ -259,11 +132,11 @@ export const LogEvent = () => {
             <DivSelect>
               <TextSelect>Tipo de Perfil</TextSelect>
               <SelectContainer id="selectModalidad">
-                <SelectBox name="profile_type" onChange={asignaTipoEmp}>
+                <SelectBox name="profile_type" onChange={asingProfile}>
                   <option hidden>Seleccione el tipo</option>
                   <option value="Tipo 1">Tipo 1</option>
-                  <option value="Tipo 2">Tipo 3</option>
-                  <option value="Tipo 3">Tipo 2</option>
+                  <option value="Tipo 2">Tipo 2</option>
+                  <option value="Tipo 3">Tipo 3</option>
                 </SelectBox>
               </SelectContainer>
             </DivSelect>
@@ -279,20 +152,14 @@ export const LogEvent = () => {
             </InputBox>
             <InputBox>
               <InputBoxLabel>URL Imagen</InputBoxLabel>
-              <FileUploader
-                handleChange={handleChange}
-                name="file"
-                types={fileTypes}
-                multiple="true"
-                maxSize="30"
-              />
+              <InputBoxInput type="url" name="url_flyer" required />
             </InputBox>
           </FormColumn>
           <FormColumn>
             <DivSelect>
               <TextSelect>Modalidad</TextSelect>
               <SelectContainer id="selectModalidad">
-                <SelectBox name="modality" onChange={asignaTipoEmp}>
+                <SelectBox name="modality" onChange={asingModality}>
                   <option hidden>Seleccione el tipo</option>
                   <option value="Presencial">Presencial</option>
                   <option value="Virtual">Virtual</option>
