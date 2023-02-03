@@ -20,6 +20,7 @@ import CodeDevelopers from "../Pages/ConoceLasComunidades/cd/code-developers/Cod
 import CultureEducation from "../Pages/ConoceLasComunidades/cd/culture-education/CultureEducation";
 import IndustryProfesionist from "../Pages/ConoceLasComunidades/cd/industry-profesionist/IndustryProfesionist";
 import Steam from "../Pages/ConoceLasComunidades/cd/steam/Steam";
+import NavbarB from "../NavbarB/NavbarB";
 
 
 const Layout = ({ children }) => {
@@ -37,16 +38,28 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
+        </Route>
+
+        <Route path="/busines-networking/BussinesNetworking" element={<NavbarB />}>
+          <Route path={ROUTES.BUSSINES_NETWORKING} element={<BussinesNetworking/>}/>
+        </Route>
+        <Route path="/code-developers/CodeDevelopers" element={<NavbarB />}>
+          <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
+        </Route>
+        <Route path="/culture-education/CultureEducation" element={<NavbarB />}>
+          <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
+        </Route>
+        <Route path="/industry-profesionist/IndustryProfesionist" element={<NavbarB />}>
+          <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>
+        </Route>
+        <Route path="/steam/Steam" element={<NavbarB />}>
           <Route path={ROUTES.STEAM} element={<Steam/>}/>
         </Route>
+
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
-        <Route path={ROUTES.BUSSINES_NETWORKING} element={<BussinesNetworking/>}/>
-        <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
-        <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
-        <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>
         
       </Routes>
 

@@ -2,8 +2,11 @@ import React from "react";
 import "./NavbarB.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 import Footer from '../Footer/Footer'; 
+
+
+
+
 function NavbarB() {
   const navigate = useNavigate(); 
 
@@ -14,9 +17,11 @@ function NavbarB() {
     navigate("/signup");
   }
 
+  
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg shadow p-3 container" >
+      <nav className="navbar navbar-expand-lg shadow p-3 containerblack" >
         <div className="container-fluid" >
           <Link className="navbar-brand" to="/home">
             <img className="logo-startup"
