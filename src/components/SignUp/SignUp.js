@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, json } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getLocalStorageItem } from "../../helpers/localStorage.helpers";
 //Imports from styled component
 import {
   Body,
@@ -26,10 +27,12 @@ import {
   ContainerImage,
   LabelHeader,
 } from "../SignUp/SignUp.css.js";
-import { CreateUser } from "../../api/signup.js";
+import { CreateUser, UpdateUser } from "../../api/signup.js";
 import { Loader } from "../Loader/Loader";
 
 export const SignUp = () => {
+  const [id, setId] = useState(0);
+  const [token, setToken] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -52,6 +55,10 @@ export const SignUp = () => {
 
   useEffect(() => {
     if (state) {
+      if(getLocalStorageItem("accessToken")){
+        setToken(getLocalStorageItem("accessToken"));
+        setId(state.userData.id);
+      }
       setName(state.userData.name);
       setLastName(state.userData.lastname);
       setEmail(state.userData.mail);
@@ -209,10 +216,12 @@ export const SignUp = () => {
       });
     }
   };
+
+
+
   const updateData = async (e) => {
     e.preventDefault();
     let datos = {
-      mail: email,
       name: name,
       lastname: lastname,
       curp: curp,
@@ -226,10 +235,28 @@ export const SignUp = () => {
       emprendedor: tipoEmp,
       aliado: tipoAli,
     };
-
     const validarCampos = await schema.isValid(datos);
     if (validarCampos) {
-      console.log(datos);
+      try {
+        setLoad(true);
+        const {data: {status}}=await UpdateUser(id,token,datos);
+        setLoad(false);
+        
+        navigate("/home");
+        
+      } catch (e) {
+        setLoad(false);
+        toast.error("Error, verifique sus datos", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
     } else {
       toast.error("Datos inválidos", {
         position: "top-center",

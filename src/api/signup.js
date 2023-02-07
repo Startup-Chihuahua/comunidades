@@ -9,4 +9,9 @@ export const GetUserId = async (id,token) => {
   return axiosInstance.get(`/users/`+ id);
 
 };
+export const UpdateUser = async (id,token,data) => {
+ 
+  axiosInstance.defaults.headers.common = {'auth-token': token}
+  return axiosInstance.put(`/users/`+ id, data);
 
+};
