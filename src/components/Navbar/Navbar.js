@@ -2,10 +2,14 @@ import React, { useState,useEffect } from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { toFormData } from "axios";
-import { getLocalStorageItem } from "../../helpers/localStorage.helpers";
+import { GetUserId } from "../../api/signup";
+import { getLocalStorageItem, removeLocalStorageItem } from "../../helpers/localStorage.helpers";
 import jwt_decode from "jwt-decode";
 import Footer from '../Footer/Footer'; 
+import { ToastContainer, toast } from "react-toastify";
+import { SignUp } from "../SignUp/SignUp";
+
+
 
 function Navbar() {
 
@@ -14,15 +18,17 @@ function Navbar() {
     if(token){
       decodeToken();
       if (id > 0){
-        
+        getUser(id,token);
       }
     }
   })
 
   const navigate = useNavigate();
   const [token,setToken] = useState ("");
-  const [login,setLogin] = useState(false);
+  const [login,setLogin] = useState(null);
   const [id,setId]= useState(0);
+  const[name,setName]= useState("");
+  const[post,setPost]= useState(null);
 
   function toLogin() {
     navigate("/login");
@@ -30,9 +36,15 @@ function Navbar() {
   function toSignUp() {
     navigate("/signup");
   }
+  const SignOut=()=>{
+    removeLocalStorageItem("accessToken");
+    navigate(0);
+  }
+  const UpdateUser = () => {
+    navigate('/signup', { state: {userData: post} });
+  }
   const decodeToken = () => {
     var decoded = jwt_decode(token);
-    //console.log(decoded);
     setId(decoded.id);
   }
   const validateLogin = ()=>{
@@ -41,6 +53,25 @@ function Navbar() {
       setToken(getLocalStorageItem("accessToken"));
     }
   }
+
+  const getUser = async (id,token) => {
+    try {
+      const {data: {data}}=await GetUserId(id,token);
+      setName(data[0].name);
+      setPost(data[0]);
+    } catch (e) {
+      toast.error("Contraseña o correo incorrectos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    }
+  };
 
   return (
     <>
@@ -188,26 +219,27 @@ function Navbar() {
                   data-bs-toggle="dropdown"
                   id="text"
                 >
-                  Usuario
+                  {name}
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link
+                    <button
+                      onClick={UpdateUser}
+                      
                       className="dropdown-item"
-                      // to="https://www.linkedin.com/"
                       id="text-dropdown"
                     >
                       Tu perfil
-                    </Link>
+                    </button>
                   </li>
                   <li>
-                    <Link
+                    <button
                       className="dropdown-item"
-                      // to="https://www.instagram.com/startupchihuahua/"
                       id="text-dropdown"
+                      onClick={SignOut}
                     >
                       Cerrar sesión
-                    </Link>
+                    </button>
                   </li>
                 
                 </ul>
