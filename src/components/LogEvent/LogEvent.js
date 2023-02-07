@@ -25,9 +25,8 @@ import { invalidData, validData } from "../../helpers/alerts.helpers";
 import { createEvent } from "../../api/log_event";
 
 export const LogEvent = () => {
-
   const navigate = useNavigate();
-  
+
   const [modality, setModality] = useState("");
   const [profile_type, setProfileType] = useState("");
 
@@ -43,6 +42,7 @@ export const LogEvent = () => {
     event_name: yup.string().max(100).required(),
     description: yup.string().max(200).required(),
     profile_type: yup.string().max(50).required(),
+    url_from: yup.string().max(1000).required(),
     start_date: yup
       .string()
       .matches(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/)
@@ -53,6 +53,7 @@ export const LogEvent = () => {
       .required(),
     url_flyer: yup.string().max(1000).required(),
     modality: yup.string().max(20).required(),
+    cost: yup.number().required(),
     location: yup.string().max(200).required(),
     name: yup.string().max(50).required(),
     lastname: yup.string().max(100).required(),
@@ -70,10 +71,12 @@ export const LogEvent = () => {
       event_name: target.event_name.value,
       description: target.description.value,
       profile_type,
+      url_form: target.url_form.value,
       start_date: newStartDate,
       end_date: newEndDate,
       url_flyer: target.url_flyer.value,
       modality,
+      cost: target.cost.value,
       location: target.location.value,
       name: target.name.value,
       lastname: target.lastname.value,
@@ -116,7 +119,6 @@ export const LogEvent = () => {
             <LabelHeader>REGISTRO EVENTO</LabelHeader>
           </ContainerHeader>
         </Link>
-
         <Form onSubmit={handleOnSumit}>
           <FormColumn>
             <InputBox>
@@ -134,28 +136,33 @@ export const LogEvent = () => {
               <SelectContainer id="selectModalidad">
                 <SelectBox name="profile_type" onChange={asingProfile}>
                   <option hidden>Seleccione el tipo</option>
-                  <option value="Tipo 1">Tipo 1</option>
-                  <option value="Tipo 2">Tipo 2</option>
-                  <option value="Tipo 3">Tipo 3</option>
+                  <option value="Base Científica y/o Tecnológica">Base Científica y/o Tecnológica</option>
+                  <option value="Cultural">Cultural</option>
+                  <option value="Tradicional">Tradicional</option>
+                  <option value="Social">Social</option>
                 </SelectBox>
               </SelectContainer>
             </DivSelect>
             <InputBox>
-              <InputBoxLabel>Fecha de inicio</InputBoxLabel>
-              <InputBoxInput type="datetime-local" name="start_date" required />
+              <InputBoxLabel>URL Registro</InputBoxLabel>
+              <InputBoxInput type="url" name="url_form" required />
             </InputBox>
           </FormColumn>
           <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Fecha de inicio</InputBoxLabel>
+              <InputBoxInput type="datetime-local" name="start_date" required />
+            </InputBox>
             <InputBox>
               <InputBoxLabel>Fecha de termino</InputBoxLabel>
               <InputBoxInput type="datetime-local" name="end_date" required />
             </InputBox>
+          </FormColumn>
+          <FormColumn>
             <InputBox>
               <InputBoxLabel>URL Imagen</InputBoxLabel>
               <InputBoxInput type="url" name="url_flyer" required />
             </InputBox>
-          </FormColumn>
-          <FormColumn>
             <DivSelect>
               <TextSelect>Modalidad</TextSelect>
               <SelectContainer id="selectModalidad">
@@ -167,6 +174,12 @@ export const LogEvent = () => {
                 </SelectBox>
               </SelectContainer>
             </DivSelect>
+          </FormColumn>
+          <FormColumn>
+            <InputBox>
+              <InputBoxLabel>Costo</InputBoxLabel>
+              <InputBoxInput type="number" step="0.01" name="cost" required />
+            </InputBox>
             <InputBox>
               <InputBoxLabel>Ubicacion</InputBoxLabel>
               <InputBoxInput type="text" name="location" required />

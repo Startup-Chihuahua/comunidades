@@ -9,7 +9,7 @@ export const ROUTES = {
     COMUNIDADES: '/comunidades',
     THETEAM: '/theteam',
     CONTACTANOS: '/contactanos',
-    LOGEVENT: '/logevent',
+    LOGEVENT: '/registrar-evento',
     EVENTOS: '/eventos',
     RECUPERAR: '/recuperar-contraseña',
     ACTUALIZAR: '/actualizar-contraseña',
