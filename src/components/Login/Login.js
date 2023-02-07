@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { validateLogin } from "../../api/login";
 import { setLocalStorageItem } from "../../helpers/localStorage.helpers";
 import * as yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Container,
@@ -18,6 +18,7 @@ import {
   Ref,
 } from "../Login/Login.css.js";
 import { Loader } from "../Loader/Loader";
+import { invalidData } from "../../helpers/alerts.helpers";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export const Login = () => {
     mail: yup.string().email().required(),
     password: yup.string().min(5).max(50).required(),
   });
-
+ 
   const capturarDatos = async (e) => {
     e.preventDefault();
     let target = e.target;
@@ -39,22 +40,12 @@ export const Login = () => {
     if (validarCampos === true) {
       validarUsuario(datos.mail, datos.password);
     } else {
-      toast.error("Datos inválidos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      invalidData("Datos Invalidos");
     }
   };
 
   const validarUsuario = async (mail, password) => {
     setLoad(true);
-
     try {
       const {
         data: { data: { accessToken } = {} },
@@ -63,27 +54,10 @@ export const Login = () => {
       setLoad(false);
       navigate("/home");
     } catch (e) {
-      toast.error("Contraseña o correo incorrectos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      invalidData("Contraseña o correo incorrrectos");
       setLoad(false);
     }
   };
-
-  function toRecover() {
-    navigate("/recuperar-contraseña");
-  }
-
-  function toSingup() {
-    navigate("/signup");
-  }
 
   const form = (
     <Container>
@@ -114,13 +88,26 @@ export const Login = () => {
             <Input type="password" name="password" required />
           </Field>
           <Link1>
-            <Ref onClick={toRecover}>¿Olvidaste tu contraseña?</Ref>
+            <Ref
+              onClick={() => {
+                navigate("/recuperar-contraseña");
+              }}
+            >
+              ¿Olvidaste tu contraseña?
+            </Ref>
           </Link1>
           <Field>
             <Button type="submit" value="Iniciar sesión" />
           </Field>
           <Link1>
-            ¿No tienes una cuenta? <Ref onClick={toSingup}>Regístrate</Ref>
+            ¿No tienes una cuenta?{" "}
+            <Ref
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              Regístrate
+            </Ref>
           </Link1>
         </Form>
       </Wrapper>
