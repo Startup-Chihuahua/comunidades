@@ -27,7 +27,7 @@ import {
   LabelHeader,
 } from "../SignUp/SignUp.css.js";
 import { CreateUser } from "../../api/signup.js";
-import PropTypes from "prop-types";
+import { Loader } from "../Loader/Loader";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -45,6 +45,8 @@ export const SignUp = () => {
   const [gender, setGender] = useState("Hombre");
   const [tipoEmp, setTipoEmp] = useState("");
   const [tipoAli, setTipoAli] = useState("No aplica");
+  const [load, setLoad] = useState(false);
+
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -102,8 +104,6 @@ export const SignUp = () => {
     emprendedor: yup.string().required(),
     aliado: yup.string().required(),
   });
-
-
   const ShowInputEmpAliado = (e) => {
     setTag(e.target.value);
     if (e.target.value === "Emprendedor") {
@@ -166,6 +166,7 @@ export const SignUp = () => {
         theme: "light",
       });
     } else if (validarCampos === true) {
+      setLoad(true);
       try {
         const {
           data: { data: {} = {} },
@@ -180,7 +181,7 @@ export const SignUp = () => {
           progress: undefined,
           theme: "light",
         });
-
+        setLoad(false);
         navigate("/login");
       } catch (e) {
         toast.error("Error, verifique sus datos", {
@@ -193,6 +194,7 @@ export const SignUp = () => {
           progress: undefined,
           theme: "light",
         });
+        setLoad(false);
       }
     } else {
       toast.error("Datos inválidos", {
@@ -240,9 +242,8 @@ export const SignUp = () => {
         theme: "light",
       });
     }
-    console.log("Entra");
   };
-  return (
+  const form = (
     <Body>
       <Container>
         <ToastContainer
@@ -369,7 +370,6 @@ export const SignUp = () => {
                 <InputBoxInput
                   type="password"
                   name="password"
-                  value=""
                   required
                 />
               </InputBox>
@@ -488,8 +488,6 @@ export const SignUp = () => {
       </Container>
     </Body>
   );
-};
 
-SignUp.propTypes = {
-  data: PropTypes.object,
+  return load ? <Loader /> : form;
 };
