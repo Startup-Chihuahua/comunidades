@@ -1,5 +1,5 @@
 .containerblack{
-    background-color: #2e2e2d;
+    background-color: #000000;
 }
 .logo-startup{
     width: 60px;
@@ -8,14 +8,20 @@
 
 .text-dropdown {
     color: #000000;
-    background-color: #FFFFFF;  
+    background-color: #FFFFFF;
 }
 
 .text-dropdown:hover {
     color: #FFFFFF;
-    background-color: #0F6FE4;   
+    background-color: #0F6FE4;    
 }
 
 .text {
-    color: #FFFFFF; 
+    color: #FFFFFF !important; 
+    
 }  
+
+.text:hover {
+    color: #ffffff; 
+    border-bottom: 1px solid;
+}

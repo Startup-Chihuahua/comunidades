@@ -4,9 +4,6 @@ import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from '../Footer/Footer'; 
 
-
-
-
 function NavbarB() {
   const navigate = useNavigate(); 
 
@@ -16,8 +13,6 @@ function NavbarB() {
   function toSignUp() {
     navigate("/signup");
   }
-
-  
 
   return (
     <>
@@ -66,7 +61,7 @@ function NavbarB() {
                 <ul className="dropdown-menu">
                   <li>
                     <Link
-                      className="dropdown-item text-dropdown"
+                      className="dropdown-item text-dropdown "
                       to="/meetup"
                     
                     >
@@ -75,7 +70,7 @@ function NavbarB() {
                   </li>
                   <li>
                     <Link
-                      className="dropdown-item text-dropdown"
+                      className="dropdown-item text-dropdown "
                       to="/comunidades"
                       
                     >
@@ -112,7 +107,7 @@ function NavbarB() {
                 <ul className="dropdown-menu">
                   <li>
                     <Link
-                      className="dropdown-item text-dropdown"
+                      className="dropdown-item text-dropdown "
                       // to="https://www.linkedin.com/"
                      
                     >
@@ -121,7 +116,7 @@ function NavbarB() {
                   </li>
                   <li>
                     <Link
-                      className="dropdown-item text-dropdown"
+                      className="dropdown-item text-dropdown "
                       // to="https://www.instagram.com/startupchihuahua/"
                   
                     >

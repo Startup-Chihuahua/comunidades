@@ -38,13 +38,26 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
-
+        
         <Route path="/conoce-las-comunidades" element={<NavbarB />}>
+          <Route
+            path={ROUTES.CULTURE_EDUCATION}
+            element={<CultureEducation />}
+          ></Route>
           <Route
             path={ROUTES.BUSSINES_NETWORKING}
             element={<BussinesNetworking />}
           ></Route>
-          <Route path={ROUTES.STEAM} element={<Steam />} />
+          <Route path={ROUTES.STEAM} 
+          element={<Steam />} />
+          <Route
+            path={ROUTES.CODE_DEVELOPERS}
+            element={<CodeDevelopers />}
+          ></Route>
+          <Route
+            path={ROUTES.INDUSTRY_PROFESIONIST}
+            element={<IndustryProfesionist />}
+          ></Route>
           
         </Route>
 

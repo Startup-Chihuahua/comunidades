@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container =styled.div`
-    background: #2B2B28;
+    background: #000000;
     overflow: hidden;`;
 
 export const Title = styled.h1`
@@ -104,7 +104,7 @@ export const ContentLeft = styled.div`
 
 export const ButtonLeft = styled.button`
     border: none;
-    background-color: #2B2B28;
+    background-color: #000000;
     color: #02F181;
     font-size: 48px;
     width: 620px;
@@ -141,7 +141,7 @@ export const ContentRight = styled.div`
 
 export const ButtonRight = styled.button`
     border: none;
-    background-color: #2B2B28;
+    background-color: #000000;
     color: #02F181;
     font-size: 48px;
     width: 620px;
