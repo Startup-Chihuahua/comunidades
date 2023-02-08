@@ -17,5 +17,5 @@ export const ROUTES = {
     CODE_DEVELOPERS: '/code-developers/CodeDevelopers',
     CULTURE_EDUCATION: '/culture-education/CultureEducation',
     INDUSTRY_PROFESIONIST: '/industry-profesionist/IndustryProfesionist',
-    STEAM: '/steam/Steam'
+    STEAM: '/Steam/Steam'
 };
