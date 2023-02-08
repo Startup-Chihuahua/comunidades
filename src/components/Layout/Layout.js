@@ -8,7 +8,7 @@ import Startups from "../Pages/Startups/Startups";
 import AddStartup from "../Pages/Startups/AddStartups";
 import Meetup from "../../components/Pages/MeetUp/MeetUp";
 import TheTeam from "../../components/Pages/Theteam/Theteam";
-import Eventos from "../Pages/CalendarioDeCiudad/Eventos"; 
+import Eventos from "../Pages/CalendarioDeCiudad/Eventos";
 import Contactanos from "../../components/Pages/Contactanos/Contactanos";
 import Navbar from "../Navbar/Navbar";
 import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
@@ -22,47 +22,37 @@ import IndustryProfesionist from "../Pages/ConoceLasComunidades/cd/industry-prof
 import Steam from "../Pages/ConoceLasComunidades/cd/steam/Steam";
 import NavbarB from "../NavbarB/NavbarB";
 
-
 const Layout = ({ children }) => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/" element={<Navbar />}>
-          <Route path={ROUTES.HOME} element={<Home />}></Route>
+          <Route path={ROUTES.HOME} element={<Home />}> /</Route>
           <Route path={ROUTES.ECOSISTEMA} element={<Ecosystem />} />
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
           <Route path={ROUTES.ADDSTARTUP} element={<AddStartup />} />
           <Route path={ROUTES.MEETUP} element={<Meetup />} />
-          <Route path={ROUTES.COMUNIDADES} element={<ConoceLasComunidades/>} />
+          <Route path={ROUTES.COMUNIDADES} element={<ConoceLasComunidades />} />
           <Route path={ROUTES.THETEAM} element={<TheTeam />} />
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
 
-        <Route path="/busines-networking/BussinesNetworking" element={<NavbarB />}>
-          <Route path={ROUTES.BUSSINES_NETWORKING} element={<BussinesNetworking/>}/>
-        </Route>
-        <Route path="/code-developers/CodeDevelopers" element={<NavbarB />}>
-          <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
-        </Route>
-        <Route path="/culture-education/CultureEducation" element={<NavbarB />}>
-          <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
-        </Route>
-        <Route path="/industry-profesionist/IndustryProfesionist" element={<NavbarB />}>
-          <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>
-        </Route>
-        <Route path="/steam/Steam" element={<NavbarB />}>
-          <Route path={ROUTES.STEAM} element={<Steam/>}/>
+        <Route path="/conoce-las-comunidades" element={<NavbarB />}>
+          <Route
+            path={ROUTES.BUSSINES_NETWORKING}
+            element={<BussinesNetworking />}
+          ></Route>
+          <Route path={ROUTES.STEAM} element={<Steam />} />
+          
         </Route>
 
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
-        <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
-        
+        <Route path={ROUTES.SIGNUP} element={<SignUp />} />
       </Routes>
-
     </BrowserRouter>
   );
 };
