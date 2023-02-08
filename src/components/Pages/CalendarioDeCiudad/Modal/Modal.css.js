@@ -25,7 +25,7 @@ export const ContainerModal = styled.div`
 export const TitleModal = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 10px; 
     padding-bottom: 10px;
     border-bottom: 1px solid #E4E4E4;

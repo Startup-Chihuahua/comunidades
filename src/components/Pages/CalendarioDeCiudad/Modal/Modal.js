@@ -10,7 +10,7 @@ function Modal({estado, cambiarEstado, data}) {
         <Container>
             <ContainerModal>
                 <TitleModal>
-                    <h2>Startup Chihuahua</h2> 
+                    <h2>{data.event_name}</h2> 
                 </TitleModal>
                 <ButtonModal onClick={() => cambiarEstado(false)}> 
                     <img src={require('../../../../assets/image_close.png')} alt=''/>

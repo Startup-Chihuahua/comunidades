@@ -1,113 +1,42 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios'; 
+import { GetEvents } from "../../../api/events";
 import {Container, ContainerEvents, Heading, Row, Card, CardHeader, CardBody, ButtonContainer, TitleEvents, ContentEvents, ButtonEvents} from './Eventos.css.js'; 
 import Modal from '../../Pages/CalendarioDeCiudad/Modal/Modal'; 
+import { Loader } from "../../Loader/Loader";
  
 
 function Eventos() {
     const [estadoModal, cambiarEstadoModal] = useState(false);
     const [data, setData] = useState([]);
     const [eventoActual, setEventoActual] = useState(0); 
+    const [load, setLoad] = useState(false);
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsImlhdCI6MTY3NTg3MjI0NiwiZXhwIjoxNjc1ODc5NDQ2fQ.WceBSoo0MdsamaSrhBiUUO3if-lGAatxa-7bRMi90Fg'
 
     useEffect(() => {
-        Axios.get('https://localhost:3000/events') 
-        .then(function (response) {
-            setData(response.data);
-            console.log(response) 
-        })
-
-        .catch(function (error) {
-            console.log(error)
-        })
+       getEvents(token);
     }, []); 
 
-    /*const mockdata = [ 
-        {
-            id: 0,
-            NombreEvento: 'Evento 1',
-            NombreInstitucion: 'Aspen Institute',
-            DescripcionEvento: 'No te pierdas esta oportunidad de conocer el avance de los ODS.', 
-            LinkRegistro: 'http://bit.ly/8febCUU',
-            FechaHoraInicio: '08-Feb-2023 1:30pm',
-            FechaHoraTermino: '08-Feb-2023 3:00pm',
-            Modalidad: 'Presencial',
-            Lugar: 'Living Lab',
-            Ciudad: 'Chihuahua',
-            CostoEvento: 'Gratis', 
-        },
-        {
-            id: 1,
-            NombreEvento: 'Evento 2',
-            NombreInstitucion: 'Aspen Institute',
-            DescripcionEvento: 'No te pierdas esta oportunidad de conocer los avances de los ODS.',
-            LinkRegistro: 'http://bit.ly/8febCUU',
-            FechaHoraInicio: '08-Feb-2023 1:30pm',
-            FechaHoraTermino: '08-Feb-2023 3:00pm', 
-            Modalidad: 'Presencial',
-            Lugar: 'Living Lab',
-            Ciudad: 'Chihuahua', 
-            CostoEvento: 'Gratis', 
-        }, 
-        { 
-            id: 2,
-            NombreEvento: 'Evento 3',
-            NombreInstitucion: 'Aspen Institute',
-            DescripcionEvento: 'No te pierdas esta oportunidad de conocer los avances de los ODS.',
-            LinkRegistro: 'http://bit.ly/8febCUU',
-            FechaHoraInicio: '08-Feb-2023 1:30pm',
-            FechaHoraTermino: '08-Feb-2023 3:00pm',
-            Modalidad: 'Presencial',
-            Lugar: 'Living Lab',
-            Ciudad: 'Chihuahua', 
-            CostoEvento: 'Gratis', 
-        },
-        {
-            id: 3,
-            NombreEvento: 'Evento 4',
-            NombreInstitucion: 'Aspen Institute',
-            DescripcionEvento: 'No te pierdas esta oportunidad de conocer los avances de los ODS.',
-            LinkRegistro: 'http://bit.ly/8febCUU',
-            FechaHoraInicio: '08-Feb-2023 1:30pm',
-            FechaHoraTermino: '08-Feb-2023 3:00pm',
-            Modalidad: 'Presencial',
-            Lugar: 'Living Lab',
-            Ciudad: 'Chihuahua',
-            CostoEvento: 'Gratis', 
-        },
-        {
-            id: 4,
-            NombreEvento: 'Evento 5',
-            NombreInstitucion: 'Aspen Institute',
-            DescripcionEvento: 'No te pierdas esta oportunidad de conocer los avances de los ODS.',
-            LinkRegistro: 'http://bit.ly/8febCUU',
-            FechaHoraInicio: '08-Feb-2023 1:30pm',
-            FechaHoraTermino: '08-Feb-2023 3:00pm',
-            Modalidad: 'Presencial',
-            Lugar: 'Living Lab',
-            Ciudad: 'Chihuahua', 
-            CostoEvento: 'Gratis', 
-        },
-        {
-            id: 5,
-            NombreEvento: 'Evento 6', 
-            NombreInstitucion: 'Aspen Institute',
-            DescripcionEvento: 'No te pierdas esta oportunidad de conocer los avances de los ODS.',
-            LinkRegistro: 'http://bit.ly/8febCUU',
-            FechaHoraInicio: '08-Feb-2023 1:30pm',
-            FechaHoraTermino: '08-Feb-2023 3:00pm',
-            Modalidad: 'Presencial',
-            Lugar: 'Living Lab',
-            Ciudad: 'Chihuahua', 
-            CostoEvento: 'Gratis', 
-        },
-    ];*/
+    const getEvents = async (token) => {
+        setLoad(true);
+    
+        try {
+          const {
+            data: { data }
+          } = await GetEvents(token);
+          setLoad(false);
+         setData(data);
+        } catch (e) {
+          console.log(e);
+          setLoad(false);
+        }
+      };
+
 
     const handleShowEventDetails = (eventIndex) => {
         cambiarEstadoModal(!estadoModal);
         setEventoActual(eventIndex); 
     }
-
-    return(
+    const modal = (
         <>
         <Container>
             <TitleEvents>
@@ -120,9 +49,7 @@ function Eventos() {
                 <button>Sube tu evento ahora</button> 
             </ButtonEvents> 
             <ContainerEvents>
-                <Heading>
-                    <h2>Eventos</h2>  
-                </Heading>
+                <br/>
                 <Row>
                     {data.map((data, index) => {
                         return(
@@ -148,7 +75,10 @@ function Eventos() {
         </Container>
         <Modal estado={estadoModal} cambiarEstado={cambiarEstadoModal} data={data[eventoActual]}/> 
         </>
+
     );
+
+    return load  ?  <Loader /> : modal;
 }
 
 export default Eventos;           
