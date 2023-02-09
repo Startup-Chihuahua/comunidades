@@ -10,26 +10,45 @@ function Eventos() {
     const [data, setData] = useState([]);
     const [eventoActual, setEventoActual] = useState(0); 
     const [load, setLoad] = useState(false);
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsImlhdCI6MTY3NTg3MjI0NiwiZXhwIjoxNjc1ODc5NDQ2fQ.WceBSoo0MdsamaSrhBiUUO3if-lGAatxa-7bRMi90Fg'
+    
+
+
+    const options = {
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric',
+        hour12: true,
+        timeZone: 'America/Mexico_City' 
+      };
+     
 
     useEffect(() => {
-       getEvents(token);
+       getEvents();
     }, []); 
 
-    const getEvents = async (token) => {
+    const getEvents = async () => {
         setLoad(true);
     
         try {
           const {
             data: { data }
-          } = await GetEvents(token);
+          } = await GetEvents();
           setLoad(false);
          setData(data);
+         
+         console.log(data);
+
+
         } catch (e) {
           console.log(e);
           setLoad(false);
         }
       };
+
+        function dateFormat(date){
+         let newDate = new Date(date).toLocaleDateString('esp-mx',options);
+        return newDate;
+      }
+      
 
 
     const handleShowEventDetails = (eventIndex) => {
@@ -59,7 +78,7 @@ function Eventos() {
                                 </CardHeader>
                                 <CardBody>
                                     <h4><strong>{data.location}</strong></h4> 
-                                    <p>{data.start_date}<p>{data.modality}</p></p>
+                                    <p>{dateFormat(data.start_date)}<p>{data.modality}</p></p>
                                     <p>{data.community_name}</p>
                                     <p>{data.description}</p> 
                                     <p><strong>{data.url_form}</strong></p>  
@@ -81,4 +100,5 @@ function Eventos() {
     return load  ?  <Loader /> : modal;
 }
 
-export default Eventos;           
+export default Eventos ;
+           
