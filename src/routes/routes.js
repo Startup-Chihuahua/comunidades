@@ -13,6 +13,7 @@ export const ROUTES = {
     ACTUALIZAR: '/actualizar-contraseña',
     CONTACTANOS: '/contactanos',
     SIGNUP: '/signUp',
+    SEARCHUSER: '/searchUser',
     BUSSINES_NETWORKING: '/busines-networking/BussinesNetworking',
     CODE_DEVELOPERS: '/code-developers/CodeDevelopers',
     CULTURE_EDUCATION: '/culture-education/CultureEducation',
