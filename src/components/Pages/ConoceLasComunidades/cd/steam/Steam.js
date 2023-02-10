@@ -1,14 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Container, Title, Steams, Photos, Subtitle, Paragraph, More, More1, More2, Content, ContentLeft, ButtonLeft, SpanLeft, ContentRight, ButtonRight, SpanRight} from "./Steam.css.js";
 import { Link} from "react-router-dom"
 import { ROUTES } from "../../../../../routes/routes"
 
 
 function Steam() {
+  
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []); 
 
   const handleClickLiga=()=>{
     window.open("https://www.facebook.com/LigaAstronomicaChihuahua/");
-    
+
   }
 
   const handleClickDivulgare=()=>{
