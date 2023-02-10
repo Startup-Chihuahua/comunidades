@@ -2,8 +2,13 @@ import React from "react";
 import { Container, Title, SecondContainer, FImage, BusinessName, BusinessContent, ButtonContainer, EImage, BusinessNameE, BusinessContentE, ButtonContainerE, SImage, BusinessNameS, BusinessContentS, TImage, BusinessNameT, BusinessContentT, ButtonContainerT, LastContainer, ButtonLeft, ButtonRight, SpanContentL, SpanContentR } from '../Business-networking/BusinessNetworking.css.js';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../../../routes/routes';
+import { useEffect } from "react"; 
 
 function BusinessNetworking() {
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);     
+
     const handleClickF = () => {
         window.open('https://facebook.com/funcuu/');
     };

@@ -2,8 +2,13 @@ import React from "react";
 import { Container, Title, SecondContiner, FirstImg, CommunityName, CommunityContent, SecondImg, CommunityNameEdit, CommunityContentEdit, LastContainer, ButtonNext, ButtonControl, ButtonControlEdit, SpanContent } from './CultureEducation.css.js';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../../../routes/routes';
+import { useEffect } from "react"; 
 
 function CultureEducation() {
+    useEffect(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []); 
+
     const handleClick = () => {
         window.open('https://facebook.com/HFChih/');  
     }; 
