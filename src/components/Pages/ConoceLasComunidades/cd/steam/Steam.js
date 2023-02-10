@@ -7,19 +7,19 @@ import { ROUTES } from "../../../../../routes/routes"
 function Steam() {
 
   const handleClickLiga=()=>{
-    window.location.replace("https://www.facebook.com/LigaAstronomicaChihuahua/");
+    window.open("https://www.facebook.com/LigaAstronomicaChihuahua/");
   }
 
   const handleClickDivulgare=()=>{
-    window.location.replace("https://www.divulgare.org/");
+    window.open("https://www.divulgare.org/");
   }
 
   const handleClickFCQ=()=>{
-    window.location.replace("https://www.linkedin.com/in/rocio-infante-ramirez-7114ba220/?originalSubdomain=mx");
+    window.open("https://www.linkedin.com/in/rocio-infante-ramirez-7114ba220/?originalSubdomain=mx");
   }
 
   const handleClickCiencias=()=>{
-    window.location.replace("https://www.facebook.com/clubdeciencias.fing/");
+    window.open("https://www.facebook.com/clubdeciencias.fing/");
   }
 
   return (
