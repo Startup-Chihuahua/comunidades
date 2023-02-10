@@ -5,7 +5,7 @@ import { ROUTES } from '../../../../../routes/routes';
 
 function CultureEducation() {
     const handleClick = () => {
-        window.location.replace('https://facebook.com/HFChih/');
+        window.open('https://facebook.com/HFChih/');  
     }; 
 
     return (
