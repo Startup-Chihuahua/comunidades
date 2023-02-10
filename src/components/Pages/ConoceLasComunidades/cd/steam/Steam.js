@@ -8,6 +8,7 @@ function Steam() {
 
   const handleClickLiga=()=>{
     window.open("https://www.facebook.com/LigaAstronomicaChihuahua/");
+    
   }
 
   const handleClickDivulgare=()=>{
@@ -80,7 +81,7 @@ function Steam() {
         <ContentLeft>
         <Link to={ROUTES.BUSSINES_NETWORKING}>
           <ButtonLeft>
-          <SpanLeft><strong>&#10096;   Comunidades de negocios</strong></SpanLeft>
+          <SpanLeft>&#10096;   Comunidades de negocios</SpanLeft>
           </ButtonLeft>
           </Link>
         </ContentLeft>
@@ -88,7 +89,7 @@ function Steam() {
         <ContentRight>
         <Link to={ROUTES.CODE_DEVELOPERS}>
           <ButtonRight>
-            <SpanRight><strong>Comunidades de programadores</strong>   &#10097;</SpanRight>
+            <SpanRight>Comunidades de programadores   &#10097;</SpanRight>
           </ButtonRight>
         </Link>
         </ContentRight>
