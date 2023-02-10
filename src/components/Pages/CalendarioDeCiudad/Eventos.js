@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GetEvents } from "../../../api/events";
+import { GetEvents } from "../../../api/Events";
 import {Container, ContainerEvents, Heading, Row, Card, CardHeader, CardBody, ButtonContainer, TitleEvents, ContentEvents, ButtonEvents} from './Eventos.css.js'; 
 import Modal from '../../Pages/CalendarioDeCiudad/Modal/Modal'; 
 import { Loader } from "../../Loader/Loader";
