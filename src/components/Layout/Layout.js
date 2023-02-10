@@ -22,6 +22,7 @@ import CodeDevelopers from "../Pages/ConoceLasComunidades/cd/code-developers/Cod
 import CultureEducation from "../Pages/ConoceLasComunidades/cd/culture-education/CultureEducation";
 import IndustryProfesionist from "../Pages/ConoceLasComunidades/cd/industry-profesionist/IndustryProfesionist";
 import Steam from "../Pages/ConoceLasComunidades/cd/steam/Steam";
+import NavbarB from "../NavbarB/NavbarB";
 
 const Layout = ({ children }) => {
   return (
@@ -29,7 +30,7 @@ const Layout = ({ children }) => {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/" element={<Navbar />}>
-          <Route path={ROUTES.HOME} element={<Home />}></Route>
+          <Route path={ROUTES.HOME} element={<Home />}> /</Route>
           <Route path={ROUTES.ECOSISTEMA} element={<Ecosystem />} />
           <Route path={ROUTES.STARTUPS} element={<Startups />} />
           <Route path={ROUTES.ADDSTARTUP} element={<AddStartup />} />
@@ -39,6 +40,29 @@ const Layout = ({ children }) => {
           <Route path={ROUTES.EVENTOS} element={<Eventos />} />
           <Route path={ROUTES.CONTACTANOS} element={<Contactanos />} />
         </Route>
+        
+        <Route path="/conoce-las-comunidades" element={<NavbarB />}>
+          <Route
+            path={ROUTES.CULTURE_EDUCATION}
+            element={<CultureEducation />}
+          ></Route>
+          <Route
+            path={ROUTES.BUSSINES_NETWORKING}
+            element={<BussinesNetworking />}
+          ></Route>
+          <Route path={ROUTES.STEAM} 
+          element={<Steam />} />
+          <Route
+            path={ROUTES.CODE_DEVELOPERS}
+            element={<CodeDevelopers />}
+          ></Route>
+          <Route
+            path={ROUTES.INDUSTRY_PROFESIONIST}
+            element={<IndustryProfesionist />}
+          ></Route>
+          
+        </Route>
+
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.LOGEVENT} element={<LogEvent />} />
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
