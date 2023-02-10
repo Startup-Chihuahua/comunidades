@@ -76,7 +76,7 @@ transition: all 0.5s;
 text-transform: uppercase;
 text-align: left;
 padding-left:50px;
-font-weight: bold;
+
 &:hover {
     padding-left: 40px;
 }`;
@@ -91,7 +91,7 @@ transition: all 0.8s;
 text-transform: uppercase;
 text-align: right;
 padding-right:50px;
-font-weight: bold;
+
 &:hover {
     padding-right: 40px;
 }`;
