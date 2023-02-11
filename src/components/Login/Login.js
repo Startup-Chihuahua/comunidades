@@ -57,7 +57,7 @@ export const Login = () => {
 
     try {
       const {
-        data: { data: { accessToken } = {} },
+        data: { data: { accessToken} = {} },
       } = await validateLogin(mail, password);
       setLocalStorageItem("accessToken", accessToken);
       setLoad(false);
@@ -71,7 +71,7 @@ export const Login = () => {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "light"
       });
       setLoad(false);
     }
