@@ -3,7 +3,7 @@
      
 }
 
-#container-navbar img {
+#img-logo {
     width: 60px;
     height: 60px;
 }
@@ -19,3 +19,10 @@
 #text {
     color: #FFFFFF; 
 }  
+
+#img-user{
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    margin-right: 2px;
+}
