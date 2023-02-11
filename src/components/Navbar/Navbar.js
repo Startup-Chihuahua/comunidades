@@ -8,27 +8,21 @@ import jwt_decode from "jwt-decode";
 import Footer from '../Footer/Footer'; 
 import { ToastContainer, toast } from "react-toastify";
 import { SignUp } from "../SignUp/SignUp";
+import { Loader } from "../Loader/Loader";
 
 
 
 function Navbar() {
 
   useEffect(()=>{
-    validateLogin();
-    if(token){
-      decodeToken();
-      if (id > 0){
-        getUser(id,token);
-      }
-    }
-  })
+    getUser();
+  },[])
 
   const navigate = useNavigate();
-  const [token,setToken] = useState ("");
   const [login,setLogin] = useState(null);
-  const [id,setId]= useState(0);
   const[name,setName]= useState("");
   const[post,setPost]= useState(null);
+  const [load, setLoad] = useState(false);
 
   function toLogin() {
     navigate("/login");
@@ -43,38 +37,40 @@ function Navbar() {
   const UpdateUser = () => {
     navigate('/signup', { state: {userData: post} });
   }
-  const decodeToken = () => {
-    var decoded = jwt_decode(token);
-    setId(decoded.id);
-  }
-  const validateLogin = ()=>{
+
+  const getUser = async()=>{
     if(getLocalStorageItem("accessToken")){
       setLogin(true);
-      setToken(getLocalStorageItem("accessToken"));
+      var decoded = jwt_decode(getLocalStorageItem("accessToken"));
+      setLoad(true);
+      try {
+        const {data: {data}}=await GetUserId(decoded.id,getLocalStorageItem("accessToken"));
+        setName(data[0].name);
+        setPost(data[0]);
+        setLoad(false);
+      } catch (e) {
+        setLoad(false);
+        toast.error("Error de conexión", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
     }
   }
-
-  const getUser = async (id,token) => {
-    try {
-      const {data: {data}}=await GetUserId(id,token);
-      setName(data[0].name);
-      setPost(data[0]);
-    } catch (e) {
-      toast.error("Contraseña o correo incorrectos", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light"
-      });
-    }
-  };
-
-  return (
+  const navBar = (
     <>
+    <ToastContainer
+          closeButton={true}
+          position="bottom-right"
+          autoClose="3000"
+          hideProgressBar="true"
+        />
       <nav className="navbar navbar-expand-lg shadow p-3" id="container">
         <div className="container-fluid" id="container-navbar">
           <Link className="navbar-brand" to="/home">
@@ -251,7 +247,10 @@ function Navbar() {
       <Outlet />
       <Footer />
     </>
+
   );
+
+  return load  ?  <Loader /> : navBar;
 }
 
 export default Navbar;
