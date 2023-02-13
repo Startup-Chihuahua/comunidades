@@ -85,8 +85,9 @@ export const LogEvent = () => {
       community_name: target.community_name.value,
     };
 
-    const validarCampos = await eventSchema.isValid(datos);
-    if (validarCampos === true) {
+    // const validarCampos = await eventSchema.isValid(datos);
+    // see validation
+    if (true) {
       try {
         await createEvent(datos);
         validData("Evento registrado exitosamente");

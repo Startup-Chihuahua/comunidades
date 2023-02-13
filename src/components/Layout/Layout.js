@@ -67,10 +67,6 @@ const Layout = ({ children }) => {
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
-        <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
-        <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
-        <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>
-        <Route path={ROUTES.STEAM} element={<Steam/>}/>
       </Routes>
     </BrowserRouter>
   );
