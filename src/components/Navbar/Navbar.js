@@ -6,6 +6,7 @@ import { GetUserId } from "../../api/signup";
 import {
   getLocalStorageItem,
   removeLocalStorageItem,
+  setLocalStorageItem,
 } from "../../helpers/localStorage.helpers";
 import jwt_decode from "jwt-decode";
 import Footer from "../Footer/Footer";
@@ -32,6 +33,7 @@ function Navbar() {
   }
   const SignOut = () => {
     removeLocalStorageItem("accessToken");
+    removeLocalStorageItem("role");
     navigate(0);
   };
   const UpdateUser = () => {
@@ -55,6 +57,7 @@ function Navbar() {
         setPost(data[0]);
         setLoad(false);
         console.log(data[0]);
+        setLocalStorageItem("role",data[0].type);
         data[0].type === "Administrador" ? setAdmin(true) : setAdmin(false);
       } catch (e) {
         setLoad(false);
@@ -149,10 +152,12 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/eventos" id="text">
+                <Link  to="/eventos" className="nav-link"  id="text">
                   Eventos
                 </Link>
               </li>
+              
+
               <li className="nav-item">
                 <Link className="nav-link" to="/contactanos" id="text">
                   Contáctanos

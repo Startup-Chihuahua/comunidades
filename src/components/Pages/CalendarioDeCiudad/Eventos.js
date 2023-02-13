@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { GetEvents } from "../../../api/Events";
+import { useLocation } from "react-router-dom";
 import {
   Container,
   ContainerEvents,
@@ -15,6 +16,10 @@ import {
 } from "./Eventos.css.js";
 import Modal from "../../Pages/CalendarioDeCiudad/Modal/Modal";
 import { Loader } from "../../Loader/Loader";
+import {
+  getLocalStorageItem
+} from "../../../helpers/localStorage.helpers";
+
 
 function Eventos() {
   const navigate = useNavigate();
@@ -22,6 +27,8 @@ function Eventos() {
   const [data, setData] = useState([]);
   const [eventoActual, setEventoActual] = useState(0);
   const [load, setLoad] = useState(false);
+  const [acces, setAcces] = useState(false);
+  const { state } = useLocation(false);
 
   const options = {
     year: "numeric",
@@ -35,6 +42,12 @@ function Eventos() {
   };
 
   useEffect(() => {
+    setAcces(false);
+    if(getLocalStorageItem("role")=== "Administrador" || getLocalStorageItem("role")=== "Mentor"){
+      setAcces(true);
+      console.log("hola");
+    }
+    console.log(acces);
     getEvents();
   }, []);
 
@@ -74,13 +87,15 @@ function Eventos() {
           </p>
         </ContentEvents>
         <ButtonEvents>
-          <button
-            onClick={() => {
-              navigate("/registrar-evento");
-            }}
-          >
-            Sube tu evento ahora
-          </button>
+          {acces === true && (
+            <button
+              onClick={() => {
+                navigate("/registrar-evento");
+              }}
+            >
+              Sube tu evento ahora
+            </button>
+          )}
         </ButtonEvents>
         <ContainerEvents>
           <br />
