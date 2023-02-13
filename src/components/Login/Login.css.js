@@ -119,7 +119,9 @@ export const Link1 = styled.div`
   text-decoration: none;
   color: black;
 `;
-export const Ref = styled.a`
+export const Ref = styled.button`
+  background-color: white;
+  border: 0;
   color: #4158d0;
   text-decoration: none;
   &: hover {
