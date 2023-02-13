@@ -23,6 +23,7 @@ function Navbar() {
   const[name,setName]= useState("");
   const[post,setPost]= useState(null);
   const [load, setLoad] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   function toLogin() {
     navigate("/login");
@@ -38,6 +39,10 @@ function Navbar() {
     navigate('/signup', { state: {userData: post} });
   }
 
+  const assignRole = ()=>{
+    navigate('/signup', { state: {Role: "Administrador"} });
+  }
+
   const getUser = async()=>{
     if(getLocalStorageItem("accessToken")){
       setLogin(true);
@@ -48,6 +53,8 @@ function Navbar() {
         setName(data[0].name);
         setPost(data[0]);
         setLoad(false);
+        console.log(data[0]);
+        (data[0].type) === "Administrador" ? setAdmin(true): setAdmin(false);
       } catch (e) {
         setLoad(false);
         toast.error("Error de conexión", {
@@ -65,12 +72,12 @@ function Navbar() {
   }
   const navBar = (
     <>
-    <ToastContainer
-          closeButton={true}
-          position="bottom-right"
-          autoClose="3000"
-          hideProgressBar="true"
-        />
+      <ToastContainer
+        closeButton={true}
+        position="bottom-right"
+        autoClose="3000"
+        hideProgressBar="true"
+      />
       <nav className="navbar navbar-expand-lg shadow p-3" id="container">
         <div className="container-fluid" id="container-navbar">
           <Link className="navbar-brand" to="/home">
@@ -227,6 +234,17 @@ function Navbar() {
                           Tu perfil
                         </button>
                       </li>
+                      {admin && (
+                        <li>
+                          <button
+                            onClick={assignRole}
+                            className="dropdown-item"
+                            id="text-dropdown"
+                          >
+                            Asignar roles
+                          </button>
+                        </li>
+                      )}
                       <li>
                         <button
                           className="dropdown-item"
@@ -247,7 +265,6 @@ function Navbar() {
       <Outlet />
       <Footer />
     </>
-
   );
 
   return load  ?  <Loader /> : navBar;

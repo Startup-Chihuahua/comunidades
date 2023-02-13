@@ -14,3 +14,9 @@ export const UpdateUser = async (id,token,data) => {
   axiosInstance.defaults.headers.common = {'auth-token': token}
   return axiosInstance.put(`/users/`+ id, data);
 };
+
+export const GetEmailUser = async (token,data) => {
+ 
+  axiosInstance.defaults.headers.common = {'auth-token': token}
+  return axiosInstance.post(`/users/mail`, data);
+};
