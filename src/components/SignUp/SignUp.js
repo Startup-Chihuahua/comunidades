@@ -26,11 +26,13 @@ import {
   ButtonContainer,
   ContainerImage,
   LabelHeader,
+  ButtonSearchContainer,
 } from "../SignUp/SignUp.css.js";
-import { CreateUser, UpdateUser } from "../../api/signup.js";
+import { CreateUser, GetEmailUser, UpdateUser } from "../../api/signup.js";
 import { Loader } from "../Loader/Loader";
 
 export const SignUp = () => {
+  const [titulo, setTitulo] = useState("REGISTRO");
   const [id, setId] = useState(0);
   const [token, setToken] = useState("");
   const [name, setName] = useState("");
@@ -49,37 +51,50 @@ export const SignUp = () => {
   const [tipoEmp, setTipoEmp] = useState("");
   const [tipoAli, setTipoAli] = useState("No aplica");
   const [load, setLoad] = useState(false);
+  const [role, setRole] = useState(false);
+  const [emailUser, setEmailUser] = useState("");
+  const [rolUser, setRoleUser] = useState("");
 
   const navigate = useNavigate();
   const { state } = useLocation();
 
   useEffect(() => {
-    if (state) {
-      if(getLocalStorageItem("accessToken")){
-        setToken(getLocalStorageItem("accessToken"));
-        setId(state.userData.id);
-      }
-      setName(state.userData.name);
-      setLastName(state.userData.lastname);
-      setEmail(state.userData.mail);
-      setCurp(state.userData.curp);
-      setDate(state.userData.birth_date.substring(0, 10));
-      setState(state.userData.state);
-      setTown(state.userData.town);
-      setNeighborhood(state.userData.neighborhood);
-      setProgram(state.userData.program);
-      setTag(state.userData.tags);
-      setGender(state.userData.gender);
-      setTipoEmp(state.userData.emprendedor);
-      setTipoAli(state.userData.aliado);
+    if (getLocalStorageItem("accessToken")) {
+      setToken(getLocalStorageItem("accessToken"));
+    }
 
-      if (state.userData.tags === "Emprendedor") {
-        setEmp(true);
-        setTipoAli("No aplica");
-      } else if (state.userData.tags === "Aliado") {
-        setAli(true);
-        setEmp(false);
-        setTipoEmp("No aplica");
+    if (state) {
+      if (state.userData) {
+        setTitulo("Tu perfil");
+        setId(state.userData.id);
+        setName(state.userData.name);
+        setLastName(state.userData.lastname);
+        setEmail(state.userData.mail);
+        setCurp(state.userData.curp);
+        setDate(state.userData.birth_date.substring(0, 10));
+        setState(state.userData.state);
+        setTown(state.userData.town);
+        setNeighborhood(state.userData.neighborhood);
+        setProgram(state.userData.program);
+        setTag(state.userData.tags);
+        setGender(state.userData.gender);
+        setTipoEmp(state.userData.emprendedor);
+        setTipoAli(state.userData.aliado);
+        setRoleUser(state.userData.type);
+
+        if (state.userData.tags === "Emprendedor") {
+          setEmp(true);
+          setTipoAli("No aplica");
+        } else if (state.userData.tags === "Aliado") {
+          setAli(true);
+          setEmp(false);
+          setTipoEmp("No aplica");
+        }
+      }
+
+      if (state.Role === "Administrador") {
+        setTitulo("Editar usuario");
+        setRole(true);
       }
     }
   }, []);
@@ -111,6 +126,10 @@ export const SignUp = () => {
     emprendedor: yup.string().required(),
     aliado: yup.string().required(),
   });
+  let schemaUserEmail = yup.object().shape({
+    mail: yup.string().email().required(),
+  });
+
   const ShowInputEmpAliado = (e) => {
     setTag(e.target.value);
     if (e.target.value === "Emprendedor") {
@@ -144,6 +163,7 @@ export const SignUp = () => {
       tags: tag,
       emprendedor: tipoEmp,
       aliado: tipoAli,
+      type: "Usuario"
     };
     const validarCampos = await schema.isValid(datos);
 
@@ -217,8 +237,6 @@ export const SignUp = () => {
     }
   };
 
-
-
   const updateData = async (e) => {
     e.preventDefault();
     let datos = {
@@ -234,16 +252,18 @@ export const SignUp = () => {
       tags: tag,
       emprendedor: tipoEmp,
       aliado: tipoAli,
+      type: rolUser
     };
     const validarCampos = await schema.isValid(datos);
     if (validarCampos) {
       try {
         setLoad(true);
-        const {data: {status}}=await UpdateUser(id,token,datos);
+        const {
+          data: { status },
+        } = await UpdateUser(id, token, datos);
         setLoad(false);
-        
+
         navigate("/home");
-        
       } catch (e) {
         setLoad(false);
         toast.error("Error, verifique sus datos", {
@@ -254,11 +274,78 @@ export const SignUp = () => {
           pauseOnHover: false,
           draggable: true,
           progress: undefined,
-          theme: "light"
+          theme: "light",
         });
       }
     } else {
       toast.error("Datos inválidos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
+  const searchUser = async (e) => {
+    e.preventDefault();
+    const dato = {
+      mail: emailUser,
+    };
+    const validarEmail = await schemaUserEmail.isValid(dato);
+    console.log(validarEmail);
+    if (validarEmail === true) {
+      try {
+        setLoad(true);
+
+        const {
+          data: { data },
+        } = await GetEmailUser(token, dato);
+        setLoad(false);
+        setId(data.id);
+        setName(data.name);
+        setLastName(data.lastname);
+        setEmail(data.mail);
+        setCurp(data.curp);
+        setDate(data.birth_date.substring(0, 10));
+        setState(data.state);
+        setTown(data.town);
+        setNeighborhood(data.neighborhood);
+        setProgram(data.program);
+        setTag(data.tags);
+        setGender(data.gender);
+        setTipoEmp(data.emprendedor);
+        setTipoAli(data.aliado);
+        setRoleUser(data.type);
+
+        if (data.tags === "Emprendedor") {
+          setEmp(true);
+          setTipoAli("No aplica");
+        } else if (data.tags === "Aliado") {
+          setAli(true);
+          setEmp(false);
+          setTipoEmp("No aplica");
+        }
+      } catch (e) {
+        setLoad(false);
+        toast.error("Error de conexión", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } else {
+      setLoad(false);
+      toast.error("Correo invalido", {
         position: "top-center",
         autoClose: 4000,
         hideProgressBar: false,
@@ -287,10 +374,28 @@ export const SignUp = () => {
               height="70"
               alt="Logotipo Empresa"
             />
-            <LabelHeader>REGISTRO</LabelHeader>
+            <LabelHeader>{titulo}</LabelHeader>
           </ContainerHeader>
         </Link>
 
+        {role && (
+          <Form onSubmit={searchUser}>
+            <FormColumn>
+              <InputBox>
+                <InputBoxLabel>Buscar correo electronico</InputBoxLabel>
+                <InputBoxInput
+                  type="text"
+                  value={emailUser}
+                  onChange={(e) => setEmailUser(e.target.value)}
+                  required
+                />
+              </InputBox>
+              <ButtonSearchContainer>
+                <Button>Buscar</Button>
+              </ButtonSearchContainer>
+            </FormColumn>
+          </Form>
+        )}
         <Form onSubmit={!state ? handleOnSumit : updateData}>
           <FormColumn>
             <InputBox>
@@ -394,11 +499,7 @@ export const SignUp = () => {
             <FormColumn>
               <InputBox>
                 <InputBoxLabel>Contraseña</InputBoxLabel>
-                <InputBoxInput
-                  type="password"
-                  name="password"
-                  required
-                />
+                <InputBoxInput type="password" name="password" required />
               </InputBox>
               <InputBox>
                 <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
@@ -507,7 +608,21 @@ export const SignUp = () => {
                 </SelectBox>
               </SelectContainer>
             )}
+            {role && (
+              <SelectContainer id="selectTipo">
+                <SelectBox
+                  name="type"
+                  onChange={(e) => setRoleUser(e.target.value)}
+                >
+                  <option hidden>{rolUser ? rolUser : "Rol de usuario"}</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="Mentor">Mentor</option>
+                  <option value="Usuario">Usuario</option>
+                </SelectBox>
+              </SelectContainer>
+            )}
           </FormColumn>
+          <FormColumn></FormColumn>
           <ButtonContainer>
             <Button>Enviar</Button>
           </ButtonContainer>

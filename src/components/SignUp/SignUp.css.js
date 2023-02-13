@@ -152,3 +152,10 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const ButtonSearchContainer = styled.div`
+  width: 100%;
+  margin-top: 2px;
+  display: flex;
+  justify-content: left;
+`;
