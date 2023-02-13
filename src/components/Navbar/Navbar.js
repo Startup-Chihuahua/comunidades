@@ -55,7 +55,7 @@ function Navbar() {
         setPost(data[0]);
         setLoad(false);
         console.log(data[0]);
-        (data[0].type) === "Administrador" ? setAdmin(true): setAdmin(false);
+        data[0].type === "Administrador" ? setAdmin(true) : setAdmin(false);
       } catch (e) {
         setLoad(false);
         toast.error("Error de conexión", {
