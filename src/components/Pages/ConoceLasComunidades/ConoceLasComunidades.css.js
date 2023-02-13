@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const TitleContainer = styled.div`
 text-align: center;
 padding: 40px;`
-    
+
 
 export const ContainerLeft = styled.div`
     position: relative;
@@ -18,12 +18,10 @@ export const ContainerRight = styled.div`
     
 `
 
-export const Image = styled.img `display: block;
+export const Image = styled.img`
+display: block;
     width: 100%;
-    height: 80% ;
-`
-
-
+    height: 80% ;`
 
 export const Overlay = styled.div`
     position: absolute;
@@ -41,7 +39,7 @@ export const Overlay = styled.div`
     }
   `
 
-  export const Content = styled.div`
+export const Content = styled.div`
     color: white;
     font-size: 20px;
     position: absolute;
@@ -52,11 +50,11 @@ export const Overlay = styled.div`
     transform: translate(-50%, -50%);
     text-align: center;
   `
- export const ImagesContainer = styled.div  `
+export const ImagesContainer = styled.div`
     display: flex;
-justify-content: center;` 
+justify-content: center;`
 
-export const Container= styled.div`
+export const Container = styled.div`
     background-color: #0F6FE4 ;`
 
 export const ImagesContainerb = styled.div`
@@ -72,3 +70,14 @@ export const Title = styled.h1`color: #FFFFFF;`
 
 export const Description = styled.p`color: #FFFFFF;
 font-size: 20px;`
+
+export const ButtonNavigator = styled.button`
+background-color: #0F6FE4;
+border: none;
+position: relative;
+`
+
+export const BText = styled.p`
+color: #FFFFFF;
+font-weight:bolder;
+font-size:24px`

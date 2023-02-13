@@ -48,7 +48,7 @@ export const Login = () => {
     setLoad(true);
     try {
       const {
-        data: { data: { accessToken } = {} },
+        data: { data: { accessToken} = {} },
       } = await validateLogin(mail, password);
       setLocalStorageItem("accessToken", accessToken);
       setLoad(false);

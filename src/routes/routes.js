@@ -13,9 +13,9 @@ export const ROUTES = {
     ACTUALIZAR: '/actualizar-contraseña',
     CONTACTANOS: '/contactanos',
     SIGNUP: '/signUp',
-    BUSSINES_NETWORKING: '/busines-networking/BussinesNetworking',
-    CODE_DEVELOPERS: '/code-developers/CodeDevelopers',
-    CULTURE_EDUCATION: '/culture-education/CultureEducation',
-    INDUSTRY_PROFESIONIST: '/industry-profesionist/IndustryProfesionist',
-    STEAM: '/steam/Steam'
+    CULTURE_EDUCATION: '/conoce-las-comunidades/comunidades-de-cultura-y-educacion',
+    BUSINESS_NETWORKING: '/conoce-las-comunidades/comunidades-de-negocios', 
+    STEAM: '/conoce-las-comunidades/comunidades-steam',
+    CODE_DEVELOPERS: '/conoce-las-comunidades/comunidades-de-programadores',
+    INDUSTRY_PROFESIONIST: '/conoce-las-comunidades/comunidades-de-industria-y-profesionistas'
 };
