@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, json } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getLocalStorageItem } from "../../helpers/localStorage.helpers";
+//Imports from styled component
 import {
   Body,
   Container,
@@ -25,11 +27,21 @@ import {
   ContainerImage,
   LabelHeader,
 } from "../SignUp/SignUp.css.js";
-import { CreateUser } from "../../api/signup.js";
+import { CreateUser, UpdateUser } from "../../api/signup.js";
 import { Loader } from "../Loader/Loader";
-import { async } from "q";
 
 export const SignUp = () => {
+  const [id, setId] = useState(0);
+  const [token, setToken] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [curp, setCurp] = useState("");
+  const [date, setDate] = useState("1940-01-01");
+  const [estate, setState] = useState("");
+  const [town, setTown] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [program, setProgram] = useState("");
   const [tag, setTag] = useState("Emprendedor");
   const [showEmp, setEmp] = useState(true);
   const [showAli, setAli] = useState(false);
@@ -39,6 +51,38 @@ export const SignUp = () => {
   const [load, setLoad] = useState(false);
 
   const navigate = useNavigate();
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (state) {
+      if(getLocalStorageItem("accessToken")){
+        setToken(getLocalStorageItem("accessToken"));
+        setId(state.userData.id);
+      }
+      setName(state.userData.name);
+      setLastName(state.userData.lastname);
+      setEmail(state.userData.mail);
+      setCurp(state.userData.curp);
+      setDate(state.userData.birth_date.substring(0, 10));
+      setState(state.userData.state);
+      setTown(state.userData.town);
+      setNeighborhood(state.userData.neighborhood);
+      setProgram(state.userData.program);
+      setTag(state.userData.tags);
+      setGender(state.userData.gender);
+      setTipoEmp(state.userData.emprendedor);
+      setTipoAli(state.userData.aliado);
+
+      if (state.userData.tags === "Emprendedor") {
+        setEmp(true);
+        setTipoAli("No aplica");
+      } else if (state.userData.tags === "Aliado") {
+        setAli(true);
+        setEmp(false);
+        setTipoEmp("No aplica");
+      }
+    }
+  }, []);
 
   const asignaGenero = (e) => {
     setGender(e.target.value);
@@ -52,8 +96,8 @@ export const SignUp = () => {
 
   //Data Validation
   let schema = yup.object().shape({
-    mail: yup.string().email().required(),
-    password: yup.string().min(5).max(50).required(),
+    mail: yup.string().email(),
+    password: yup.string().min(5).max(50),
     name: yup.string().min(3).max(30).required(),
     lastname: yup.string().min(3).max(30).required(),
     curp: yup.string().min(5).max(30).required(),
@@ -67,7 +111,6 @@ export const SignUp = () => {
     emprendedor: yup.string().required(),
     aliado: yup.string().required(),
   });
-
   const ShowInputEmpAliado = (e) => {
     setTag(e.target.value);
     if (e.target.value === "Emprendedor") {
@@ -89,7 +132,7 @@ export const SignUp = () => {
     let datos = {
       mail: target.mail.value,
       password: target.password.value,
-      name: target.name.value,
+      name: name,
       lastname: target.lastname.value,
       curp: target.curp.value,
       birth_date: target.birth_date.value,
@@ -131,7 +174,6 @@ export const SignUp = () => {
       });
     } else if (validarCampos === true) {
       setLoad(true);
-
       try {
         const {
           data: { data: {} = {} },
@@ -174,6 +216,60 @@ export const SignUp = () => {
       });
     }
   };
+
+
+
+  const updateData = async (e) => {
+    e.preventDefault();
+    let datos = {
+      name: name,
+      lastname: lastname,
+      curp: curp,
+      birth_date: date,
+      gender: gender,
+      state: estate,
+      town: town,
+      neighborhood: neighborhood,
+      program: program,
+      tags: tag,
+      emprendedor: tipoEmp,
+      aliado: tipoAli,
+    };
+    const validarCampos = await schema.isValid(datos);
+    if (validarCampos) {
+      try {
+        setLoad(true);
+        const {data: {status}}=await UpdateUser(id,token,datos);
+        setLoad(false);
+        
+        navigate("/home");
+        
+      } catch (e) {
+        setLoad(false);
+        toast.error("Error, verifique sus datos", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
+    } else {
+      toast.error("Datos inválidos", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
   const form = (
     <Body>
       <Container>
@@ -195,31 +291,62 @@ export const SignUp = () => {
           </ContainerHeader>
         </Link>
 
-        <Form onSubmit={handleOnSumit}>
+        <Form onSubmit={!state ? handleOnSumit : updateData}>
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Nombre</InputBoxLabel>
-              <InputBoxInput type="text" name="name" required />
+              <InputBoxInput
+                type="text"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </InputBox>
             <InputBox>
               <InputBoxLabel>Apellido</InputBoxLabel>
-              <InputBoxInput type="text" name="lastname" required />
+              <InputBoxInput
+                type="text"
+                name="lastname"
+                value={lastname}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
             </InputBox>
           </FormColumn>
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Correo electrónico</InputBoxLabel>
-              <InputBoxInput type="text" name="mail" required />
+              <InputBoxInput
+                type="text"
+                name="mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={state}
+                required
+              />
             </InputBox>
             <InputBox>
               <InputBoxLabel>Curp</InputBoxLabel>
-              <InputBoxInput type="text" name="curp" required />
+              <InputBoxInput
+                type="text"
+                name="curp"
+                value={curp}
+                onChange={(e) => setCurp(e.target.value)}
+                required
+              />
             </InputBox>
           </FormColumn>
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Fecha de nacimiento</InputBoxLabel>
-              <InputBoxInput type="date" name="birth_date" required />
+              <InputBoxInput
+                type="date"
+                name="birth_date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
             </InputBox>
             <InputBox>
               <FormGenderBox>
@@ -231,6 +358,7 @@ export const SignUp = () => {
                       id="male"
                       name="gender"
                       value="Hombre"
+                      checked={gender === "Hombre" ? true : false}
                       onChange={asignaGenero}
                       defaultChecked
                     />
@@ -241,6 +369,7 @@ export const SignUp = () => {
                       type="radio"
                       id="female"
                       name="gender"
+                      checked={gender === "Mujer" ? true : false}
                       value="Mujer"
                       onChange={asignaGenero}
                     />
@@ -252,6 +381,7 @@ export const SignUp = () => {
                       id="other"
                       name="gender"
                       value="Otro"
+                      checked={gender === "Otro" ? true : false}
                       onChange={asignaGenero}
                     />
                     <GenderLabel for="other">Prefiero no decir</GenderLabel>
@@ -260,35 +390,64 @@ export const SignUp = () => {
               </FormGenderBox>
             </InputBox>
           </FormColumn>
-          <FormColumn>
-            <InputBox>
-              <InputBoxLabel>Contraseña</InputBoxLabel>
-              <InputBoxInput type="password" name="password" required />
-            </InputBox>
-            <InputBox>
-              <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
-              <InputBoxInput type="password" name="password2" required />
-            </InputBox>
-          </FormColumn>
-
+          {!state && (
+            <FormColumn>
+              <InputBox>
+                <InputBoxLabel>Contraseña</InputBoxLabel>
+                <InputBoxInput
+                  type="password"
+                  name="password"
+                  required
+                />
+              </InputBox>
+              <InputBox>
+                <InputBoxLabel>Confirmar contraseña</InputBoxLabel>
+                <InputBoxInput type="password" name="password2" required />
+              </InputBox>
+            </FormColumn>
+          )}
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Estado</InputBoxLabel>
-              <InputBoxInput type="text" name="state" required />
+              <InputBoxInput
+                type="text"
+                name="state"
+                value={estate}
+                onChange={(e) => setState(e.target.value)}
+                required
+              />
             </InputBox>
             <InputBox>
               <InputBoxLabel>Municipio</InputBoxLabel>
-              <InputBoxInput type="text" name="town" required />
+              <InputBoxInput
+                type="text"
+                name="town"
+                value={town}
+                onChange={(e) => setTown(e.target.value)}
+                required
+              />
             </InputBox>
           </FormColumn>
           <FormColumn>
             <InputBox>
               <InputBoxLabel>Localidad</InputBoxLabel>
-              <InputBoxInput type="text" name="neighborhood" required />
+              <InputBoxInput
+                type="text"
+                name="neighborhood"
+                value={neighborhood}
+                onChange={(e) => setNeighborhood(e.target.value)}
+                required
+              />
             </InputBox>
             <InputBox>
               <InputBoxLabel>Programa</InputBoxLabel>
-              <InputBoxInput type="text" name="program" required />
+              <InputBoxInput
+                type="text"
+                name="program"
+                value={program}
+                onChange={(e) => setProgram(e.target.value)}
+                required
+              />
             </InputBox>
           </FormColumn>
 
@@ -323,7 +482,9 @@ export const SignUp = () => {
             {showEmp && (
               <SelectContainer id="selectEmprendedor">
                 <SelectBox name="emprendedor" onChange={asignaTipoEmp}>
-                  <option hidden>Seleccione el tipo</option>
+                  <option hidden>
+                    {tipoEmp ? tipoEmp : "Seleccione el tipo"}
+                  </option>
                   <option value="Tipo 1">Tipo 1</option>
                   <option value="Tipo 2">Tipo 2</option>
                   <option value="Tipo 3">Tipo 3</option>
@@ -335,7 +496,9 @@ export const SignUp = () => {
             {showAli && (
               <SelectContainer id="selectAliado">
                 <SelectBox name="aliado" onChange={asignaTipoAli}>
-                  <option hidden>Seleccione el tipo</option>
+                  <option hidden>
+                    {tipoAli ? tipoAli : "Seleccione el tipo"}
+                  </option>
                   <option value="Inversionista">Inversionista</option>
                   <option value="Comunidad">Comunidad</option>
                   <option value="Empresa & Industria">
@@ -353,5 +516,5 @@ export const SignUp = () => {
     </Body>
   );
 
-  return load  ?  <Loader /> : form;
+  return load ? <Loader /> : form;
 };

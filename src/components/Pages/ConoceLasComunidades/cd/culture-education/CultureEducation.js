@@ -32,7 +32,7 @@ function CultureEducation() {
                 </div>
             </SecondContiner>
             <LastContainer>
-                <Link to={ROUTES.BUSSINES_NETWORKING}>
+                <Link to={ROUTES.BUSINESS_NETWORKING}>
                     <ButtonNext type='buton'>
                         <SpanContent>Comunidades de<br />negocios&nbsp;&nbsp;&nbsp;&#10097;</SpanContent>
                     </ButtonNext>

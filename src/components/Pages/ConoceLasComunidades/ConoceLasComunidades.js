@@ -23,8 +23,8 @@
                         </ContainerLeft>
                         <ContainerRight>
                             <Image src={require("../../../assets/bussines-networking2.png")} alt="Comunidades de negocios." />
-                            <Overlay >
-                                <Content><ButtonNavigator><Link to={ROUTES.BUSSINES_NETWORKING}><BText>COMUNIDADES DE NEGOCIOS</BText></Link></ButtonNavigator></Content>
+                            <Overlay > 
+                                <Content><ButtonNavigator><Link to={ROUTES.BUSINESS_NETWORKING}><BText>COMUNIDADES DE NEGOCIOS</BText></Link></ButtonNavigator></Content>
                             </Overlay>
                         </ContainerRight>
                     </ImagesContainer>
