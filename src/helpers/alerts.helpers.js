@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
-const invalidData = () => {
-  toast.error("Datos inválidos", {
+const invalidData = (message) => {
+  toast.error(message, {
     position: "top-center",
     autoClose: 4000,
     hideProgressBar: false,
@@ -13,8 +13,8 @@ const invalidData = () => {
   });
 };
 
-const validData = () => {
-  toast.success("Datos validos", {
+const validData = (message) => {
+  toast.success(message, {
     position: "top-center",
     autoClose: 4000,
     hideProgressBar: false,

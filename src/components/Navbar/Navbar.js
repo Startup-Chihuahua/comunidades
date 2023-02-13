@@ -1,27 +1,26 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { GetUserId } from "../../api/signup";
-import { getLocalStorageItem, removeLocalStorageItem } from "../../helpers/localStorage.helpers";
+import {
+  getLocalStorageItem,
+  removeLocalStorageItem,
+} from "../../helpers/localStorage.helpers";
 import jwt_decode from "jwt-decode";
-import Footer from '../Footer/Footer'; 
+import Footer from "../Footer/Footer";
 import { ToastContainer, toast } from "react-toastify";
-import { SignUp } from "../SignUp/SignUp";
 import { Loader } from "../Loader/Loader";
 
-
-
 function Navbar() {
-
-  useEffect(()=>{
+  useEffect(() => {
     getUser();
-  },[])
+  }, []);
 
   const navigate = useNavigate();
-  const [login,setLogin] = useState(null);
-  const[name,setName]= useState("");
-  const[post,setPost]= useState(null);
+  const [login, setLogin] = useState(null);
+  const [name, setName] = useState("");
+  const [post, setPost] = useState(null);
   const [load, setLoad] = useState(false);
   const [admin, setAdmin] = useState(false);
 
@@ -31,30 +30,32 @@ function Navbar() {
   function toSignUp() {
     navigate("/signup");
   }
-  const SignOut=()=>{
+  const SignOut = () => {
     removeLocalStorageItem("accessToken");
     navigate(0);
-  }
+  };
   const UpdateUser = () => {
-    navigate('/signup', { state: {userData: post} });
-  }
+    navigate("/signup", { state: { userData: post } });
+  };
 
-  const assignRole = ()=>{
-    navigate('/signup', { state: {Role: "Administrador"} });
-  }
+  const assignRole = () => {
+    navigate("/signup", { state: { Role: "Administrador" } });
+  };
 
-  const getUser = async()=>{
-    if(getLocalStorageItem("accessToken")){
+  const getUser = async () => {
+    if (getLocalStorageItem("accessToken")) {
       setLogin(true);
       var decoded = jwt_decode(getLocalStorageItem("accessToken"));
       setLoad(true);
       try {
-        const {data: {data}}=await GetUserId(decoded.id,getLocalStorageItem("accessToken"));
+        const {
+          data: { data },
+        } = await GetUserId(decoded.id, getLocalStorageItem("accessToken"));
         setName(data[0].name);
         setPost(data[0]);
         setLoad(false);
         console.log(data[0]);
-        (data[0].type) === "Administrador" ? setAdmin(true): setAdmin(false);
+        data[0].type === "Administrador" ? setAdmin(true) : setAdmin(false);
       } catch (e) {
         setLoad(false);
         toast.error("Error de conexión", {
@@ -65,11 +66,11 @@ function Navbar() {
           pauseOnHover: false,
           draggable: true,
           progress: undefined,
-          theme: "light"
+          theme: "light",
         });
       }
     }
-  }
+  };
   const navBar = (
     <>
       <ToastContainer
@@ -267,7 +268,7 @@ function Navbar() {
     </>
   );
 
-  return load  ?  <Loader /> : navBar;
+  return load ? <Loader /> : navBar;
 }
 
 export default Navbar;

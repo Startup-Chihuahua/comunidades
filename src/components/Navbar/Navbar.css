@@ -1,28 +1,27 @@
 #container {
-    background-color: #0F6FE4;
-     
+  background-color: #0f6fe4;
 }
 
 #img-logo {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 #text-dropdown {
-    color: #000000; 
+  color: #000000;
 }
 
 #text-dropdown:hover {
-    background-color: #0F6FE4; 
+  background-color: #0f6fe4;
 }
 
 #text {
-    color: #FFFFFF; 
-}  
+  color: #ffffff;
+}
 
-#img-user{
-    width: 40px;
-    height: 40px;
-    align-items: center;
-    margin-right: 2px;
+#img-user {
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  margin-right: 2px;
 }
