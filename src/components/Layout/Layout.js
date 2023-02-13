@@ -19,7 +19,7 @@ import BussinesNetworking from "../Pages/ConoceLasComunidades/cd/bussines-networ
 import CodeDevelopers from "../Pages/ConoceLasComunidades/cd/code-developers/CodeDevelopers";
 import CultureEducation from "../Pages/ConoceLasComunidades/cd/culture-education/CultureEducation";
 import IndustryProfesionist from "../Pages/ConoceLasComunidades/cd/industry-profesionist/IndustryProfesionist";
-import Steam from "../Pages/ConoceLasComunidades/cd/Steam/Steam";
+import Steam from "../Pages/ConoceLasComunidades/cd/steam/Steam";
 import NavbarB from "../NavbarB/NavbarB";
 
 const Layout = ({ children }) => {
