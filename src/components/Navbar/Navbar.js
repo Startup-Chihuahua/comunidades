@@ -6,6 +6,7 @@ import { GetUserId } from "../../api/signup";
 import {
   getLocalStorageItem,
   removeLocalStorageItem,
+  setLocalStorageItem,
 } from "../../helpers/localStorage.helpers";
 import jwt_decode from "jwt-decode";
 import Footer from "../Footer/Footer";
@@ -22,6 +23,7 @@ function Navbar() {
   const [name, setName] = useState("");
   const [post, setPost] = useState(null);
   const [load, setLoad] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   function toLogin() {
     navigate("/login");
@@ -31,14 +33,19 @@ function Navbar() {
   }
   const SignOut = () => {
     removeLocalStorageItem("accessToken");
+    removeLocalStorageItem("role");
     navigate(0);
   };
   const UpdateUser = () => {
     navigate("/signup", { state: { userData: post } });
   };
 
-  const getUser = async () => {
-    if (getLocalStorageItem("accessToken")) {
+  const assignRole = ()=>{
+    navigate('/signup', { state: {Role: "Administrador"} });
+  }
+
+  const getUser = async()=>{
+    if(getLocalStorageItem("accessToken")){
       setLogin(true);
       var decoded = jwt_decode(getLocalStorageItem("accessToken"));
       setLoad(true);
@@ -49,6 +56,9 @@ function Navbar() {
         setName(data[0].name);
         setPost(data[0]);
         setLoad(false);
+        console.log(data[0]);
+        setLocalStorageItem("role",data[0].type);
+        data[0].type === "Administrador" ? setAdmin(true) : setAdmin(false);
       } catch (e) {
         setLoad(false);
         toast.error("Error de conexión", {
@@ -142,10 +152,12 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/eventos" id="text">
+                <Link  to="/eventos" className="nav-link"  id="text">
                   Eventos
                 </Link>
               </li>
+              
+
               <li className="nav-item">
                 <Link className="nav-link" to="/contactanos" id="text">
                   Contáctanos
@@ -228,6 +240,17 @@ function Navbar() {
                           Tu perfil
                         </button>
                       </li>
+                      {admin && (
+                        <li>
+                          <button
+                            onClick={assignRole}
+                            className="dropdown-item"
+                            id="text-dropdown"
+                          >
+                            Asignar roles
+                          </button>
+                        </li>
+                      )}
                       <li>
                         <button
                           className="dropdown-item"

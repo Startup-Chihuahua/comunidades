@@ -25,3 +25,10 @@
   align-items: center;
   margin-right: 2px;
 }
+
+#button-Event {
+  background: #0f6fe4;
+  border: 0;
+  text-decoration: none;
+  color: #ffffff ;
+}
