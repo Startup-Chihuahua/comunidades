@@ -34,7 +34,7 @@ function Navbar() {
   const SignOut = () => {
     removeLocalStorageItem("accessToken");
     removeLocalStorageItem("role");
-    navigate(0);
+    navigate('/');
   };
   const UpdateUser = () => {
     navigate("/signup", { state: { userData: post } });
