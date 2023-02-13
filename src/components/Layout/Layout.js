@@ -16,7 +16,7 @@ import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
 import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
 import { SignUp } from "../SignUp/SignUp";
 import ConoceLasComunidades from "../Pages/ConoceLasComunidades/ConoceLasComunidades";
-import BussinesNetworking from "../Pages/ConoceLasComunidades/cd/bussines-networking/BussinesNetworking";
+import BusinessNetworking from "../Pages/ConoceLasComunidades/cd/Business-networking/BusinessNetworking"; 
 import CodeDevelopers from "../Pages/ConoceLasComunidades/cd/code-developers/CodeDevelopers";
 import CultureEducation from "../Pages/ConoceLasComunidades/cd/culture-education/CultureEducation";
 import IndustryProfesionist from "../Pages/ConoceLasComunidades/cd/industry-profesionist/IndustryProfesionist";
@@ -46,8 +46,8 @@ const Layout = ({ children }) => {
             element={<CultureEducation />}
           ></Route>
           <Route
-            path={ROUTES.BUSSINES_NETWORKING}
-            element={<BussinesNetworking />}
+            path={ROUTES.BUSINESS_NETWORKING}
+            element={<BusinessNetworking />} 
           ></Route>
           <Route path={ROUTES.STEAM} 
           element={<Steam />} />
@@ -67,7 +67,6 @@ const Layout = ({ children }) => {
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
         <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
-        <Route path={ROUTES.BUSSINES_NETWORKING} element={<BussinesNetworking/>}/>
         <Route path={ROUTES.CODE_DEVELOPERS} element={<CodeDevelopers/>}/>
         <Route path={ROUTES.CULTURE_EDUCATION} element={<CultureEducation/>}/>
         <Route path={ROUTES.INDUSTRY_PROFESIONIST} element={<IndustryProfesionist/>}/>

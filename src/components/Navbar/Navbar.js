@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { GetUserId } from "../../api/signup";
+import { getLocalStorageItem, removeLocalStorageItem } from "../../helpers/localStorage.helpers";
+import jwt_decode from "jwt-decode";
 import Footer from '../Footer/Footer'; 
+import { ToastContainer, toast } from "react-toastify";
+import { SignUp } from "../SignUp/SignUp";
+import { Loader } from "../Loader/Loader";
+
+
+
 function Navbar() {
-  const navigate = useNavigate(); 
+
+  useEffect(()=>{
+    getUser();
+  },[])
+
+  const navigate = useNavigate();
+  const [login,setLogin] = useState(null);
+  const[name,setName]= useState("");
+  const[post,setPost]= useState(null);
+  const [load, setLoad] = useState(false);
 
   function toLogin() {
     navigate("/login");
@@ -13,17 +30,56 @@ function Navbar() {
   function toSignUp() {
     navigate("/signup");
   }
+  const SignOut=()=>{
+    removeLocalStorageItem("accessToken");
+    navigate(0);
+  }
+  const UpdateUser = () => {
+    navigate('/signup', { state: {userData: post} });
+  }
 
-  return (
+  const getUser = async()=>{
+    if(getLocalStorageItem("accessToken")){
+      setLogin(true);
+      var decoded = jwt_decode(getLocalStorageItem("accessToken"));
+      setLoad(true);
+      try {
+        const {data: {data}}=await GetUserId(decoded.id,getLocalStorageItem("accessToken"));
+        setName(data[0].name);
+        setPost(data[0]);
+        setLoad(false);
+      } catch (e) {
+        setLoad(false);
+        toast.error("Error de conexión", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
+    }
+  }
+  const navBar = (
     <>
+    <ToastContainer
+          closeButton={true}
+          position="bottom-right"
+          autoClose="3000"
+          hideProgressBar="true"
+        />
       <nav className="navbar navbar-expand-lg shadow p-3" id="container">
         <div className="container-fluid" id="container-navbar">
           <Link className="navbar-brand" to="/home">
             <img
+              id="img-logo"
               src={require("../../assets/image-logo.png")}
               alt="Logotipo Empresa"
             />
-          </Link> 
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -34,7 +90,7 @@ function Navbar() {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button> 
+          </button>
 
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto gap-4">
@@ -125,26 +181,76 @@ function Navbar() {
                   </li>
                 </ul>
               </li>
-              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button
-                  className="btn btn-outline-light"
-                  type="button"
-                  onClick={toLogin}
-                >
-                  Login
-                </button>
-                <button className="btn btn-outline-light" type="button" onClick={toSignUp}>
-                  Sign-up
-                </button>
-              </div>
+              {!login && (
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button
+                    className="btn btn-outline-light"
+                    type="button"
+                    onClick={toLogin}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="btn btn-outline-light"
+                    type="button"
+                    onClick={toSignUp}
+                  >
+                    Sign-up
+                  </button>
+                </div>
+              )}
+
+              {login && (
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <img
+                    id="img-user"
+                    src={require("../../assets/user-logo.png")}
+                    alt="Logotipo Empresa"
+                  />
+                  <div className="nav-item dropdown dropstart">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="/"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      id="text"
+                    >
+                      {name}
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <button
+                          onClick={UpdateUser}
+                          className="dropdown-item"
+                          id="text-dropdown"
+                        >
+                          Tu perfil
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          id="text-dropdown"
+                          onClick={SignOut}
+                        >
+                          Cerrar sesión
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
             </ul>
           </div>
         </div>
       </nav>
       <Outlet />
-      <Footer/> 
+      <Footer />
     </>
+
   );
+
+  return load  ?  <Loader /> : navBar;
 }
 
 export default Navbar;

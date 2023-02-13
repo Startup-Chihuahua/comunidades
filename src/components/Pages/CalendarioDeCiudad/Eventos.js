@@ -1,35 +1,130 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { GetEvents } from "../../../api/Events";
 import {
-  EventsContainer,
-  TitleEventsContainer,
-  ContentEventsContainer,
-  ButtonContainerDiv,
+  Container,
+  ContainerEvents,
+  Row,
+  Card,
+  CardHeader,
+  CardBody,
+  ButtonContainer,
+  TitleEvents,
+  ContentEvents,
   ButtonEvents,
 } from "./Eventos.css.js";
+import Modal from "../../Pages/CalendarioDeCiudad/Modal/Modal";
+import { Loader } from "../../Loader/Loader";
 
 function Eventos() {
   const navigate = useNavigate();
-  return (
-    <EventsContainer className="container-fluid">
-      <TitleEventsContainer>Agenda de ciudad</TitleEventsContainer>
-      <ContentEventsContainer>
-        todos los eventos de emprendimiento, ciencia y<br />
-        tecnología de chihuahua
-      </ContentEventsContainer>
-      <br />
-      <ButtonContainerDiv>
-        <ButtonEvents
-          type="button"
-          onClick={() => {
-            navigate('/registrar-evento');
-          }}
-        >
-          Sube tu evento ahora
+  const [estadoModal, cambiarEstadoModal] = useState(false);
+  const [data, setData] = useState([]);
+  const [eventoActual, setEventoActual] = useState(0);
+  const [load, setLoad] = useState(false);
+
+  const options = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+    timeZone: "America/Mexico_City",
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  const getEvents = async () => {
+    setLoad(true);
+
+    try {
+      const {
+        data: { data },
+      } = await GetEvents();
+      setLoad(false);
+      setData(data);
+    } catch (e) {
+      setLoad(false);
+    }
+  };
+
+  function dateFormat(date) {
+    let newDate = new Date(date).toLocaleDateString("esp-mx", options);
+    return newDate;
+  }
+
+  const handleShowEventDetails = (eventIndex) => {
+    cambiarEstadoModal(!estadoModal);
+    setEventoActual(eventIndex);
+  };
+  const modal = (
+    <>
+      <Container>
+        <TitleEvents>
+          <h1>Eventos del ecosistema</h1>
+        </TitleEvents>
+        <ContentEvents>
+          <p>
+            Todos los eventos de emprendimiento, ciencia y tecnologia de
+            chihuahua.
+          </p>
+        </ContentEvents>
+        <ButtonEvents>
+          <button
+            onClick={() => {
+              navigate("/registrar-evento");
+            }}
+          >
+            Sube tu evento ahora
+          </button>
         </ButtonEvents>
-      </ButtonContainerDiv>
-    </EventsContainer>
+        <ContainerEvents>
+          <br />
+          <Row>
+            {data.map((data, index) => {
+              return (
+                <Card key={data.id}>
+                  <CardHeader>
+                    <h2>{data.event_name}</h2>
+                  </CardHeader>
+                  <CardBody>
+                    <h4>
+                      <strong>{data.location}</strong>
+                    </h4>
+                    <p>
+                      {dateFormat(data.start_date)}
+                      <p>{data.modality}</p>
+                    </p>
+                    <p>{data.community_name}</p>
+                    <p>{data.description}</p>
+                    <p>
+                      <strong>{data.url_form}</strong>
+                    </p>
+                    <ButtonContainer
+                      onClick={() => handleShowEventDetails(index)}
+                    >
+                      Leer mas
+                    </ButtonContainer>
+                  </CardBody>
+                </Card>
+              );
+            })}
+          </Row>
+        </ContainerEvents>
+      </Container>
+      <Modal
+        estado={estadoModal}
+        cambiarEstado={cambiarEstadoModal}
+        data={data[eventoActual]}
+      />
+    </>
   );
+
+  return load ? <Loader /> : modal;
 }
 
 export default Eventos;
