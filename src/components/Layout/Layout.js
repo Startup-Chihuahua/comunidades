@@ -11,6 +11,7 @@ import TheTeam from "../../components/Pages/Theteam/Theteam";
 import Eventos from "../Pages/CalendarioDeCiudad/Eventos";
 import Contactanos from "../../components/Pages/Contactanos/Contactanos";
 import Navbar from "../Navbar/Navbar";
+import { LogEvent } from "../LogEvent/LogEvent";
 import { RecoverPassword } from "../RecoverPassword/RecoverPassword";
 import { UpdatePassword } from "../UpdatePassword/UpdatePassword";
 import { SignUp } from "../SignUp/SignUp";
@@ -62,9 +63,10 @@ const Layout = ({ children }) => {
         </Route>
 
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.LOGEVENT} element={<LogEvent />} />
         <Route path={ROUTES.RECUPERAR} element={<RecoverPassword />} />
         <Route path={ROUTES.ACTUALIZAR} element={<UpdatePassword />} />
-        <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+        <Route path={ROUTES.SIGNUP} element={<SignUp/>}/>
       </Routes>
     </BrowserRouter>
   );
