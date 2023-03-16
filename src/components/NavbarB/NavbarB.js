@@ -22,10 +22,15 @@ function NavbarB() {
   const [name, setName] = useState("");
   const [post, setPost] = useState(null);
   const [load, setLoad] = useState(false);
-
+  /**
+   * @brief Esta funcion sirve para traer el boton de login.
+   */
   function toLogin() {
     navigate("/login");
   }
+  /**
+   * @brief Esta funcion sirve para traer el boton de Signup.
+   */
   function toSignUp() {
     navigate("/signup");
   }
