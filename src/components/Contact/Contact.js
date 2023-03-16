@@ -1,7 +1,10 @@
 import React from "react";
 import "./Contact.css";
 import {ContactContainer, ContactInformationContainer, Title, Text, Button} from "./Contact.css.js"
-
+/**
+ * @brief Esta funcion permite exportar multiples valores.
+ * @returns 
+ */
 export default function Sponsors() {  
   return (
     <ContactContainer className="container-contact">
