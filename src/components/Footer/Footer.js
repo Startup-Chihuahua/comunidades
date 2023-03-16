@@ -1,7 +1,10 @@
 import React from "react";
 import "./Footer.css";
 import {Container, Title, Text, Img, Button} from "./Footer.css.js";
-
+/**
+ * @brief Esta funcion (Footer) es para agregar el pie de pagina.
+ * @returns 
+ */
 export default function Footer() {
   return (
     <Container className="container-fluid">
