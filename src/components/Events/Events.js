@@ -1,7 +1,10 @@
 import React from "react";
 import './Events.css.js';
 import { ColsEvent, ContainerEvent, TitleEvent, Content, Content2, Paragraph, Paragraph2, ButtonEvent } from "./Events.css.js";
-
+/**
+ * @brief Esta funcion (Events) es para agregar funciones al apartado de eventos de la pagina.
+ * @returns 
+ */
 function Events() {
   return (
     <ContainerEvent>
